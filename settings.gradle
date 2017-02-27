@@ -1,1 +1,2 @@
 include ':jdroid-java-core'
+include ':jdroid-java-firebase-database'
