@@ -8,16 +8,6 @@
 |Production|[![Build Status](https://api.travis-ci.org/maxirosson/jdroid-java.svg?branch=production)](https://travis-ci.org/maxirosson/jdroid-java)|
 
 ## Features
-* HTTP Service Layer
- * GET, POST, PUT, PATCH & DELETE methods
- * Headers appender
- * Response validator
- * Response mocks support
- * GZIP encoding
- * Cache support
-* Parsers
- * [Jackson JSON parser](https://github.com/FasterXML/jackson)
- * Plain text parser
 * JSON marshallers
 * Exception handling
 * Repository Pattern
