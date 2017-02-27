@@ -14,6 +14,21 @@
  * In Memory Implementation 
 * Utilities for Collections, Strings, Dates, Files, Encryption, Threads, [Logging](http://www.slf4j.org/), Validations, Reflection and more
 
+## Setup
+
+Add the following lines to your `build.gradle`:
+
+    repositories {
+      jcenter()
+    }
+
+    dependencies {
+      compile 'com.jdroidframework:jdroid-java:X.Y.Z'
+    }
+
+Replace the X.Y.Z by the [latest version](https://github.com/maxirosson/jdroid-java/releases/latest)
+
+
 ## Donations
 Help us to continue with this project:
 
