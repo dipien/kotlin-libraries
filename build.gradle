@@ -3,16 +3,12 @@ ext.VERSION_MINOR = 13
 ext.VERSION_PATCH = 0
 
 ext.JDROID_GITHUB_REPOSITORY_OWNER = 'maxirosson'
-ext.JDROID_GITHUB_REPOSITORY_NAME = 'jdroid-java-http'
+ext.JDROID_GITHUB_REPOSITORY_NAME = 'jdroid-java'
 
 ext.JDROID_GRADLE_PLUGIN_VERSION = '0.14.0-SNAPSHOT'
 
 apply plugin: 'com.jdroid.root'
 apply plugin: 'com.jdroid.component.builder'
-
-ext.PROJECT_NAME = 'Jdroid Java Http'
-description = 'Jdroid Java Http'
-
 
 buildscript {
 	repositories {
