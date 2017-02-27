@@ -1,0 +1,26 @@
+apply plugin: 'com.jdroid.java.library'
+
+ext.ARTIFACT_ID = 'jdroid-java'
+ext.PROJECT_NAME = 'Jdroid Java'
+description = 'Jdroid dependency project for both Android & Java apps'
+
+buildscript {
+	dependencies {
+		classpath 'com.jdroidframework:jdroid-gradle-java-plugin:' + JDROID_GRADLE_PLUGIN_VERSION
+	}
+}
+
+dependencies {
+
+	// Logging
+	compile "org.slf4j:slf4j-api:1.6.3"
+
+	// Testing
+	testCompile "org.testng:testng:6.8.21"
+	testCompile "org.mockito:mockito-all:1.10.19"
+}
+
+test {
+	useTestNG {
+	}
+}
