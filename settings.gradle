@@ -1,1 +1,1 @@
-include ':library'
+include ':jdroid-java-core'
