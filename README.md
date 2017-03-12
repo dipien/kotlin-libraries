@@ -8,11 +8,15 @@
 |Production|[![Build Status](https://api.travis-ci.org/maxirosson/jdroid-java.svg?branch=production)](https://travis-ci.org/maxirosson/jdroid-java)|
 
 ## Features
+### jdroid-java-core
 * JSON marshallers
 * Exception handling
 * Repository Pattern
  * In Memory Implementation 
 * Utilities for Collections, Strings, Dates, Files, Encryption, Threads, [Logging](http://www.slf4j.org/), Validations, Reflection and more
+### jdroid-java-firebase-database
+* Repository Pattern
+ * [Firebase Implementation](https://www.firebase.com)
 
 ## Setup
 

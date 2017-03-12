@@ -17,11 +17,13 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 
 	private Repository<T> wrappedRepository;
 	private Map<String, T> cache;
+	private List<String> cachedIds;
 	private Boolean synced;
 
 	public CacheWrapperRepository(Repository<T> wrappedRepository) {
 		this.wrappedRepository = wrappedRepository;
 		cache = createCacheMap();
+		cachedIds = Lists.newArrayList();
 		synced = false;
 	}
 
@@ -47,16 +49,20 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 
 	@Override
 	public T get(String id) {
-		T item = cache.get(id);
-		if (item != null || synced) {
+		T item = null;
+		if (cachedIds.contains(id)) {
+			item = cache.get(id);
 			if (item != null) {
-				LOGGER.info("Retrieved object: " + item.getClass().getSimpleName() + ". [ " + item + " ]");
+				LOGGER.debug("Retrieved cached object: " + item.getClass().getSimpleName() + ". [ " + item + " ]");
+			} else {
+				LOGGER.debug("Retrieved cached object with id: " + id + ". [ " + item + " ]");
 			}
 		} else {
 			item = wrappedRepository.get(id);
 			if (item != null) {
 				cache.put(id, item);
 			}
+			cachedIds.add(id);
 		}
 		return item;
 	}
@@ -65,6 +71,7 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 	public void add(T item) {
 		wrappedRepository.add(item);
 		cache.put(item.getId(), item);
+		cachedIds.add(item.getId());
 	}
 
 	@Override
@@ -72,6 +79,7 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 		wrappedRepository.addAll(items);
 		for (T each : items) {
 			cache.put(each.getId(), each);
+			cachedIds.add(each.getId());
 		}
 	}
 
@@ -79,18 +87,21 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 	public void update(T item) {
 		wrappedRepository.update(item);
 		cache.put(item.getId(), item);
+		cachedIds.add(item.getId());
 	}
 
 	@Override
 	public void remove(T item) {
 		wrappedRepository.remove(item);
 		cache.remove(item.getId());
+		cachedIds.remove(item.getId());
 	}
 
 	@Override
 	public void removeAll() {
 		wrappedRepository.removeAll();
 		cache.clear();
+		cachedIds.clear();
 		synced = true;
 	}
 
@@ -99,6 +110,7 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 		wrappedRepository.removeAll(items);
 		for (T each : items) {
 			cache.remove(each.getId());
+			cachedIds.remove(each.getId());
 		}
 	}
 
@@ -111,13 +123,15 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 	public List<T> getAll() {
 		if (synced) {
 			List<T> items = Lists.newArrayList(cache.values());
-			LOGGER.info("Retrieved all objects [" + items.size() + "]");
+			LOGGER.info("Retrieved all cached objects [" + items.size() + "]");
 			return items;
 		} else {
 			List<T> items = wrappedRepository.getAll();
 			cache.clear();
+			cachedIds.clear();
 			for (T each : items) {
 				cache.put(each.getId(), each);
+				cachedIds.add(each.getId());
 			}
 			synced = true;
 			return items;
@@ -131,12 +145,13 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 			for (String each : ids) {
 				items.add(cache.get(each));
 			}
-			LOGGER.info("Retrieved all objects [" + items.size() + "] with ids: " + ids);
+			LOGGER.info("Retrieved all cached objects [" + items.size() + "] with ids: " + ids);
 			return items;
 		} else {
 			List<T> items = wrappedRepository.getAll(ids);
 			for (T each : items) {
 				cache.put(each.getId(), each);
+				cachedIds.add(each.getId());
 			}
 			return items;
 		}
@@ -146,6 +161,7 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 	public void remove(String id) {
 		wrappedRepository.remove(id);
 		cache.remove(id);
+		cachedIds.remove(id);
 	}
 
 	@Override
@@ -175,6 +191,7 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 		wrappedRepository.replaceAll(items);
 		for (T each : items) {
 			cache.put(each.getId(), each);
+			cachedIds.add(each.getId());
 		}
 	}
 
@@ -186,6 +203,7 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 			T item = wrappedRepository.getUniqueInstance();
 			if (item != null) {
 				cache.put(item.getId(), item);
+				cachedIds.add(item.getId());
 			}
 			return item;
 		}
@@ -193,6 +211,7 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 
 	public void clearCache() {
 		cache.clear();
+		cachedIds.clear();
 		synced = false;
 	}
 }
