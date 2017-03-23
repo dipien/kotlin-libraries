@@ -21,6 +21,14 @@ public abstract class ReflectionUtils {
 			throw new UnexpectedException(e);
 		}
 	}
+	
+	public static Class<?> getSafeClass(String className) {
+		try {
+			return Class.forName(className);
+		} catch (ClassNotFoundException e) {
+			return null;
+		}
+	}
 
 	public static <T> T newInstance(String className) {
 		return (T)newInstance(getClass(className));
