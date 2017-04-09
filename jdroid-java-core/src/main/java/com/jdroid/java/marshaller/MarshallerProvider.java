@@ -3,6 +3,7 @@ package com.jdroid.java.marshaller;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.collections.Maps;
 import com.jdroid.java.json.JSONArray;
+import com.jdroid.java.json.JSONObject;
 
 import java.util.Collection;
 import java.util.List;
@@ -60,11 +61,11 @@ public class MarshallerProvider {
 				if (map.isEmpty()) {
 					return null;
 				} else {
-					Map<Object, Object> marshalledMap = Maps.newHashMap();
+					JSONObject jsonObject = new JSONObject();
 					for (Map.Entry entry : map.entrySet()) {
-						marshalledMap.put(entry.getKey(), innerMarshall(entry.getValue(), mode, extras));
+						jsonObject.put(entry.getKey().toString(), innerMarshall(entry.getValue(), mode, extras));
 					}
-					return marshalledMap;
+					return jsonObject;
 				}
 			} else {
 				return getMarshaller(object).marshall(object, mode, extras);

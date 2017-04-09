@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +65,14 @@ public class MarshallerProviderTest {
 		dummyJson = "{\"stringMapProperty\":{\"a\":\"b\"}}";
 		cases.add(new Object[] { dummyClass, dummyJson });
 		cases.add(new Object[] { Lists.newArrayList(dummyClass, dummyClass), "[" + dummyJson + "," + dummyJson + "]" });
-
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("a", "b");
+		map.put("c", "d");
+		dummyJson = "{\"a\":\"b\",\"c\":\"d\"}";
+		cases.add(new Object[] { map, dummyJson });
+		cases.add(new Object[] { Lists.newArrayList(map, map), "[" + dummyJson + "," + dummyJson + "]" });
+		
 		dummyClass = new DummyClass();
 		dummyClass.longMapProperty = Maps.newLinkedHashMap();
 		dummyClass.longMapProperty.put("a", 1L);
