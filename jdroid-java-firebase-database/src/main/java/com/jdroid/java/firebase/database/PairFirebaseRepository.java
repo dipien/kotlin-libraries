@@ -67,7 +67,7 @@ public abstract class PairFirebaseRepository implements PairRepository {
 		firebase = firebase.child(item.getId());
 
 		FirebaseCompletionListener listener = new FirebaseCompletionListener();
-		firebase.setValue(item, listener);
+		firebase.setValue(item.getValue(), listener);
 
 		listener.waitOperation();
 		LOGGER.info("Stored object in database: " + item);
