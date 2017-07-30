@@ -3,7 +3,7 @@ version = '0.14.0'
 ext.JDROID_GITHUB_REPOSITORY_OWNER = 'maxirosson'
 ext.JDROID_GITHUB_REPOSITORY_NAME = 'jdroid-java'
 
-ext.JDROID_GRADLE_PLUGIN_VERSION = '0.16.0-SNAPSHOT'
+ext.JDROID_GRADLE_PLUGIN_VERSION = '0.16.3'
 
 apply plugin: 'com.jdroid.root'
 apply plugin: 'com.jdroid.component.builder'
