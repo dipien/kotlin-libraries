@@ -3,8 +3,16 @@ package com.jdroid.java.repository;
 import com.jdroid.java.domain.Entity;
 
 public class Pair extends Entity {
-
+	
 	private String value;
+	
+	public Pair(String key, String value) {
+		super(key);
+		this.value = value;
+	}
+	
+	public Pair() {
+	}
 
 	public String getValue() {
 		return value;

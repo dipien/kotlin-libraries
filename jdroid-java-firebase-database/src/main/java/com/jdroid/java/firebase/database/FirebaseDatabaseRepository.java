@@ -17,13 +17,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class FirebaseRepository<T extends Entity> implements Repository<T> {
+public abstract class FirebaseDatabaseRepository<T extends Entity> implements Repository<T> {
 
-	private static final Logger LOGGER = LoggerUtils.getLogger(FirebaseRepository.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(FirebaseDatabaseRepository.class);
 
 	private FirebaseAuthenticationStrategy firebaseAuthenticationStrategy;
 
-	public FirebaseRepository() {
+	public FirebaseDatabaseRepository() {
 		firebaseAuthenticationStrategy = createFirebaseAuthenticationStrategy();
 	}
 

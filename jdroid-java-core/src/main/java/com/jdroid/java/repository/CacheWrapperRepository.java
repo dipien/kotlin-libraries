@@ -50,6 +50,11 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 	@Override
 	public T get(String id) {
 		T item = null;
+		
+		if (synced && !cachedIds.contains(id)) {
+			cachedIds.add(id);
+		}
+		
 		if (cachedIds.contains(id)) {
 			item = cache.get(id);
 			if (item != null) {

@@ -563,7 +563,15 @@ public abstract class DateUtils {
 		}
 	}
 	
+	public static Date getFakeNow() {
+		return fakeNow;
+	}
+	
 	public static void setFakeNow(Date fakeNow) {
 		DateUtils.fakeNow = fakeNow;
+	}
+	
+	public static Boolean isFakeNow() {
+		return fakeNow != null;
 	}
 }

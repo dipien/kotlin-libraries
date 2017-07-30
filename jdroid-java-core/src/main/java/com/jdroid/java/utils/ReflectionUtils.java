@@ -21,6 +21,14 @@ public abstract class ReflectionUtils {
 			throw new UnexpectedException(e);
 		}
 	}
+	
+	public static Class<?> getSafeClass(String className) {
+		try {
+			return Class.forName(className);
+		} catch (ClassNotFoundException e) {
+			return null;
+		}
+	}
 
 	public static <T> T newInstance(String className) {
 		return (T)newInstance(getClass(className));
@@ -65,13 +73,13 @@ public abstract class ReflectionUtils {
 	
 	/**
 	 * Set a value in the given object without using getters or setters
-	 * 
-	 * @param object The object where we want to null the expression
-	 * @param expression The expression we want to null
+	 *
+	 * @param object The object where we want to set the field
+	 * @param fieldName The name of the field to set
 	 * @param value The new value to set
 	 */
-	public static void set(Object object, String expression, Object value) {
-		Field field = ReflectionUtils.getField(object.getClass(), expression);
+	public static void set(Object object, String fieldName, Object value) {
+		Field field = ReflectionUtils.getField(object.getClass(), fieldName);
 		field.setAccessible(true);
 		try {
 			field.set(object, value);
@@ -81,6 +89,25 @@ public abstract class ReflectionUtils {
 			field.setAccessible(false);
 		}
 	}
+	
+		/**
+	 	 * Set a value in a static field
+	 	 *
+	 	 * @param clazz The Class whose field should be modified
+	 	 * @param fieldName The name of the field to set
+	 	 * @param value The new value to set
+	 	 */
+		public static void setStaticField(Class<?> clazz, String fieldName, Object value) {
+			Field field = ReflectionUtils.getField(clazz, fieldName);
+			field.setAccessible(true);
+			try {
+				field.set(null, value);
+			} catch (SecurityException | IllegalArgumentException | IllegalAccessException e) {
+				throw new UnexpectedException(e);
+			} finally {
+				field.setAccessible(false);
+			}
+		}
 	
 	public static Object get(Field field, Object object) {
 		field.setAccessible(true);
