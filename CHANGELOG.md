@@ -1,5 +1,16 @@
 # Change Log
 
+## [v0.14.0](https://github.com/maxirosson/jdroid-java/tree/v0.14.0) (2017-07-30)
+[Full Changelog](https://github.com/maxirosson/jdroid-java/compare/v0.13.0...v0.14.0)
+
+**Implemented enhancements:**
+
+- Utils improvements [\#3](https://github.com/maxirosson/jdroid-java/issues/3)
+
+**Closed issues:**
+
+- Upgrade jdroid gradle plugin to v0.16.3 [\#2](https://github.com/maxirosson/jdroid-java/issues/2)
+
 ## [v0.13.0](https://github.com/maxirosson/jdroid-java/tree/v0.13.0) (2017-03-14)
 **Closed issues:**
 
