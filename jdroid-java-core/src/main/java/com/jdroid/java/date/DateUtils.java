@@ -432,6 +432,16 @@ public abstract class DateUtils {
 		return DateUtils.isBeforeEquals(startDate1, startDate2) && DateUtils.isAfterEquals(endDate1, endDate2);
 	}
 	
+	public static Boolean isToday(Long timestamp) {
+		Date date = DateUtils.getDate(timestamp);
+		date = truncateTime(date);
+		return date.equals(today());
+	}
+	
+	public static Boolean isYesterdayOrPrevious(Long timestamp) {
+		return timestamp < today().getTime();
+	}
+	
 	public static Calendar todayCalendar() {
 		Calendar calendar = Calendar.getInstance();
 		DateUtils.truncateTime(calendar);
