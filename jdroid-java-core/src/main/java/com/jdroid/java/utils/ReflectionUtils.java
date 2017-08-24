@@ -30,6 +30,14 @@ public abstract class ReflectionUtils {
 		}
 	}
 
+	public static <T> T safeNewInstance(String className) {
+		try {
+			return (T)newInstance(className);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 	public static <T> T newInstance(String className) {
 		return (T)newInstance(getClass(className));
 	}
