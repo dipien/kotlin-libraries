@@ -2,7 +2,7 @@ version = '0.15.0'
 
 ext.JDROID_GITHUB_REPOSITORY_NAME = 'jdroid-java'
 
-ext.JDROID_GRADLE_PLUGIN_VERSION = '0.16.3'
+ext.JDROID_GRADLE_PLUGIN_VERSION = '0.17.0'
 
 apply plugin: 'com.jdroid.root'
 apply plugin: 'com.jdroid.component.builder'
@@ -19,7 +19,7 @@ buildscript {
 	}
 	dependencies {
 		classpath 'com.jdroidframework:jdroid-component-builder:0.4.0-SNAPSHOT'
-		classpath 'com.jdroidframework:jdroid-gradle-root-plugin:0.16.3'
+		classpath 'com.jdroidframework:jdroid-gradle-root-plugin:0.17.0'
 	}
 }
 
