@@ -1,5 +1,9 @@
 package com.jdroid.java.utils;
 
+import com.jdroid.java.collections.Lists;
+import com.jdroid.java.collections.Sets;
+import com.jdroid.java.exception.UnexpectedException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,9 +12,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
-import com.jdroid.java.collections.Lists;
-import com.jdroid.java.collections.Sets;
-import com.jdroid.java.exception.UnexpectedException;
 
 public abstract class PropertiesUtils {
 	
@@ -89,6 +90,6 @@ public abstract class PropertiesUtils {
 	
 	public static Set<String> getStringSetProperty(String name) {
 		String value = getStringProperty(name);
-		return Sets.newHashSet(StringUtils.splitToCollectionWithCommaSeparator(value));
+		return Sets.newHashSet(StringUtils.splitWithCommaSeparator(value));
 	}
 }
