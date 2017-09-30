@@ -89,10 +89,15 @@ public abstract class PairFirebaseRepository implements PairRepository {
 	}
 
 	@Override
-	public List<Pair> findByField(String fieldName, Object... values) {
+	public List<Pair> getByField(String fieldName, Object... values) {
 		throw new UnsupportedOperationException();
 	}
-
+	
+	@Override
+	public Pair getItemByField(String fieldName, Object... values) {
+		throw new UnsupportedOperationException();
+	}
+	
 	@Override
 	public List<Pair> getAll() {
 		Firebase firebase = createFirebase();
@@ -111,7 +116,7 @@ public abstract class PairFirebaseRepository implements PairRepository {
 	}
 
 	@Override
-	public List<Pair> getAll(List<String> ids) {
+	public List<Pair> getByIds(List<String> ids) {
 		Firebase firebase = createFirebase();
 		FirebaseValueEventListener listener = new FirebaseValueEventListener();
 		firebase.addListenerForSingleValueEvent(listener);

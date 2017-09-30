@@ -17,6 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.sound.midi.Instrument;
+
 public abstract class FirebaseDatabaseRepository<T extends Entity> implements Repository<T> {
 
 	private static final Logger LOGGER = LoggerUtils.getLogger(FirebaseDatabaseRepository.class);
@@ -111,7 +113,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 	}
 
 	@Override
-	public List<T> findByField(String fieldName, Object... values) {
+	public List<T> getByField(String fieldName, Object... values) {
 		Firebase firebase = createFirebase();
 		Query query = firebase.orderByChild(fieldName);
 
@@ -161,7 +163,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 	}
 
 	@Override
-	public List<T> getAll(List<String> ids) {
+	public List<T> getByIds(List<String> ids) {
 		Firebase firebase = createFirebase();
 		FirebaseValueEventListener listener = new FirebaseValueEventListener();
 		firebase.addListenerForSingleValueEvent(listener);
@@ -176,8 +178,17 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		LOGGER.info("Retrieved all objects [" + results.size() + "] from path: " + getPath() + " and ids: " + ids);
 		return results;
 	}
-
-
+	
+	@Override
+	public T getItemByField(String fieldName, Object... values) {
+		List<T> items = getByField(fieldName, values);
+		if (!items.isEmpty()) {
+			return items.get(0);
+		} else {
+			return null;
+		}
+	}
+	
 	@Override
 	public void remove(T item) {
 		remove(item.getId());

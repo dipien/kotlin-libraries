@@ -100,13 +100,17 @@ public class InMemoryRepository<T extends Identifiable> implements Repository<T>
 	}
 	
 	@Override
-	public List<T> findByField(String fieldName, Object... values) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<T> getByField(String fieldName, Object... values) {
+		throw new UnsupportedOperationException();
 	}
 	
 	@Override
-	public List<T> getAll(List<String> ids) {
+	public T getItemByField(String fieldName, Object... values) {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	public List<T> getByIds(List<String> ids) {
 		List<T> itemsList = Lists.newArrayList();
 		for (String each : ids) {
 			T item = items.get(each);

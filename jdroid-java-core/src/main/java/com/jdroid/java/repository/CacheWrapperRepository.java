@@ -117,10 +117,17 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 	}
 
 	@Override
-	public List<T> findByField(String fieldName, Object... values) {
-		return wrappedRepository.findByField(fieldName, values);
+	public List<T> getByField(String fieldName, Object... values) {
+		LOGGER.warn("The getByField query is not cached.");
+		return wrappedRepository.getByField(fieldName, values);
 	}
-
+	
+	@Override
+	public T getItemByField(String fieldName, Object... values) {
+		LOGGER.warn("The getItemByField query is not cached.");
+		return wrappedRepository.getItemByField(fieldName, values);
+	}
+	
 	@Override
 	public List<T> getAll() {
 		if (synced) {
@@ -140,7 +147,7 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 	}
 
 	@Override
-	public List<T> getAll(List<String> ids) {
+	public List<T> getByIds(List<String> ids) {
 		if (synced) {
 			List<T> items = Lists.newArrayList();
 			for (String each : ids) {
@@ -149,7 +156,7 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 			LOGGER.info("Retrieved all cached objects [" + items.size() + "] with ids: " + ids);
 			return items;
 		} else {
-			List<T> items = wrappedRepository.getAll(ids);
+			List<T> items = wrappedRepository.getByIds(ids);
 			for (T each : items) {
 				addToCache(each);
 			}

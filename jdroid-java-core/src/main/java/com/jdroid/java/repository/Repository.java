@@ -22,6 +22,45 @@ public interface Repository<T extends Identifiable> {
 	public T get(String id);
 	
 	/**
+	 * Obtains a list containing all the {@link Identifiable}s in the repository
+	 *
+	 * @return the list of {@link Identifiable}s
+	 */
+	public List<T> getAll();
+	
+	/**
+	 * @return The unique instance
+	 */
+	public T getUniqueInstance();
+	
+	/**
+	 * @param ids
+	 * @return All the items with the ids
+	 */
+	public List<T> getByIds(List<String> ids);
+	
+	/**
+	 * @param fieldName
+	 * @param values
+	 * @return items the items with the fieldName that match with values.
+	 */
+	public List<T> getByField(String fieldName, Object... values);
+	
+	/**
+	 * @param fieldName
+	 * @param values
+	 * @return the {@link Identifiable} retrieved.
+	 */
+	public T getItemByField(String fieldName, Object... values);
+	
+	/**
+	 * @return If the repository has data or not
+	 */
+	public Boolean isEmpty();
+	
+	public Long getSize();
+	
+	/**
 	 * Adds an {@link Identifiable} to the repository.
 	 * 
 	 * @param item The {@link Identifiable} to add.
@@ -57,26 +96,6 @@ public interface Repository<T extends Identifiable> {
 	public void removeAll(Collection<T> items);
 	
 	/**
-	 * @param fieldName
-	 * @param values
-	 * @return items the items with the fieldName that match with values.
-	 */
-	public List<T> findByField(String fieldName, Object... values);
-	
-	/**
-	 * Obtains a list containing all the {@link Identifiable}s in the repository
-	 * 
-	 * @return the list of {@link Identifiable}s
-	 */
-	public List<T> getAll();
-	
-	/**
-	 * @param ids
-	 * @return All the items with the ids
-	 */
-	public List<T> getAll(List<String> ids);
-	
-	/**
 	 * Removes the {@link Identifiable} with the id
 	 * 
 	 * @param id The {@link Identifiable} id to be removed
@@ -84,21 +103,10 @@ public interface Repository<T extends Identifiable> {
 	public void remove(String id);
 	
 	/**
-	 * @return If the repository has data or not
-	 */
-	public Boolean isEmpty();
-	
-	public Long getSize();
-	
-	/**
 	 * Replaces all the {@link Identifiable}s in the repository by new ones.
 	 * 
 	 * @param items The new {@link Identifiable}s to replace the old ones.
 	 */
 	public void replaceAll(Collection<T> items);
-	
-	/**
-	 * @return The unique instance
-	 */
-	public T getUniqueInstance();
+
 }
