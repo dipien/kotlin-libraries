@@ -30,6 +30,8 @@ Add the following lines to your `build.gradle`:
 
     dependencies {
       compile 'com.jdroidframework:jdroid-java-core:X.Y.Z'
+      compile 'com.jdroidframework:jdroid-java-firebase-database:X.Y.Z'
+      compile 'com.jdroidframework:jdroid-java-firebase-dynamiclink:X.Y.Z'
     }
 
 Replace the X.Y.Z by the [latest version](https://github.com/maxirosson/jdroid-java/releases/latest)
