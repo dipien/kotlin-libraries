@@ -3,6 +3,7 @@ version = '0.15.0'
 ext.JDROID_GITHUB_REPOSITORY_NAME = 'jdroid-java'
 
 ext.JDROID_GRADLE_PLUGIN_VERSION = '0.17.0'
+ext.JDROID_JAVA_HTTP_VERSION = '0.15.0-SNAPSHOT'
 
 apply plugin: 'com.jdroid.root'
 apply plugin: 'com.jdroid.component.builder'

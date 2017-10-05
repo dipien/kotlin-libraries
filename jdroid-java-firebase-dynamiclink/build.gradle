@@ -1,0 +1,26 @@
+apply plugin: 'com.jdroid.java.library'
+
+ext.ARTIFACT_ID = 'jdroid-java-firebase-dynamiclink'
+ext.PROJECT_NAME = 'Jdroid Java Firebase Dynamic Link'
+description = 'Firebase Database Dynamic Link for Jdroid'
+
+buildscript {
+	dependencies {
+		classpath 'com.jdroidframework:jdroid-gradle-java-plugin:' + JDROID_GRADLE_PLUGIN_VERSION
+	}
+}
+
+dependencies {
+
+	compile project(":jdroid-java-core")
+	compile ("com.jdroidframework:jdroid-java-http-core:${JDROID_JAVA_HTTP_VERSION}") {
+		exclude module: 'jdroid-java-core'
+	}
+	// Testing
+	testCompile "org.testng:testng:6.8.21"
+}
+
+test {
+	useTestNG {
+	}
+}

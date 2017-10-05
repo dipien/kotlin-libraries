@@ -17,6 +17,8 @@
 ### jdroid-java-firebase-database
 * Repository Pattern
  * [Firebase Implementation](https://www.firebase.com)
+### jdroid-java-firebase-dynamiclink
+* Dynamic Link builder
 
 ## Setup
 
