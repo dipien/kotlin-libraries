@@ -12,6 +12,9 @@ buildscript {
 
 dependencies {
 
+	// https://github.com/google/gson/blob/master/CHANGELOG.md
+	compile ('com.google.code.gson:gson:2.8.1')
+
 	// Logging
 	compile "org.slf4j:slf4j-api:1.6.3"
 
