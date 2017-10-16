@@ -17,8 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.sound.midi.Instrument;
-
 public abstract class FirebaseDatabaseRepository<T extends Entity> implements Repository<T> {
 
 	private static final Logger LOGGER = LoggerUtils.getLogger(FirebaseDatabaseRepository.class);
@@ -55,7 +53,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		FirebaseValueEventListener listener = new FirebaseValueEventListener();
 		firebase.addListenerForSingleValueEvent(listener);
 		listener.waitOperation();
-		T result = listener.getDataSnapshot().getValue(getEntityClass());
+		T result = loadItem(listener.getDataSnapshot());
 		if (result != null) {
 			LOGGER.info("Retrieved object from database with path [ " + getPath() + "]. [ " + result + " ]");
 		} else {
@@ -142,7 +140,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		listener.waitOperation();
 		List<T> results = Lists.newArrayList();
 		for (DataSnapshot eachSnapshot: listener.getDataSnapshot().getChildren()) {
-			results.add(eachSnapshot.getValue(getEntityClass()));
+			results.add(loadItem(eachSnapshot));
 		}
 		LOGGER.info("Retrieved objects [" + results.size() + "] from database of path: " + getPath() + " field: " + fieldName);
 		return results;
@@ -156,7 +154,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		listener.waitOperation();
 		List<T> results = Lists.newArrayList();
 		for (DataSnapshot eachSnapshot: listener.getDataSnapshot().getChildren()) {
-			results.add(eachSnapshot.getValue(getEntityClass()));
+			results.add(loadItem(eachSnapshot));
 		}
 		LOGGER.info("Retrieved all objects [" + results.size() + "] from path: " + getPath());
 		return results;
@@ -170,13 +168,24 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		listener.waitOperation();
 		List<T> results = Lists.newArrayList();
 		for (DataSnapshot eachSnapshot: listener.getDataSnapshot().getChildren()) {
-			T each = eachSnapshot.getValue(getEntityClass());
+			T each = loadItem(eachSnapshot);
 			if (ids.contains(each.getId())) {
 				results.add(each);
 			}
 		}
 		LOGGER.info("Retrieved all objects [" + results.size() + "] from path: " + getPath() + " and ids: " + ids);
 		return results;
+	}
+	
+	private T loadItem(DataSnapshot dataSnapshot) {
+		T item = dataSnapshot.getValue(getEntityClass());
+		onItemLoaded(item);
+		return item;
+		
+	}
+	
+	protected void onItemLoaded(T item) {
+		// Do nothing
 	}
 	
 	@Override
@@ -241,9 +250,8 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 
 	@Override
 	public void replaceAll(Collection<T> items) {
-		for(T each : items) {
-			update(each);
-		}
+		removeAll();
+		addAll(items);
 	}
 
 	@Override
