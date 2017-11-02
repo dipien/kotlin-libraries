@@ -2,7 +2,10 @@ version = '0.15.0'
 
 ext.JDROID_GITHUB_REPOSITORY_NAME = 'jdroid-java'
 
-ext.JDROID_GRADLE_PLUGIN_VERSION = '0.17.0'
+// https://github.com/maxirosson/jdroid-gradle-plugin/blob/master/CHANGELOG.md
+ext.JDROID_GRADLE_PLUGIN_VERSION = '0.18.0'
+
+// https://github.com/maxirosson/jdroid-java-http/blob/master/CHANGELOG.md
 ext.JDROID_JAVA_HTTP_VERSION = '0.15.0-SNAPSHOT'
 
 apply plugin: 'com.jdroid.root'
@@ -19,8 +22,11 @@ buildscript {
 		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 	}
 	dependencies {
-		classpath 'com.jdroidframework:jdroid-component-builder:0.4.0-SNAPSHOT'
-		classpath 'com.jdroidframework:jdroid-gradle-root-plugin:0.17.0'
+		// https://github.com/maxirosson/jdroid-component-builder/blob/master/CHANGELOG.md
+		classpath 'com.jdroidframework:jdroid-component-builder:0.4.0'
+
+		// https://github.com/maxirosson/jdroid-gradle-plugin/blob/master/CHANGELOG.md
+		classpath 'com.jdroidframework:jdroid-gradle-root-plugin:0.18.0'
 	}
 }
 
