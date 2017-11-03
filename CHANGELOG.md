@@ -1,5 +1,16 @@
 # Change Log
 
+## [v0.15.0](https://github.com/maxirosson/jdroid-java/tree/v0.15.0) (2017-11-03)
+[Full Changelog](https://github.com/maxirosson/jdroid-java/compare/v0.14.0...v0.15.0)
+
+**Implemented enhancements:**
+
+- Gson support [\#7](https://github.com/maxirosson/jdroid-java/issues/7)
+
+**Closed issues:**
+
+- Upgrade to jdroid gradle plugin v0.18.0 [\#8](https://github.com/maxirosson/jdroid-java/issues/8)
+
 ## [v0.14.0](https://github.com/maxirosson/jdroid-java/tree/v0.14.0) (2017-07-30)
 [Full Changelog](https://github.com/maxirosson/jdroid-java/compare/v0.13.0...v0.14.0)
 
