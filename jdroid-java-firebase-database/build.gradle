@@ -12,13 +12,13 @@ buildscript {
 
 dependencies {
 
-	compile project(":jdroid-java-core")
+	implementation project(":jdroid-java-core")
 
 	// https://www.firebase.com/docs/android/changelog.html
-	compile 'com.firebase:firebase-client-jvm:2.5.2'
+	api 'com.firebase:firebase-client-jvm:2.5.2'
 
 	// Testing
-	testCompile "org.testng:testng:6.8.21"
+	testImplementation "org.testng:testng:6.8.21"
 }
 
 test {

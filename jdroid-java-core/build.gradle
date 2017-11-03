@@ -13,14 +13,14 @@ buildscript {
 dependencies {
 
 	// https://github.com/google/gson/blob/master/CHANGELOG.md
-	compile ('com.google.code.gson:gson:2.8.2')
+	api 'com.google.code.gson:gson:2.8.2'
 
 	// Logging
-	compile "org.slf4j:slf4j-api:1.6.3"
+	api "org.slf4j:slf4j-api:1.6.3"
 
 	// Testing
-	testCompile "org.testng:testng:6.8.21"
-	testCompile "org.mockito:mockito-all:1.10.19"
+	testImplementation "org.testng:testng:6.8.21"
+	testImplementation "org.mockito:mockito-all:1.10.19"
 }
 
 test {
