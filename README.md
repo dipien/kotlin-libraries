@@ -17,8 +17,6 @@
 ### jdroid-java-firebase-database
 * Repository Pattern
  * [Firebase Implementation](https://www.firebase.com)
-### jdroid-java-firebase-dynamiclink
-* Dynamic Link builder
 
 ## Setup
 
@@ -31,7 +29,6 @@ Add the following lines to your `build.gradle`:
     dependencies {
       compile 'com.jdroidframework:jdroid-java-core:X.Y.Z'
       compile 'com.jdroidframework:jdroid-java-firebase-database:X.Y.Z'
-      compile 'com.jdroidframework:jdroid-java-firebase-dynamiclink:X.Y.Z'
     }
 
 Replace the X.Y.Z by the [latest version](https://github.com/maxirosson/jdroid-java/releases/latest)
