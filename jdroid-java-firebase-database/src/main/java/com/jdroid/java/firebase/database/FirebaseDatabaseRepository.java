@@ -142,7 +142,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		for (DataSnapshot eachSnapshot: listener.getDataSnapshot().getChildren()) {
 			results.add(loadItem(eachSnapshot));
 		}
-		LOGGER.info("Retrieved objects [" + results.size() + "] from database of path: " + getPath() + " field: " + fieldName);
+		LOGGER.info("Retrieved objects [" + results.size() + "] from database of path [" + getPath() + "], field [" + fieldName + "], value [" + value + "]");
 		return results;
 	}
 
