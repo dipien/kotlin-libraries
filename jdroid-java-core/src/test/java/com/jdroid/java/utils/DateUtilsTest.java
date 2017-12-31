@@ -324,6 +324,44 @@ public class DateUtilsTest {
 		return cases.iterator();
 	}
 	
+	@Test(dataProvider = "getLastWeekDayOfTheMonthData")
+	public void lastWeekDayOfTheMonth(Date date, Date expectedResult) {
+		Date lastDay = DateUtils.getLastWeekDayOfMonth(date);
+		Assert.assertEquals(lastDay, expectedResult);
+	}
+	
+	@DataProvider
+	protected Iterator<Object[]> getLastWeekDayOfTheMonthData() {
+		List<Object[]> cases = Lists.newArrayList();
+		
+		// 31-day month
+		Date date1 = DateUtils.getDate(2017, 11, 1);
+		Date expectedDate1 = DateUtils.getDate(2017, 11, 29);
+		cases.add(new Object[] { date1, expectedDate1 });
+		
+		// 31-day month but in the 31th day
+		Date date2 = DateUtils.getDate(2017, 11, 31);
+		Date expectedDate2 = DateUtils.getDate(2017, 11, 29);
+		cases.add(new Object[] { date2, expectedDate2 });
+		
+		// 30-day month
+		Date date3 = DateUtils.getDate(2017, 10, 1);
+		Date expectedDate3 = DateUtils.getDate(2017, 10, 30);
+		cases.add(new Object[] { date3, expectedDate3 });
+		
+		// February special case in a leap year
+		Date date4 = DateUtils.getDate(2008, 1, 1);
+		Date expectedDate4 = DateUtils.getDate(2008, 1, 29);
+		cases.add(new Object[] { date4, expectedDate4 });
+		
+		// February special case in a normal year
+		Date date5 = DateUtils.getDate(2009, 1, 1);
+		Date expectedDate5 = DateUtils.getDate(2009, 1, 27);
+		cases.add(new Object[] { date5, expectedDate5 });
+		
+		return cases.iterator();
+	}
+	
 	/**
 	 * @return the data to tests the formatDuration method
 	 */
@@ -346,6 +384,11 @@ public class DateUtilsTest {
 	public void formatDuration(long duration, String expectedResult) {
 		String result = DateUtils.formatDuration(duration);
 		Assert.assertEquals(result, expectedResult);
+	}
+	
+	@Test
+	public void addMonths() {
+		Assert.assertEquals(DateUtils.addMonths(DateUtils.getDate(2017, 2, 25), -1), DateUtils.getDate(2017, 1, 25));
 	}
 	
 }

@@ -273,10 +273,10 @@ public abstract class DateUtils {
 		return calendar.getTime();
 	}
 	
-	public static Date addMonths(Date date, int days) {
+	public static Date addMonths(Date date, int months) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
-		calendar.add(Calendar.MONTH, days);
+		calendar.add(Calendar.MONTH, months);
 		return calendar.getTime();
 	}
 	
@@ -502,7 +502,20 @@ public abstract class DateUtils {
 		DateUtils.truncateTime(calendar);
 		return calendar.getTime();
 	}
-
+	
+	public static Date getLastWeekDayOfMonth(Date date) {
+		Date lastDayOfMonth = getLastDayOfMonth(date);
+		DayOfWeek dayOfWeek = getDayOfWeek(lastDayOfMonth);
+		
+		if (dayOfWeek.equals(DayOfWeek.SATURDAY)) {
+			return addDays(lastDayOfMonth, -1);
+		} else if (dayOfWeek.equals(DayOfWeek.SUNDAY)) {
+			return addDays(lastDayOfMonth, -2);
+		} else {
+			return lastDayOfMonth;
+		}
+	}
+	
 	/**
 	 * @param fromDate the start date
 	 * @param toDate the end date
