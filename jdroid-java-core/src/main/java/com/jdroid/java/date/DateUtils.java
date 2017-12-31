@@ -516,6 +516,28 @@ public abstract class DateUtils {
 		}
 	}
 	
+	public static Date getLastDayOfYear(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.MONTH, 11);
+		calendar.set(Calendar.DAY_OF_MONTH, 31);
+		DateUtils.truncateTime(calendar);
+		return calendar.getTime();
+	}
+	
+	public static Date getLastWeekDayOfYear(Date date) {
+		Date lastDayOfYear = getLastDayOfYear(date);
+		DayOfWeek dayOfWeek = getDayOfWeek(lastDayOfYear);
+		
+		if (dayOfWeek.equals(DayOfWeek.SATURDAY)) {
+			return addDays(lastDayOfYear, -1);
+		} else if (dayOfWeek.equals(DayOfWeek.SUNDAY)) {
+			return addDays(lastDayOfYear, -2);
+		} else {
+			return lastDayOfYear;
+		}
+	}
+	
 	/**
 	 * @param fromDate the start date
 	 * @param toDate the end date

@@ -362,6 +362,87 @@ public class DateUtilsTest {
 		return cases.iterator();
 	}
 	
+	
+	/**
+	 * @param date the date to be tested
+	 * @param expectedResult The expected result
+	 */
+	@Test(dataProvider = "getLastDayOfTheYearData", dependsOnMethods = "getDate")
+	public void lastDayOfTheYear(Date date, Date expectedResult) {
+		Date lastDay = DateUtils.getLastDayOfYear(date);
+		Assert.assertEquals(lastDay, expectedResult);
+	}
+	
+	@DataProvider
+	protected Iterator<Object[]> getLastDayOfTheYearData() {
+		List<Object[]> cases = Lists.newArrayList();
+		
+		// 31-day month
+		Date date1 = DateUtils.getDate(2010, 0, 10);
+		Date expectedDate1 = DateUtils.getDate(2010, 11, 31);
+		cases.add(new Object[] { date1, expectedDate1 });
+		
+		// 31-day month but in the 31th day
+		Date date2 = DateUtils.getDate(2010, 0, 31);
+		Date expectedDate2 = DateUtils.getDate(2010, 11, 31);
+		cases.add(new Object[] { date2, expectedDate2 });
+		
+		// 30-day month
+		Date date3 = DateUtils.getDate(2010, 3, 1);
+		Date expectedDate3 = DateUtils.getDate(2010, 11, 31);
+		cases.add(new Object[] { date3, expectedDate3 });
+		
+		// February special case in a leap year
+		Date date4 = DateUtils.getDate(2008, 1, 1);
+		Date expectedDate4 = DateUtils.getDate(2008, 11, 31);
+		cases.add(new Object[] { date4, expectedDate4 });
+		
+		// February special case in a normal year
+		Date date5 = DateUtils.getDate(2009, 1, 1);
+		Date expectedDate5 = DateUtils.getDate(2009, 11, 31);
+		cases.add(new Object[] { date5, expectedDate5 });
+		
+		return cases.iterator();
+	}
+	
+	@Test(dataProvider = "getLastWeekDayOfTheYearData")
+	public void lastWeekDayOfTheYear(Date date, Date expectedResult) {
+		Date lastDay = DateUtils.getLastWeekDayOfYear(date);
+		Assert.assertEquals(lastDay, expectedResult);
+	}
+	
+	@DataProvider
+	protected Iterator<Object[]> getLastWeekDayOfTheYearData() {
+		List<Object[]> cases = Lists.newArrayList();
+		
+		// 31-day month
+		Date date1 = DateUtils.getDate(2017, 11, 1);
+		Date expectedDate1 = DateUtils.getDate(2017, 11, 29);
+		cases.add(new Object[] { date1, expectedDate1 });
+		
+		// 31-day month but in the 31th day
+		Date date2 = DateUtils.getDate(2017, 11, 31);
+		Date expectedDate2 = DateUtils.getDate(2017, 11, 29);
+		cases.add(new Object[] { date2, expectedDate2 });
+		
+		// 30-day month
+		Date date3 = DateUtils.getDate(2017, 10, 1);
+		Date expectedDate3 = DateUtils.getDate(2017, 11, 29);
+		cases.add(new Object[] { date3, expectedDate3 });
+		
+		// February special case in a leap year
+		Date date4 = DateUtils.getDate(2008, 1, 1);
+		Date expectedDate4 = DateUtils.getDate(2008, 11, 31);
+		cases.add(new Object[] { date4, expectedDate4 });
+		
+		// February special case in a normal year
+		Date date5 = DateUtils.getDate(2009, 1, 1);
+		Date expectedDate5 = DateUtils.getDate(2009, 11, 31);
+		cases.add(new Object[] { date5, expectedDate5 });
+		
+		return cases.iterator();
+	}
+	
 	/**
 	 * @return the data to tests the formatDuration method
 	 */
