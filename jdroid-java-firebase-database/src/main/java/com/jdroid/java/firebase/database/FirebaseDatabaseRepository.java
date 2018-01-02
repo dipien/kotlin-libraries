@@ -53,13 +53,13 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		FirebaseValueEventListener listener = new FirebaseValueEventListener();
 		firebase.addListenerForSingleValueEvent(listener);
 		listener.waitOperation();
-		T result = loadItem(listener.getDataSnapshot());
-		if (result != null) {
-			LOGGER.info("Retrieved object from database with path [ " + getPath() + "]. [ " + result + " ]");
+		T item = loadItem(listener.getDataSnapshot());
+		if (item != null) {
+			LOGGER.info("[" + getPath() + "] Retrieved object from database: [" + item + "]");
 		} else {
-			LOGGER.info("Object not found on database with path [ " + getPath() + " ] and id [ " + id + " ]");
+			LOGGER.info("[" + getPath() + "] Object not found on database with id [" + id + "]");
 		}
-		return result;
+		return item;
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 			addIdField(firebase.getKey());
 		}
 		item.setId(firebase.getKey());
-		LOGGER.info("Stored object in database: " + item);
+		LOGGER.info("[" + getPath() + "] Stored object in database: " + item);
 	}
 
 	private void addIdField(String id) {
@@ -142,7 +142,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		for (DataSnapshot eachSnapshot: listener.getDataSnapshot().getChildren()) {
 			results.add(loadItem(eachSnapshot));
 		}
-		LOGGER.info("Retrieved objects [" + results.size() + "] from database of path [" + getPath() + "], field [" + fieldName + "], value [" + value + "]");
+		LOGGER.info("[" + getPath() + "] Retrieved objects [" + results.size() + "] from database with field [" + fieldName + "], value [" + value + "]");
 		return results;
 	}
 
@@ -156,7 +156,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		for (DataSnapshot eachSnapshot: listener.getDataSnapshot().getChildren()) {
 			results.add(loadItem(eachSnapshot));
 		}
-		LOGGER.info("Retrieved all objects [" + results.size() + "] from path: " + getPath());
+		LOGGER.info("[" + getPath() + "] Retrieved all objects [" + results.size() + "]");
 		return results;
 	}
 
@@ -173,7 +173,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 				results.add(each);
 			}
 		}
-		LOGGER.info("Retrieved all objects [" + results.size() + "] from path: " + getPath() + " and ids: " + ids);
+		LOGGER.info("[" + getPath() + "] Retrieved all objects [" + results.size() + "] with ids: " + ids);
 		return results;
 	}
 	
@@ -231,7 +231,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		FirebaseCompletionListener listener = new FirebaseCompletionListener();
 		firebase.removeValue(listener);
 		listener.waitOperation();
-		LOGGER.trace("Deleted object in database: with id: " + id);
+		LOGGER.trace("[" + getPath() + "] Deleted object in database with id: " + id);
 	}
 
 	@Override
