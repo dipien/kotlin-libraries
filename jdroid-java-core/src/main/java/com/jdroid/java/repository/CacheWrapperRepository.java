@@ -118,13 +118,15 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 
 	@Override
 	public List<T> getByField(String fieldName, Object... values) {
-		LOGGER.warn("The getByField query is not cached.");
+		// TODO Add cache to getByField query
+		LOGGER.info("The getByField query is not cached. Repository [" + wrappedRepository.getClass().getSimpleName() + "]. Field name [" + fieldName + "]");
 		return wrappedRepository.getByField(fieldName, values);
 	}
 	
 	@Override
 	public T getItemByField(String fieldName, Object... values) {
-		LOGGER.warn("The getItemByField query is not cached.");
+		// TODO Add cache to getItemByField query
+		LOGGER.info("The getItemByField query is not cached. Repository [" + wrappedRepository.getClass().getSimpleName() + "]. Field name [" + fieldName + "]");
 		return wrappedRepository.getItemByField(fieldName, values);
 	}
 	
