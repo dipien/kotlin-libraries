@@ -54,9 +54,9 @@ public abstract class PairFirebaseRepository implements PairRepository {
 			pair = new Pair();
 			pair.setId(id);
 			pair.setValue(result);
-			LOGGER.info("Retrieved object from database with path [ " + getPath() + "]. [ " + result + " ]");
+			LOGGER.debug("Retrieved object from database with path [ " + getPath() + "]. [ " + result + " ]");
 		} else {
-			LOGGER.info("Object not found on database with path [ " + getPath() + " ] and id [ " + id + " ]");
+			LOGGER.debug("Object not found on database with path [ " + getPath() + " ] and id [ " + id + " ]");
 		}
 		return pair;
 	}
@@ -70,7 +70,7 @@ public abstract class PairFirebaseRepository implements PairRepository {
 		firebase.setValue(item.getValue(), listener);
 
 		listener.waitOperation();
-		LOGGER.info("Stored object in database: " + item);
+		LOGGER.debug("Stored object in database: " + item);
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public abstract class PairFirebaseRepository implements PairRepository {
 			pair.setValue(eachSnapshot.getValue(String.class));
 			results.add(pair);
 		}
-		LOGGER.info("Retrieved all objects [" + results.size() + "] from path: " + getPath());
+		LOGGER.debug("Retrieved all objects [" + results.size() + "] from path: " + getPath());
 		return results;
 	}
 
@@ -130,7 +130,7 @@ public abstract class PairFirebaseRepository implements PairRepository {
 				results.add(pair);
 			}
 		}
-		LOGGER.info("Retrieved all objects [" + results.size() + "] from path: " + getPath() + " and ids: " + ids);
+		LOGGER.debug("Retrieved all objects [" + results.size() + "] from path: " + getPath() + " and ids: " + ids);
 		return results;
 	}
 
@@ -168,7 +168,7 @@ public abstract class PairFirebaseRepository implements PairRepository {
 		FirebaseCompletionListener listener = new FirebaseCompletionListener();
 		firebase.removeValue(listener);
 		listener.waitOperation();
-		LOGGER.trace("Deleted object in database: with id: " + id);
+		LOGGER.debug("Deleted object in database: with id: " + id);
 	}
 
 	@Override
