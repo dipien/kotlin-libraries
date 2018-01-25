@@ -219,6 +219,8 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 	public void remove(String id) {
 		if (id != null) {
 			innerRemove(id);
+		} else {
+			throw new IllegalArgumentException("The id parameter can't be null");
 		}
 	}
 
