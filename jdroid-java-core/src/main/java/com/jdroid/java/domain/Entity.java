@@ -52,8 +52,10 @@ public abstract class Entity implements Serializable, Identifiable {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Entity{id='");
 		builder.append(id);
-		builder.append("\', parentId='");
-		builder.append(parentId);
+		if (parentId != null) {
+			builder.append("\', parentId='");
+			builder.append(parentId);
+		}
 		builder.append("\'}");
 		return builder.toString();
 	}
