@@ -258,6 +258,13 @@ public abstract class DateUtils {
 		calendar.add(Calendar.SECOND, seconds);
 		return calendar.getTime();
 	}
+	
+	public static Date addMinutes(Date date, int minutes) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.MINUTE, minutes);
+		return calendar.getTime();
+	}
 
 	public static Date addHours(Date date, int hours) {
 		Calendar calendar = Calendar.getInstance();
