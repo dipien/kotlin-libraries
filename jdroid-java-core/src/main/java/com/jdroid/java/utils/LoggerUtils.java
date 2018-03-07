@@ -18,13 +18,13 @@ public class LoggerUtils {
 	private static List<String> DISABLED_LOGGERS = Lists.newArrayList();
 	private static ILoggerFactory DEFAULT_LOGGER_FACTORY;
 	
-	public static Logger getLogger(Object name) {
-		return LoggerUtils.getLogger(name.getClass());
-	}
-
 	public static Logger getLogger(Class<?> clazz) {
+		return getLogger(clazz.getSimpleName());
+	}
+	
+	public static Logger getLogger(String name) {
 		if (enabled) {
-			String loggerName = getLoggerName(clazz);
+			String loggerName = getLoggerName(name);
 			if (!DISABLED_LOGGERS.contains(loggerName)) {
 				if (DEFAULT_LOGGER_FACTORY != null) {
 					return DEFAULT_LOGGER_FACTORY.getLogger(loggerName);
@@ -39,10 +39,9 @@ public class LoggerUtils {
 		}
 	}
 	
-	private static String getLoggerName(Class<?> clazz) {
-		String simpleName = clazz.getSimpleName();
+	private static String getLoggerName(String name) {
 		// Logcat support 23 characters as maximum
-		return simpleName.substring(0, Math.min(simpleName.length(), 23));
+		return name.substring(0, Math.min(name.length(), 23));
 	}
 	
 	public static void setEnabled(boolean enabled) {
@@ -57,8 +56,12 @@ public class LoggerUtils {
 		DEFAULT_LOGGER_FACTORY = defaultLoggerFactory;
 	}
 
+	public static void addDisabledLogger(String name) {
+		DISABLED_LOGGERS.add(getLoggerName(name));
+	}
+	
 	public static void addDisabledLogger(Class<?> clazz) {
-		DISABLED_LOGGERS.add(getLoggerName(clazz));
+		addDisabledLogger(clazz.getSimpleName());
 	}
 	
 	/**
