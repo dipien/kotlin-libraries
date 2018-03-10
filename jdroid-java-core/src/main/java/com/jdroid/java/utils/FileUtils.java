@@ -1,12 +1,14 @@
 package com.jdroid.java.utils;
 
 import com.jdroid.java.exception.UnexpectedException;
+import com.jdroid.java.files.FileLineListener;
 
 import org.slf4j.Logger;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
@@ -18,9 +20,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
+import static java.lang.System.in;
 
 /**
  * This class contains functions for working with files within the application.
@@ -66,6 +72,20 @@ public abstract class FileUtils {
 	@SuppressWarnings("resource")
 	public static byte[] readAsBytes(File file) throws IOException {
 		return readAsBytes(new FileInputStream(file));
+	}
+	
+	public static void readLines(File file, FileLineListener fileLineListener) {
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				fileLineListener.onLine(line);
+			}
+		} catch (IOException e) {
+			throw new UnexpectedException("Error reading the stream", e);
+		} finally {
+			safeClose(in);
+		}
 	}
 	
 	/**
@@ -231,6 +251,20 @@ public abstract class FileUtils {
 	 */
 	public static String toString(InputStream in) {
 		return toString(in, true);
+	}
+	
+	public static void writeLines(File file, List<String> lines) {
+		try {
+			FileOutputStream fileOutputStream = new FileOutputStream(file);
+			BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
+			for (String line : lines) {
+				bufferedWriter.write(line);
+				bufferedWriter.newLine();
+			}
+			bufferedWriter.close();
+		} catch (IOException e) {
+			throw new UnexpectedException(e);
+		}
 	}
 	
 	/**
