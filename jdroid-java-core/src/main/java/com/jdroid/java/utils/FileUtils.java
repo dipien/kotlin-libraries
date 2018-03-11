@@ -1,7 +1,7 @@
 package com.jdroid.java.utils;
 
+import com.jdroid.java.collections.Lists;
 import com.jdroid.java.exception.UnexpectedException;
-import com.jdroid.java.files.FileLineListener;
 
 import org.slf4j.Logger;
 
@@ -74,13 +74,15 @@ public abstract class FileUtils {
 		return readAsBytes(new FileInputStream(file));
 	}
 	
-	public static void readLines(File file, FileLineListener fileLineListener) {
+	public static List<String> readLines(File file) {
 		try {
+			List<String> lines = Lists.newArrayList();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 			String line = null;
 			while ((line = reader.readLine()) != null) {
-				fileLineListener.onLine(line);
+				lines.add(line);
 			}
+			return lines;
 		} catch (IOException e) {
 			throw new UnexpectedException("Error reading the stream", e);
 		} finally {
