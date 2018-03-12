@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import static java.lang.System.in;
-
 /**
  * This class contains functions for working with files within the application.
  */
@@ -75,10 +73,11 @@ public abstract class FileUtils {
 	}
 	
 	public static List<String> readLines(File file) {
+		BufferedReader reader = null;
 		try {
 			List<String> lines = Lists.newArrayList();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-			String line = null;
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+			String line;
 			while ((line = reader.readLine()) != null) {
 				lines.add(line);
 			}
@@ -86,7 +85,7 @@ public abstract class FileUtils {
 		} catch (IOException e) {
 			throw new UnexpectedException("Error reading the stream", e);
 		} finally {
-			safeClose(in);
+			safeClose(reader);
 		}
 	}
 	
@@ -263,7 +262,7 @@ public abstract class FileUtils {
 				bufferedWriter.write(line);
 				bufferedWriter.newLine();
 			}
-			bufferedWriter.close();
+			safeClose(bufferedWriter);
 		} catch (IOException e) {
 			throw new UnexpectedException(e);
 		}
