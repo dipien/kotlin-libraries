@@ -29,6 +29,7 @@ Add the following lines to your `build.gradle`:
     dependencies {
       implementation 'com.jdroidframework:jdroid-java-core:X.Y.Z'
       implementation 'com.jdroidframework:jdroid-java-firebase-database:X.Y.Z'
+      implementation 'com.jdroidframework:jdroid-java-remote-config:X.Y.Z'
     }
 
 Replace the X.Y.Z by the [latest version](https://github.com/maxirosson/jdroid-java/releases/latest)
