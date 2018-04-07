@@ -1,11 +1,11 @@
 # Jdroid Java
 
 ## Continuous Integration
-|Branch|Status|
-| ------------- | ------------- |
-|Master|[![Build Status](https://travis-ci.org/maxirosson/jdroid-java.svg?branch=master)](https://travis-ci.org/maxirosson/jdroid-java)|
-|Staging|[![Build Status](https://api.travis-ci.org/maxirosson/jdroid-java.svg?branch=staging)](https://travis-ci.org/maxirosson/jdroid-java)|
-|Production|[![Build Status](https://api.travis-ci.org/maxirosson/jdroid-java.svg?branch=production)](https://travis-ci.org/maxirosson/jdroid-java)|
+|Branch|Status|Workflows|Insights|
+| ------------- | ------------- | ------------- | ------------- |
+|master|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-java/tree/master.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-java/tree/master)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-java/tree/master)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-java/master)|
+|staging|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-java/tree/staging.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-java/tree/staging)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-java/tree/staging)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-java/staging)|
+|production|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-java/tree/production.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-java/tree/production)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-java/tree/production)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-java/production)|
 
 ## Features
 ### jdroid-java-core
