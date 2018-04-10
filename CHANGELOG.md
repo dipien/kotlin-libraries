@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.16.0](https://github.com/maxirosson/jdroid-java/tree/v0.16.0) (2018-04-10)
+[Full Changelog](https://github.com/maxirosson/jdroid-java/compare/v0.15.0...v0.16.0)
+
+**Closed issues:**
+
+- Remote Config component [\#6](https://github.com/maxirosson/jdroid-java/issues/6)
+
 ## [v0.15.0](https://github.com/maxirosson/jdroid-java/tree/v0.15.0) (2017-11-03)
 [Full Changelog](https://github.com/maxirosson/jdroid-java/compare/v0.14.0...v0.15.0)
 
