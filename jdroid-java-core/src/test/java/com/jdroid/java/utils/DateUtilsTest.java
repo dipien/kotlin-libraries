@@ -472,4 +472,16 @@ public class DateUtilsTest {
 		Assert.assertEquals(DateUtils.addMonths(DateUtils.getDate(2017, 2, 25), -1), DateUtils.getDate(2017, 1, 25));
 	}
 	
+	@Test
+	public void getLastWeekDayOfPreviousWeek() {
+		Date friday = DateUtils.getDate(2018, 3, 13);
+		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 15)), friday);
+		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 16)), friday);
+		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 17)), friday);
+		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 18)), friday);
+		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 19)), friday);
+		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 20)), friday);
+		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 21)), friday);
+	}
+	
 }

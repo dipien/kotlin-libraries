@@ -444,13 +444,11 @@ public abstract class DateUtils {
 	}
 	
 	public static Boolean isToday(Date date) {
-		return isToday(date.getTime());
+		return truncateTime(date).equals(today());
 	}
 	
 	public static Boolean isToday(Long timestamp) {
-		Date date = DateUtils.getDate(timestamp);
-		date = truncateTime(date);
-		return date.equals(today());
+		return isToday(DateUtils.getDate(timestamp));
 	}
 	
 	public static Boolean isYesterdayOrPrevious(Date date) {
@@ -506,6 +504,22 @@ public abstract class DateUtils {
 	 */
 	public static Date oneMonthInPast() {
 		return DateUtils.monthsAway(-1);
+	}
+	
+	public static Date getLastWeekDayOfPreviousWeek() {
+		return getLastWeekDayOfMonth(DateUtils.now());
+	}
+	
+	public static Date getLastWeekDayOfPreviousWeek(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+		int diff = -(dayOfWeek + 1);
+		return DateUtils.addDays(date, diff);
+	}
+	
+	public static Boolean isLastWeekDayOfWeek() {
+		return getDayOfWeek() == DayOfWeek.FRIDAY;
 	}
 	
 	/**
