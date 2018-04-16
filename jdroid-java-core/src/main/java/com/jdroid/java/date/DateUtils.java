@@ -461,6 +461,7 @@ public abstract class DateUtils {
 		return timestamp < today().getTime();
 	}
 	
+	@Deprecated
 	public static Calendar todayCalendar() {
 		Calendar calendar = Calendar.getInstance();
 		DateUtils.truncateTime(calendar);
@@ -471,21 +472,18 @@ public abstract class DateUtils {
 	 * @return a day after today
 	 */
 	public static Date tomorrow() {
-		Calendar calendar = DateUtils.todayCalendar();
-		return DateUtils.addDays(calendar.getTime(), 1);
+		return DateUtils.addDays(today(), 1);
 	}
 	
 	public static Date today() {
-		Calendar calendar = DateUtils.todayCalendar();
-		return calendar.getTime();
+		return truncateTime(DateUtils.now());
 	}
 	
 	/**
 	 * @return a day before today
 	 */
 	public static Date yesterday() {
-		Calendar calendar = DateUtils.todayCalendar();
-		return DateUtils.addDays(calendar.getTime(), -1);
+		return DateUtils.addDays(today(), -1);
 	}
 	
 	/**
@@ -493,7 +491,7 @@ public abstract class DateUtils {
 	 * @return a date that is <code>months</code> in the future/past. Use negative values for past dates.
 	 */
 	public static Date monthsAway(int months) {
-		return DateUtils.addMonths(DateUtils.todayCalendar().getTime(), months);
+		return DateUtils.addMonths(today(), months);
 	}
 	
 	/**
