@@ -510,6 +510,14 @@ public abstract class DateUtils {
 		return calendar.getTime();
 	}
 	
+	public static Boolean isLastWeekDayOfMonth() {
+		return DateUtils.today().equals(getLastWeekDayOfMonth());
+	}
+	
+	public static Date getLastWeekDayOfMonth() {
+		return getLastWeekDayOfMonth(DateUtils.today());
+	}
+	
 	public static Date getLastWeekDayOfMonth(Date date) {
 		Date lastDayOfMonth = getLastDayOfMonth(date);
 		DayOfWeek dayOfWeek = getDayOfWeek(lastDayOfMonth);
@@ -530,6 +538,14 @@ public abstract class DateUtils {
 		calendar.set(Calendar.DAY_OF_MONTH, 31);
 		DateUtils.truncateTime(calendar);
 		return calendar.getTime();
+	}
+	
+	public static Boolean isLastWeekDayOfYear() {
+		return DateUtils.today().equals(getLastWeekDayOfYear());
+	}
+	
+	public static Date getLastWeekDayOfYear() {
+		return getLastWeekDayOfYear(DateUtils.today());
 	}
 	
 	public static Date getLastWeekDayOfYear(Date date) {
