@@ -196,6 +196,10 @@ public abstract class DateUtils {
 		return calendar.get(Calendar.YEAR);
 	}
 	
+	public static int getMonth() {
+		return getMonth(now());
+	}
+	
 	public static int getMonth(Date date) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
@@ -515,7 +519,7 @@ public abstract class DateUtils {
 	}
 	
 	public static Date getLastWeekDayOfMonth() {
-		return getLastWeekDayOfMonth(DateUtils.today());
+		return getLastWeekDayOfMonth(now());
 	}
 	
 	public static Date getLastWeekDayOfMonth(Date date) {
@@ -545,7 +549,7 @@ public abstract class DateUtils {
 	}
 	
 	public static Date getLastWeekDayOfYear() {
-		return getLastWeekDayOfYear(DateUtils.today());
+		return getLastWeekDayOfYear(now());
 	}
 	
 	public static Date getLastWeekDayOfYear(Date date) {
