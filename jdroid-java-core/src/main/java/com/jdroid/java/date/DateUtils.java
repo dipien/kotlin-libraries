@@ -186,6 +186,15 @@ public abstract class DateUtils {
 		return calendar.getTime();
 	}
 	
+	public static Date getDateTime(Date date, Date time) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.HOUR_OF_DAY, DateUtils.getHour(time, true));
+		calendar.set(Calendar.MINUTE, DateUtils.getMinute(time));
+		calendar.set(Calendar.SECOND, DateUtils.getSeconds(time));
+		return calendar.getTime();
+	}
+	
 	public static int getYear() {
 		return getYear(now());
 	}
@@ -234,6 +243,18 @@ public abstract class DateUtils {
 		return calendar.get(Calendar.MINUTE);
 	}
 	
+	public static int getSeconds(Date date) {
+		return DateUtils.getSeconds(date, TimeZone.getDefault());
+	}
+	
+	public static int getSeconds(Date date, TimeZone timeZone) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.setTimeZone(timeZone);
+		return calendar.get(Calendar.SECOND);
+	}
+	
+	
 	public static DayOfWeek getDayOfWeek() {
 		return getDayOfWeek(DateUtils.now());
 	}
@@ -253,6 +274,13 @@ public abstract class DateUtils {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		calendar.set(is24Hour ? Calendar.HOUR_OF_DAY : Calendar.HOUR, hours);
+		return calendar.getTime();
+	}
+	
+	public static Date setMinutes(Date date, int minutes) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.MINUTE, minutes);
 		return calendar.getTime();
 	}
 	
@@ -457,6 +485,10 @@ public abstract class DateUtils {
 	
 	public static Boolean isYesterdayOrPrevious(Long timestamp) {
 		return timestamp < today().getTime();
+	}
+	
+	public Boolean isSameDay(Date a, Date b) {
+		return DateUtils.truncateTime(a).equals(DateUtils.truncateTime(b));
 	}
 	
 	@Deprecated
