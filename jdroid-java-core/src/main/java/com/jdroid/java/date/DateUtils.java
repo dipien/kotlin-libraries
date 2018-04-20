@@ -487,7 +487,7 @@ public abstract class DateUtils {
 		return timestamp < today().getTime();
 	}
 	
-	public Boolean isSameDay(Date a, Date b) {
+	public static Boolean isSameDay(Date a, Date b) {
 		return DateUtils.truncateTime(a).equals(DateUtils.truncateTime(b));
 	}
 	
