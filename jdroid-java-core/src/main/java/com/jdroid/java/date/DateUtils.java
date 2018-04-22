@@ -539,7 +539,7 @@ public abstract class DateUtils {
 	}
 	
 	public static Date getLastWeekDayOfPreviousWeek() {
-		return getLastWeekDayOfMonth(DateUtils.now());
+		return getLastWeekDayOfPreviousWeek(DateUtils.now());
 	}
 	
 	public static Date getLastWeekDayOfPreviousWeek(Date date) {

@@ -5,6 +5,7 @@ import com.jdroid.java.date.DateTimeFormat;
 import com.jdroid.java.date.DateUtils;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -18,6 +19,11 @@ import java.util.List;
  * 
  */
 public class DateUtilsTest {
+	
+	@AfterMethod
+	public static void onAfterMethod() {
+		DateUtils.setFakeNow(null);
+	}
 	
 	/**
 	 * @return The different cases
@@ -474,6 +480,8 @@ public class DateUtilsTest {
 	
 	@Test
 	public void getLastWeekDayOfPreviousWeek() {
+		
+		
 		Date friday = DateUtils.getDate(2018, 3, 13);
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 15)), friday);
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 16)), friday);
@@ -482,6 +490,28 @@ public class DateUtilsTest {
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 19)), friday);
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 20)), friday);
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 21)), friday);
+		
+		DateUtils.setFakeNow(DateUtils.getDate(2018, 3, 15));
+		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
+		
+		DateUtils.setFakeNow(DateUtils.getDate(2018, 3, 16));
+		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
+		
+		DateUtils.setFakeNow(DateUtils.getDate(2018, 3, 17));
+		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
+		
+		DateUtils.setFakeNow(DateUtils.getDate(2018, 3, 18));
+		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
+		
+		DateUtils.setFakeNow(DateUtils.getDate(2018, 3, 19));
+		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
+		
+		DateUtils.setFakeNow(DateUtils.getDate(2018, 3, 20));
+		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
+		
+		DateUtils.setFakeNow(DateUtils.getDate(2018, 3, 21));
+		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
+		
 	}
 	
 }
