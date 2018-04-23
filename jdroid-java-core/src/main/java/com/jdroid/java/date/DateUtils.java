@@ -17,33 +17,43 @@ import java.util.concurrent.TimeUnit;
 public abstract class DateUtils {
 	
 	/** Seconds in a minute */
+	@Deprecated
 	public static final int SECONDS_PER_MINUTE = 60;
 	
 	/** Seconds in an hour */
+	@Deprecated
 	public static final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * 60;
 	
 	/** Seconds in a day */
+	@Deprecated
 	public static final int SECONDS_PER_DAY = SECONDS_PER_HOUR * 24;
 	
 	/** Seconds in a week */
+	@Deprecated
 	public static final int WEEK = SECONDS_PER_DAY * 7;
 	
 	/** Number of milliseconds in a second. */
+	@Deprecated
 	public static final long MILLIS_PER_SECOND = 1000;
 	
 	/** Number of milliseconds in a minute. */
+	@Deprecated
 	public static final long MILLIS_PER_MINUTE = 60 * MILLIS_PER_SECOND;
 	
 	/** Number of milliseconds in a hour. */
+	@Deprecated
 	public static final long MILLIS_PER_HOUR = 60 * MILLIS_PER_MINUTE;
 	
 	/** Number of milliseconds in a day. */
+	@Deprecated
 	public static final long MILLIS_PER_DAY = 24 * MILLIS_PER_HOUR;
 
 	/** Number of milliseconds in a week. */
+	@Deprecated
 	public static final long MILLIS_PER_WEEK = 7 * MILLIS_PER_DAY;
 
 	/** Number of hours in a day **/
+	@Deprecated
 	public static final int HOURS_PER_DAY = 24;
 
 	@Deprecated
