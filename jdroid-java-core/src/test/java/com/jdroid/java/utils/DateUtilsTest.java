@@ -1,6 +1,7 @@
 package com.jdroid.java.utils;
 
 import com.jdroid.java.collections.Lists;
+import com.jdroid.java.date.DateConfiguration;
 import com.jdroid.java.date.DateTimeFormat;
 import com.jdroid.java.date.DateUtils;
 
@@ -22,7 +23,7 @@ public class DateUtilsTest {
 	
 	@AfterMethod
 	public static void onAfterMethod() {
-		DateUtils.setFakeNow(null);
+		DateConfiguration.setFakeNow(null);
 	}
 	
 	/**
@@ -491,25 +492,25 @@ public class DateUtilsTest {
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 20)), friday);
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 21)), friday);
 		
-		DateUtils.setFakeNow(DateUtils.getDate(2018, 3, 15));
+		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 15));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
 		
-		DateUtils.setFakeNow(DateUtils.getDate(2018, 3, 16));
+		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 16));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
 		
-		DateUtils.setFakeNow(DateUtils.getDate(2018, 3, 17));
+		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 17));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
 		
-		DateUtils.setFakeNow(DateUtils.getDate(2018, 3, 18));
+		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 18));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
 		
-		DateUtils.setFakeNow(DateUtils.getDate(2018, 3, 19));
+		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 19));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
 		
-		DateUtils.setFakeNow(DateUtils.getDate(2018, 3, 20));
+		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 20));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
 		
-		DateUtils.setFakeNow(DateUtils.getDate(2018, 3, 21));
+		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 21));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
 		
 	}

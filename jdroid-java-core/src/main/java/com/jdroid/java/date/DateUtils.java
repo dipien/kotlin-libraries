@@ -46,9 +46,8 @@ public abstract class DateUtils {
 	/** Number of hours in a day **/
 	public static final int HOURS_PER_DAY = 24;
 
-	public static String DEFAULT_DATE_TIME_FORMAT = DateTimeFormat.YYYYMMDDHHMMSSZ;
-
-	private static Date fakeNow;
+	@Deprecated
+	public static String DEFAULT_DATE_TIME_FORMAT = DateConfiguration.DEFAULT_DATE_TIME_FORMAT;
 	
 	public static void init() {
 		// nothing...
@@ -379,11 +378,11 @@ public abstract class DateUtils {
 	 * @return the current moment
 	 */
 	public static Date now() {
-		return fakeNow != null ? fakeNow : new Date();
+		return DateConfiguration.isFakeNow() ? DateConfiguration.getFakeNow() : new Date();
 	}
 
 	public static long nowMillis() {
-		return fakeNow != null ? fakeNow.getTime() : System.currentTimeMillis();
+		return DateConfiguration.isFakeNow() ? DateConfiguration.getFakeNow().getTime() : System.currentTimeMillis();
 	}
 
 	/**
@@ -687,15 +686,18 @@ public abstract class DateUtils {
 		}
 	}
 	
+	@Deprecated
 	public static Date getFakeNow() {
-		return fakeNow;
+		return DateConfiguration.getFakeNow();
 	}
 	
+	@Deprecated
 	public static void setFakeNow(Date fakeNow) {
-		DateUtils.fakeNow = fakeNow;
+		DateConfiguration.setFakeNow(fakeNow);
 	}
 	
+	@Deprecated
 	public static Boolean isFakeNow() {
-		return fakeNow != null;
+		return DateConfiguration.isFakeNow();
 	}
 }
