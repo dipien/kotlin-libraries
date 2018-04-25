@@ -3,6 +3,7 @@ package com.jdroid.java.repository;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.collections.Maps;
 import com.jdroid.java.domain.Identifiable;
+import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.ReflectionUtils;
 
@@ -42,7 +43,10 @@ public class InMemoryRepository<T extends Identifiable> implements Repository<T>
 	
 	@Override
 	public void update(T item) {
-		add(item);
+		if (item.getId() == null) {
+			throw new UnexpectedException("Item with null id can not be updated");
+		}
+		items.put(item.getId(), item);
 		LOGGER.debug("Updated object in memory: " + item);
 	}
 	

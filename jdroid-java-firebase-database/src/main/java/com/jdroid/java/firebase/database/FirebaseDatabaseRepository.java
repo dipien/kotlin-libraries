@@ -107,7 +107,13 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		if (item.getId() == null) {
 			throw new UnexpectedException("Item with null id can not be updated");
 		}
-		add(item);
+		Firebase firebase = createFirebase().child(item.getId());
+		
+		FirebaseCompletionListener listener = new FirebaseCompletionListener();
+		firebase.setValue(item, listener);
+		listener.waitOperation();
+		item.setId(firebase.getKey());
+		LOGGER.debug("[" + getPath() + "] Updated object in database: " + item);
 	}
 
 	@Override

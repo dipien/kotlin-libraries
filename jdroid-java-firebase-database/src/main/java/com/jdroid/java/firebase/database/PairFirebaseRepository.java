@@ -85,7 +85,15 @@ public abstract class PairFirebaseRepository implements PairRepository {
 		if (item.getId() == null) {
 			throw new UnexpectedException("Item with null id can not be updated");
 		}
-		add(item);
+		
+		Firebase firebase = createFirebase();
+		firebase = firebase.child(item.getId());
+		
+		FirebaseCompletionListener listener = new FirebaseCompletionListener();
+		firebase.setValue(item.getValue(), listener);
+		
+		listener.waitOperation();
+		LOGGER.debug("Updated object in database: " + item);
 	}
 
 	@Override
