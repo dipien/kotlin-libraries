@@ -195,6 +195,7 @@ public abstract class DateUtils {
 		return calendar.getTime();
 	}
 	
+	@Deprecated
 	public static Date getDateTime(Date date, Date time) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
@@ -688,6 +689,7 @@ public abstract class DateUtils {
 		return builder.toString();
 	}
 
+	@Deprecated
 	public static Long millisecondsToDays(Long timestamp) {
 		if (timestamp != null) {
 			return (DateUtils.nowMillis() - timestamp) / MILLIS_PER_DAY;

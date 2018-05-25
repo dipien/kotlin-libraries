@@ -17,7 +17,7 @@ public abstract class AbstractScheduler {
 				try {
 					doExecute();
 				} catch (Exception e) {
-					LoggerUtils.getLogger(getClass()).error("Unexpected error when executing " + getClass().getSimpleName(), e);
+					onException(e);
 				} finally {
 					releaseLock();
 				}
@@ -29,7 +29,13 @@ public abstract class AbstractScheduler {
 	
 	protected abstract void doExecute();
 	
-	protected abstract Boolean isEnabled();
+	protected void onException(Exception e) {
+		LoggerUtils.getLogger(getClass()).error("Unexpected error when executing " + getClass().getSimpleName(), e);
+	}
+	
+	protected Boolean isEnabled() {
+		return true;
+	}
 	
 	private synchronized Boolean acquireLock() {
 		if (!inProgress) {
