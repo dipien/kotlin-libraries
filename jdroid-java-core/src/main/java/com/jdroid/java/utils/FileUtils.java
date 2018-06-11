@@ -72,11 +72,11 @@ public abstract class FileUtils {
 		return readAsBytes(new FileInputStream(file));
 	}
 	
-	public static List<String> readLines(File file) {
+	public static List<String> readLines(InputStream inputStream) {
 		BufferedReader reader = null;
 		try {
 			List<String> lines = Lists.newArrayList();
-			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+			reader = new BufferedReader(new InputStreamReader(inputStream));
 			String line;
 			while ((line = reader.readLine()) != null) {
 				lines.add(line);
@@ -86,6 +86,14 @@ public abstract class FileUtils {
 			throw new UnexpectedException("Error reading the stream", e);
 		} finally {
 			safeClose(reader);
+		}
+	}
+	
+	public static List<String> readLines(File file) {
+		try {
+			return readLines(new FileInputStream(file));
+		} catch (FileNotFoundException e) {
+			throw new UnexpectedException("Error reading the file", e);
 		}
 	}
 	
