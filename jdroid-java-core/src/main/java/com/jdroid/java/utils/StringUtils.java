@@ -40,7 +40,7 @@ public abstract class StringUtils {
 	}
 	
 	public static Boolean isEmpty(String text) {
-		return text != null ? text.length() == 0 : true;
+		return text == null || text.length() == 0;
 	}
 	
 	public static Boolean isNotEmpty(String text) {
@@ -230,7 +230,7 @@ public abstract class StringUtils {
 		if ((objectsToJoin != null) && !objectsToJoin.isEmpty()) {
 			StringBuilder builder = new StringBuilder();
 			for (Object object : objectsToJoin) {
-				builder.append(object);
+				builder.append(object != null ? object.toString() : "");
 				builder.append(separator);
 			}
 			// Remove the last separator
