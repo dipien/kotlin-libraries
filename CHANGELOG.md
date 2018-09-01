@@ -1,5 +1,13 @@
 # Change Log
 
+## [v2.0.0](https://github.com/maxirosson/jdroid-java/tree/v2.0.0) (2018-09-01)
+[Full Changelog](https://github.com/maxirosson/jdroid-java/compare/v1.0.0...v2.0.0)
+
+**Implemented enhancements:**
+
+- New StreamUtils [\#11](https://github.com/maxirosson/jdroid-java/issues/11)
+- Date utils improvements [\#10](https://github.com/maxirosson/jdroid-java/issues/10)
+
 ## [v1.0.0](https://github.com/maxirosson/jdroid-java/tree/v1.0.0) (2018-04-10)
 [Full Changelog](https://github.com/maxirosson/jdroid-java/compare/v0.16.0...v1.0.0)
 
