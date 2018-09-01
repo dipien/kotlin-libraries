@@ -40,52 +40,13 @@ public final class ExecutorUtils {
 		scheduledExecutor.schedule(runnable, delay, timeUnit);
 	}
 	
-	@Deprecated
-	public static void schedule(Runnable runnable, Long delaySeconds) {
-		scheduledExecutor.schedule(runnable, delaySeconds, TimeUnit.SECONDS);
-	}
-	
 	public static ScheduledFuture<?> schedule(Runnable runnable, Long delay, Long period, TimeUnit timeUnit) {
 		return scheduledExecutor.scheduleAtFixedRate(runnable, delay, period, timeUnit);
-	}
-	
-	@Deprecated
-	public static ScheduledFuture<?> schedule(Runnable runnable, Long delaySeconds, Long period) {
-		return scheduledExecutor.scheduleAtFixedRate(runnable, delaySeconds, period, TimeUnit.SECONDS);
-	}
-	
-	@Deprecated
-	public static void scheduleInMillis(Runnable runnable, Long delayMilliSeconds) {
-		scheduledExecutor.schedule(runnable, delayMilliSeconds, TimeUnit.MILLISECONDS);
 	}
 	
 	public static void sleep(int delay, TimeUnit timeUnit) {
 		try {
 			Thread.sleep(timeUnit.toMillis(delay));
-		} catch (InterruptedException e) {
-			LoggerUtils.logHandledException(LOGGER, e);
-		}
-	}
-	
-	/**
-	 * @param seconds The time to sleep in seconds.
-	 */
-	@Deprecated
-	public static void sleep(int seconds) {
-		try {
-			Thread.sleep(seconds * 1000);
-		} catch (InterruptedException e) {
-			LoggerUtils.logHandledException(LOGGER, e);
-		}
-	}
-	
-	/**
-	 * @param millis The time to sleep in milliseconds.
-	 */
-	@Deprecated
-	public static void sleepInMillis(long millis) {
-		try {
-			Thread.sleep(millis);
 		} catch (InterruptedException e) {
 			LoggerUtils.logHandledException(LOGGER, e);
 		}

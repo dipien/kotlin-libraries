@@ -16,49 +16,6 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class DateUtils {
 	
-	/** Seconds in a minute */
-	@Deprecated
-	public static final int SECONDS_PER_MINUTE = 60;
-	
-	/** Seconds in an hour */
-	@Deprecated
-	public static final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * 60;
-	
-	/** Seconds in a day */
-	@Deprecated
-	public static final int SECONDS_PER_DAY = SECONDS_PER_HOUR * 24;
-	
-	/** Seconds in a week */
-	@Deprecated
-	public static final int WEEK = SECONDS_PER_DAY * 7;
-	
-	/** Number of milliseconds in a second. */
-	@Deprecated
-	public static final long MILLIS_PER_SECOND = 1000;
-	
-	/** Number of milliseconds in a minute. */
-	@Deprecated
-	public static final long MILLIS_PER_MINUTE = 60 * MILLIS_PER_SECOND;
-	
-	/** Number of milliseconds in a hour. */
-	@Deprecated
-	public static final long MILLIS_PER_HOUR = 60 * MILLIS_PER_MINUTE;
-	
-	/** Number of milliseconds in a day. */
-	@Deprecated
-	public static final long MILLIS_PER_DAY = 24 * MILLIS_PER_HOUR;
-
-	/** Number of milliseconds in a week. */
-	@Deprecated
-	public static final long MILLIS_PER_WEEK = 7 * MILLIS_PER_DAY;
-
-	/** Number of hours in a day **/
-	@Deprecated
-	public static final int HOURS_PER_DAY = 24;
-
-	@Deprecated
-	public static String DEFAULT_DATE_TIME_FORMAT = DateConfiguration.DEFAULT_DATE_TIME_FORMAT;
-	
 	public static void init() {
 		// nothing...
 	}
@@ -192,16 +149,6 @@ public abstract class DateUtils {
 		calendar.set(Calendar.MINUTE, minutes);
 		calendar.set(Calendar.SECOND, 0);
 		truncateDate(calendar);
-		return calendar.getTime();
-	}
-	
-	@Deprecated
-	public static Date getDateTime(Date date, Date time) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		calendar.set(Calendar.HOUR_OF_DAY, DateUtils.getHour(time, true));
-		calendar.set(Calendar.MINUTE, DateUtils.getMinute(time));
-		calendar.set(Calendar.SECOND, DateUtils.getSeconds(time));
 		return calendar.getTime();
 	}
 	
@@ -501,13 +448,6 @@ public abstract class DateUtils {
 		return DateUtils.truncateTime(a).equals(DateUtils.truncateTime(b));
 	}
 	
-	@Deprecated
-	public static Calendar todayCalendar() {
-		Calendar calendar = Calendar.getInstance();
-		DateUtils.truncateTime(calendar);
-		return calendar;
-	}
-	
 	/**
 	 * @return a day after today
 	 */
@@ -634,7 +574,7 @@ public abstract class DateUtils {
 	 */
 	public static Integer differenceInDays(Date fromDate, Date toDate) {
 		Long diff = toDate.getTime() - fromDate.getTime();
-		diff = diff / (DateUtils.MILLIS_PER_DAY);
+		diff = diff / (TimeUnit.DAYS.toMillis(1));
 		return diff.intValue();
 	}
 
@@ -645,7 +585,7 @@ public abstract class DateUtils {
 	 */
 	public static double differenceInHours(Date fromDate, Date toDate) {
 		double diff = toDate.getTime() - fromDate.getTime();
-		diff = diff / (DateUtils.MILLIS_PER_HOUR);
+		diff = diff / (TimeUnit.HOURS.toMillis(1));
 		return diff;
 	}
 
@@ -656,7 +596,7 @@ public abstract class DateUtils {
 	 */
 	public static Integer differenceInMinutes(Date fromDate, Date toDate) {
 		Long diff = toDate.getTime() - fromDate.getTime();
-		diff = diff / (DateUtils.MILLIS_PER_MINUTE);
+		diff = diff / (TimeUnit.MINUTES.toMillis(1));
 		return diff.intValue();
 	}
 	
@@ -687,29 +627,5 @@ public abstract class DateUtils {
 		}
 		
 		return builder.toString();
-	}
-
-	@Deprecated
-	public static Long millisecondsToDays(Long timestamp) {
-		if (timestamp != null) {
-			return (DateUtils.nowMillis() - timestamp) / MILLIS_PER_DAY;
-		} else {
-			return 0L;
-		}
-	}
-	
-	@Deprecated
-	public static Date getFakeNow() {
-		return DateConfiguration.getFakeNow();
-	}
-	
-	@Deprecated
-	public static void setFakeNow(Date fakeNow) {
-		DateConfiguration.setFakeNow(fakeNow);
-	}
-	
-	@Deprecated
-	public static Boolean isFakeNow() {
-		return DateConfiguration.isFakeNow();
 	}
 }
