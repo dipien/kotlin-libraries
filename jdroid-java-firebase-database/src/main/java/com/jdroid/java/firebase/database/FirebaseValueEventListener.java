@@ -14,6 +14,7 @@ public class FirebaseValueEventListener implements ValueEventListener {
 		done.setDataSnapshot(snapshot);
 		done.countDown();
 	}
+
 	@Override
 	public void onCancelled(FirebaseError firebaseError) {
 		done.setFirebaseException(new com.jdroid.java.firebase.database.FirebaseException(firebaseError));

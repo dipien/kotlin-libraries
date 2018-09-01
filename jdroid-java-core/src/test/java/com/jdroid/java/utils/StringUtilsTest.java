@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class StringUtilsTest {
 
@@ -89,22 +89,22 @@ public class StringUtilsTest {
 	@DataProvider
 	public Iterator<Object[]> toAlphanumericProvider() {
 		List<Object[]> cases = Lists.newArrayList();
-		cases.add(new Object[]{"text", "text"});
-		cases.add(new Object[]{"text.", "text"});
-		cases.add(new Object[]{"text.\\", "text"});
-		cases.add(new Object[]{"?text.\\", "text"});
-		cases.add(new Object[]{" ?text.\\", " text"});
-		cases.add(new Object[]{"text.\\text2", "texttext2"});
-		cases.add(new Object[]{"text.\\text2??", "texttext2"});
-		cases.add(new Object[]{"text.\\text2??text3", "texttext2text3"});
-		cases.add(new Object[]{"text .\\text2 ??text3", "text text2 text3"});
-		cases.add(new Object[]{"text text2 text3", "text text2 text3"});
-		cases.add(new Object[]{"text  text2", "text  text2"});
+		cases.add(new Object[] { "text", "text" });
+		cases.add(new Object[] { "text.", "text" });
+		cases.add(new Object[] { "text.\\", "text" });
+		cases.add(new Object[] { "?text.\\", "text" });
+		cases.add(new Object[] { " ?text.\\", " text" });
+		cases.add(new Object[] { "text.\\text2", "texttext2" });
+		cases.add(new Object[] { "text.\\text2??", "texttext2" });
+		cases.add(new Object[] { "text.\\text2??text3", "texttext2text3" });
+		cases.add(new Object[] { "text .\\text2 ??text3", "text text2 text3" });
+		cases.add(new Object[] { "text text2 text3", "text text2 text3" });
+		cases.add(new Object[] { "text  text2", "text  text2" });
 		return cases.iterator();
 	}
 
 	/**
-	 * @param text         The text to transform
+	 * @param text The text to transform
 	 * @param expectedText The expected transformed text
 	 */
 	@Test(dataProvider = "toAlphanumericProvider")
@@ -118,29 +118,29 @@ public class StringUtilsTest {
 	@DataProvider
 	public Iterator<Object[]> truncateProvider() {
 		List<Object[]> cases = Lists.newArrayList();
-		cases.add(new Object[]{null, 5, null, null});
-		cases.add(new Object[]{"", 5, "", ""});
-		cases.add(new Object[]{"text1", 1, "t", ""});
-		cases.add(new Object[]{"text1", 2, "te", ""});
-		cases.add(new Object[]{"text1", 3, "tex", ""});
-		cases.add(new Object[]{"text1", 4, "t...", ""});
-		cases.add(new Object[]{"text1", 5, "text1", "text1"});
-		cases.add(new Object[]{"text1", 6, "text1", "text1"});
-		cases.add(new Object[]{"text1", 10, "text1", "text1"});
-		cases.add(new Object[]{"text1 text2", 4, "t...", ""});
-		cases.add(new Object[]{"text1 text2", 5, "te...", "text1"});
-		cases.add(new Object[]{"text1 text2", 6, "tex...", "text1"});
-		cases.add(new Object[]{"text1 text2", 7, "text...", "text1"});
-		cases.add(new Object[]{"text1 text2", 11, "text1 text2", "text1 text2"});
-		cases.add(new Object[]{"text1 text2 ", 11, "text1 te...", "text1 text2"});
-		cases.add(new Object[]{"text1  text2 ", 11, "text1  t...", "text1 "});
+		cases.add(new Object[] { null, 5, null, null });
+		cases.add(new Object[] { "", 5, "", "" });
+		cases.add(new Object[] { "text1", 1, "t", "" });
+		cases.add(new Object[] { "text1", 2, "te", "" });
+		cases.add(new Object[] { "text1", 3, "tex", "" });
+		cases.add(new Object[] { "text1", 4, "t...", "" });
+		cases.add(new Object[] { "text1", 5, "text1", "text1" });
+		cases.add(new Object[] { "text1", 6, "text1", "text1" });
+		cases.add(new Object[] { "text1", 10, "text1", "text1" });
+		cases.add(new Object[] { "text1 text2", 4, "t...", "" });
+		cases.add(new Object[] { "text1 text2", 5, "te...", "text1" });
+		cases.add(new Object[] { "text1 text2", 6, "tex...", "text1" });
+		cases.add(new Object[] { "text1 text2", 7, "text...", "text1" });
+		cases.add(new Object[] { "text1 text2", 11, "text1 text2", "text1 text2" });
+		cases.add(new Object[] { "text1 text2 ", 11, "text1 te...", "text1 text2" });
+		cases.add(new Object[] { "text1  text2 ", 11, "text1  t...", "text1 " });
 		return cases.iterator();
 	}
 
 	/**
-	 * @param text                          The text to truncate
-	 * @param maxCharacters                 The maximum amount of characters allowed
-	 * @param expectedWordsTruncatedText    The expected truncated text with words truncated
+	 * @param text The text to truncate
+	 * @param maxCharacters The maximum amount of characters allowed
+	 * @param expectedWordsTruncatedText The expected truncated text with words truncated
 	 * @param expectedWordsNotTruncatedText The expected truncated text without words truncated
 	 */
 	@Test(dataProvider = "truncateProvider")
@@ -157,18 +157,18 @@ public class StringUtilsTest {
 	@DataProvider
 	public Iterator<Object[]> extractPlaceholdersProvider() {
 		List<Object[]> cases = Lists.newArrayList();
-		cases.add(new Object[]{"", Sets.newHashSet()});
-		cases.add(new Object[]{"a", Sets.newHashSet()});
-		cases.add(new Object[]{"${a}", Sets.newHashSet("a")});
-		cases.add(new Object[]{"${a}${a}", Sets.newHashSet("a")});
-		cases.add(new Object[]{"${a}${b}", Sets.newHashSet("a", "b")});
+		cases.add(new Object[] { "", Sets.newHashSet() });
+		cases.add(new Object[] { "a", Sets.newHashSet() });
+		cases.add(new Object[] { "${a}", Sets.newHashSet("a") });
+		cases.add(new Object[] { "${a}${a}", Sets.newHashSet("a") });
+		cases.add(new Object[] { "${a}${b}", Sets.newHashSet("a", "b") });
 		return cases.iterator();
 	}
 
 	/**
 	 * Verifies the {@link StringUtils#extractPlaceHolders(String)} method
 	 *
-	 * @param string           The string
+	 * @param string The string
 	 * @param placeholderNames The placeholder names
 	 */
 	@Test(dataProvider = "extractPlaceholdersProvider")
@@ -181,7 +181,7 @@ public class StringUtilsTest {
 	public void wordWrapToTwoLinesTests() {
 		// Word wrap with two words of the same size
 		assertEquals(StringUtils.wordWrapToTwoLines("Aerolineas Argentinas", 10),
-				"Aerolineas\nArgentinas");
+			"Aerolineas\nArgentinas");
 		// Word wrap with the first word longer than the second
 		assertEquals(StringUtils.wordWrapToTwoLines("Southern Winds", 10), "Southern\nWinds");
 		// Word wrap with the first word shorter than the second

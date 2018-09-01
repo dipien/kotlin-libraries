@@ -1,23 +1,24 @@
 package com.jdroid.java.utils;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import com.jdroid.java.exception.UnexpectedException;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public enum Hasher {
-	
+
 	SHA_1("SHA-1"),
 	SHA_512("SHA-512");
-	
+
 	private String algorithm;
-	
+
 	private Hasher(String algorithm) {
 		this.algorithm = algorithm;
 	}
-	
+
 	/**
 	 * Algorithm that returns a Hashed string of the value given as parameter
-	 * 
+	 *
 	 * @param value the string to hash
 	 * @return String hashed value.
 	 */
@@ -32,7 +33,7 @@ public enum Hasher {
 			throw new UnexpectedException(e);
 		}
 	}
-	
+
 	public Boolean isSupported() {
 		try {
 			MessageDigest.getInstance(algorithm);
@@ -41,7 +42,7 @@ public enum Hasher {
 			return false;
 		}
 	}
-	
+
 	public static Hasher getSupportedHasher() {
 		if (Hasher.SHA_512.isSupported()) {
 			return Hasher.SHA_512;

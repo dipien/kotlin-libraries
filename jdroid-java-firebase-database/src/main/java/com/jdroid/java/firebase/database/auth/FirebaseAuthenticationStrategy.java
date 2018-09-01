@@ -43,6 +43,7 @@ public abstract class FirebaseAuthenticationStrategy implements Firebase.AuthRes
 		doOnAuthenticationError(error);
 
 	}
+
 	@Override
 	public final void onAuthenticated(AuthData authData) {
 		getCountDownLatch().countDown();

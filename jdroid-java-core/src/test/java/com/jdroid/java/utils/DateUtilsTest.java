@@ -17,15 +17,14 @@ import java.util.List;
 
 /**
  * Test class for the {@link DateUtils} class.
- * 
  */
 public class DateUtilsTest {
-	
+
 	@AfterMethod
 	public static void onAfterMethod() {
 		DateConfiguration.setFakeNow(null);
 	}
-	
+
 	/**
 	 * @return The different cases
 	 */
@@ -33,13 +32,13 @@ public class DateUtilsTest {
 	public Iterator<Object[]> formatDataProvider() {
 		List<Object[]> cases = Lists.newArrayList();
 		cases.add(new Object[] { DateUtils.getDate(2010, Calendar.AUGUST, 10), DateTimeFormat.MMDDYYYY,
-				"08/10/2010" });
+			"08/10/2010" });
 		cases.add(new Object[] { DateUtils.getDate(2010, Calendar.AUGUST, 10), DateTimeFormat.MMDDYYYY_SLASH,
-				"08-10-2010" });
+			"08-10-2010" });
 		cases.add(new Object[] { DateUtils.getTime(5, 30, true), DateTimeFormat.HHMMAA, "05:30 AM" });
 		return cases.iterator();
 	}
-	
+
 	/**
 	 * @param date The {@link Date} to format
 	 * @param pattern The pattern to format the {@link Date}
@@ -50,10 +49,10 @@ public class DateUtilsTest {
 		String result = DateUtils.format(date, pattern);
 		Assert.assertEquals(result, expected);
 	}
-	
+
 	/**
 	 * Test method for the {@link DateUtils#isBetween(Date, Date, Date)} method.
-	 * 
+	 *
 	 * @return The different scenarios
 	 */
 	@DataProvider
@@ -61,32 +60,32 @@ public class DateUtilsTest {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(2009, Calendar.JANUARY, 20);
 		Date date = calendar.getTime();
-		
+
 		List<Object[]> cases = Lists.newArrayList();
 		calendar.set(2009, Calendar.JANUARY, 20);
 		Date startDate = calendar.getTime();
 		calendar.set(2009, Calendar.JANUARY, 20);
 		Date endDate = calendar.getTime();
 		cases.add(new Object[] { date, startDate, endDate, true });
-		
+
 		calendar.set(2009, Calendar.JANUARY, 19);
 		startDate = calendar.getTime();
 		calendar.set(2009, Calendar.JANUARY, 21);
 		endDate = calendar.getTime();
 		cases.add(new Object[] { date, startDate, endDate, true });
-		
+
 		calendar.set(2009, Calendar.JANUARY, 19);
 		startDate = calendar.getTime();
 		calendar.set(2009, Calendar.JANUARY, 19);
 		endDate = calendar.getTime();
 		cases.add(new Object[] { date, startDate, endDate, false });
-		
+
 		return cases.iterator();
 	}
-	
+
 	/**
 	 * Test method for the {@link DateUtils#isBetween(Date, Date, Date)} method.
-	 * 
+	 *
 	 * @param date The date
 	 * @param startDate The start date
 	 * @param endDate The end date
@@ -96,7 +95,7 @@ public class DateUtilsTest {
 	public void isBetween(Date date, Date startDate, Date endDate, boolean expectedResult) {
 		Assert.assertEquals(DateUtils.isBetween(date, startDate, endDate), expectedResult);
 	}
-	
+
 	/**
 	 * Tests the {@link DateUtils#getDate(int, int, int)} method.
 	 */
@@ -111,10 +110,10 @@ public class DateUtilsTest {
 		Date createdDate = DateUtils.getDate(year, month, date);
 		Assert.assertEquals(createdDate, calendar.getTime());
 	}
-	
+
 	/**
 	 * So given the start date is 10-Jun and stop date is 20-Jun there are several scenarios to check:
-	 * 
+	 * <p>
 	 * <pre>
 	 * Input:  --------|-----|---------
 	 * Case1:  --------|-----|---------  Yes
@@ -129,9 +128,9 @@ public class DateUtilsTest {
 	 * Case10: --|--|------------------  No
 	 * Case11: ------------------|--|--  No
 	 * </pre>
-	 * 
+	 * <p>
 	 * In other words, ONLY if one range touches the other, it's an overlap.
-	 * 
+	 *
 	 * @return {@link Iterator} Contains the test cases.
 	 */
 	@DataProvider
@@ -152,7 +151,7 @@ public class DateUtilsTest {
 		cases.add(new Object[] { DateUtils.getDate(year, month, 22), DateUtils.getDate(year, month, 24), false });
 		return cases.iterator();
 	}
-	
+
 	/**
 	 * @param start2 The second rage start date
 	 * @param end2 The second rage end date
@@ -160,16 +159,16 @@ public class DateUtilsTest {
 	 */
 	@Test(dataProvider = "periodsOverlapDataProvider")
 	public void periodsOverlapDateTest(Date start2, Date end2, boolean expected) {
-		
+
 		Integer year = Calendar.getInstance().get(Calendar.YEAR);
 		Integer month = Calendar.JANUARY;
-		
+
 		Date start = DateUtils.getDate(year, month, 10);
 		Date end = DateUtils.getDate(year, month, 20);
-		
+
 		Assert.assertEquals(DateUtils.periodsOverlap(start, end, start2, end2), expected);
 	}
-	
+
 	/**
 	 * @return The different scenarios of periods
 	 */
@@ -181,7 +180,7 @@ public class DateUtilsTest {
 		cases.add(new Object[] { 2009, Calendar.JANUARY, 11, 2009, Calendar.JANUARY, 10, true });
 		return cases.iterator();
 	}
-	
+
 	/**
 	 * @param year The year
 	 * @param month The month
@@ -193,12 +192,12 @@ public class DateUtilsTest {
 	 */
 	@Test(dataProvider = "getForIsAfterEquals")
 	public void isAfterEquals(int year, int month, int date, int yearToCompare, int monthToCompare, int dateToCompare,
-			boolean expectedResult) {
+							  boolean expectedResult) {
 		Assert.assertEquals(
 			DateUtils.isAfterEquals(DateUtils.getDate(year, month, date),
-					DateUtils.getDate(yearToCompare, monthToCompare, dateToCompare)), expectedResult);
+				DateUtils.getDate(yearToCompare, monthToCompare, dateToCompare)), expectedResult);
 	}
-	
+
 	/**
 	 * @return The different scenarios of periods
 	 */
@@ -210,7 +209,7 @@ public class DateUtilsTest {
 		cases.add(new Object[] { 2009, Calendar.JANUARY, 11, 2009, Calendar.JANUARY, 10, true });
 		return cases.iterator();
 	}
-	
+
 	/**
 	 * @param year The year
 	 * @param month The month
@@ -222,12 +221,12 @@ public class DateUtilsTest {
 	 */
 	@Test(dataProvider = "getForIsAfter")
 	public void isAfter(int year, int month, int date, int yearToCompare, int monthToCompare, int dateToCompare,
-			boolean expectedResult) {
+						boolean expectedResult) {
 		Assert.assertEquals(
 			DateUtils.isAfter(DateUtils.getDate(year, month, date),
-					DateUtils.getDate(yearToCompare, monthToCompare, dateToCompare)), expectedResult);
+				DateUtils.getDate(yearToCompare, monthToCompare, dateToCompare)), expectedResult);
 	}
-	
+
 	/**
 	 * @return The different scenarios of periods
 	 */
@@ -239,7 +238,7 @@ public class DateUtilsTest {
 		cases.add(new Object[] { 2009, Calendar.JANUARY, 11, 2009, Calendar.JANUARY, 10, false });
 		return cases.iterator();
 	}
-	
+
 	/**
 	 * @param year The year
 	 * @param month The month
@@ -251,12 +250,12 @@ public class DateUtilsTest {
 	 */
 	@Test(dataProvider = "getForIsBeforeEquals")
 	public void isBeforeEquals(int year, int month, int date, int yearToCompare, int monthToCompare, int dateToCompare,
-			boolean expectedResult) {
+							   boolean expectedResult) {
 		Assert.assertEquals(
 			DateUtils.isBeforeEquals(DateUtils.getDate(year, month, date),
-					DateUtils.getDate(yearToCompare, monthToCompare, dateToCompare)), expectedResult);
+				DateUtils.getDate(yearToCompare, monthToCompare, dateToCompare)), expectedResult);
 	}
-	
+
 	/**
 	 * @return The different scenarios of periods
 	 */
@@ -268,7 +267,7 @@ public class DateUtilsTest {
 		cases.add(new Object[] { 2009, Calendar.JANUARY, 11, 2009, Calendar.JANUARY, 10, false });
 		return cases.iterator();
 	}
-	
+
 	/**
 	 * @param year The year
 	 * @param month The month
@@ -280,12 +279,12 @@ public class DateUtilsTest {
 	 */
 	@Test(dataProvider = "getForIsBefore")
 	public void isBefore(int year, int month, int date, int yearToCompare, int monthToCompare, int dateToCompare,
-			boolean expectedResult) {
+						 boolean expectedResult) {
 		Assert.assertEquals(
 			DateUtils.isBefore(DateUtils.getDate(year, month, date),
-					DateUtils.getDate(yearToCompare, monthToCompare, dateToCompare)), expectedResult);
+				DateUtils.getDate(yearToCompare, monthToCompare, dateToCompare)), expectedResult);
 	}
-	
+
 	/**
 	 * @param date the date to be tested
 	 * @param expectedResult The expected result
@@ -295,81 +294,81 @@ public class DateUtilsTest {
 		Date lastDay = DateUtils.getLastDayOfMonth(date);
 		Assert.assertEquals(lastDay, expectedResult);
 	}
-	
+
 	/**
 	 * @return the data to tests the lastDayOfTheMonth method
 	 */
 	@DataProvider
 	protected Iterator<Object[]> getLastDayOfTheMonthData() {
 		List<Object[]> cases = Lists.newArrayList();
-		
+
 		// 31-day month
 		Date date1 = DateUtils.getDate(2010, 0, 10);
 		Date expectedDate1 = DateUtils.getDate(2010, 0, 31);
 		cases.add(new Object[] { date1, expectedDate1 });
-		
+
 		// 31-day month but in the 31th day
 		Date date2 = DateUtils.getDate(2010, 0, 31);
 		Date expectedDate2 = DateUtils.getDate(2010, 0, 31);
 		cases.add(new Object[] { date2, expectedDate2 });
-		
+
 		// 30-day month
 		Date date3 = DateUtils.getDate(2010, 3, 1);
 		Date expectedDate3 = DateUtils.getDate(2010, 3, 30);
 		cases.add(new Object[] { date3, expectedDate3 });
-		
+
 		// February special case in a leap year
 		Date date4 = DateUtils.getDate(2008, 1, 1);
 		Date expectedDate4 = DateUtils.getDate(2008, 1, 29);
 		cases.add(new Object[] { date4, expectedDate4 });
-		
+
 		// February special case in a normal year
 		Date date5 = DateUtils.getDate(2009, 1, 1);
 		Date expectedDate5 = DateUtils.getDate(2009, 1, 28);
 		cases.add(new Object[] { date5, expectedDate5 });
-		
+
 		return cases.iterator();
 	}
-	
+
 	@Test(dataProvider = "getLastWeekDayOfTheMonthData")
 	public void lastWeekDayOfTheMonth(Date date, Date expectedResult) {
 		Date lastDay = DateUtils.getLastWeekDayOfMonth(date);
 		Assert.assertEquals(lastDay, expectedResult);
 	}
-	
+
 	@DataProvider
 	protected Iterator<Object[]> getLastWeekDayOfTheMonthData() {
 		List<Object[]> cases = Lists.newArrayList();
-		
+
 		// 31-day month
 		Date date1 = DateUtils.getDate(2017, 11, 1);
 		Date expectedDate1 = DateUtils.getDate(2017, 11, 29);
 		cases.add(new Object[] { date1, expectedDate1 });
-		
+
 		// 31-day month but in the 31th day
 		Date date2 = DateUtils.getDate(2017, 11, 31);
 		Date expectedDate2 = DateUtils.getDate(2017, 11, 29);
 		cases.add(new Object[] { date2, expectedDate2 });
-		
+
 		// 30-day month
 		Date date3 = DateUtils.getDate(2017, 10, 1);
 		Date expectedDate3 = DateUtils.getDate(2017, 10, 30);
 		cases.add(new Object[] { date3, expectedDate3 });
-		
+
 		// February special case in a leap year
 		Date date4 = DateUtils.getDate(2008, 1, 1);
 		Date expectedDate4 = DateUtils.getDate(2008, 1, 29);
 		cases.add(new Object[] { date4, expectedDate4 });
-		
+
 		// February special case in a normal year
 		Date date5 = DateUtils.getDate(2009, 1, 1);
 		Date expectedDate5 = DateUtils.getDate(2009, 1, 27);
 		cases.add(new Object[] { date5, expectedDate5 });
-		
+
 		return cases.iterator();
 	}
-	
-	
+
+
 	/**
 	 * @param date the date to be tested
 	 * @param expectedResult The expected result
@@ -379,84 +378,84 @@ public class DateUtilsTest {
 		Date lastDay = DateUtils.getLastDayOfYear(date);
 		Assert.assertEquals(lastDay, expectedResult);
 	}
-	
+
 	@DataProvider
 	protected Iterator<Object[]> getLastDayOfTheYearData() {
 		List<Object[]> cases = Lists.newArrayList();
-		
+
 		// 31-day month
 		Date date1 = DateUtils.getDate(2010, 0, 10);
 		Date expectedDate1 = DateUtils.getDate(2010, 11, 31);
 		cases.add(new Object[] { date1, expectedDate1 });
-		
+
 		// 31-day month but in the 31th day
 		Date date2 = DateUtils.getDate(2010, 0, 31);
 		Date expectedDate2 = DateUtils.getDate(2010, 11, 31);
 		cases.add(new Object[] { date2, expectedDate2 });
-		
+
 		// 30-day month
 		Date date3 = DateUtils.getDate(2010, 3, 1);
 		Date expectedDate3 = DateUtils.getDate(2010, 11, 31);
 		cases.add(new Object[] { date3, expectedDate3 });
-		
+
 		// February special case in a leap year
 		Date date4 = DateUtils.getDate(2008, 1, 1);
 		Date expectedDate4 = DateUtils.getDate(2008, 11, 31);
 		cases.add(new Object[] { date4, expectedDate4 });
-		
+
 		// February special case in a normal year
 		Date date5 = DateUtils.getDate(2009, 1, 1);
 		Date expectedDate5 = DateUtils.getDate(2009, 11, 31);
 		cases.add(new Object[] { date5, expectedDate5 });
-		
+
 		return cases.iterator();
 	}
-	
+
 	@Test(dataProvider = "getLastWeekDayOfTheYearData")
 	public void lastWeekDayOfTheYear(Date date, Date expectedResult) {
 		Date lastDay = DateUtils.getLastWeekDayOfYear(date);
 		Assert.assertEquals(lastDay, expectedResult);
 	}
-	
+
 	@DataProvider
 	protected Iterator<Object[]> getLastWeekDayOfTheYearData() {
 		List<Object[]> cases = Lists.newArrayList();
-		
+
 		// 31-day month
 		Date date1 = DateUtils.getDate(2017, 11, 1);
 		Date expectedDate1 = DateUtils.getDate(2017, 11, 29);
 		cases.add(new Object[] { date1, expectedDate1 });
-		
+
 		// 31-day month but in the 31th day
 		Date date2 = DateUtils.getDate(2017, 11, 31);
 		Date expectedDate2 = DateUtils.getDate(2017, 11, 29);
 		cases.add(new Object[] { date2, expectedDate2 });
-		
+
 		// 30-day month
 		Date date3 = DateUtils.getDate(2017, 10, 1);
 		Date expectedDate3 = DateUtils.getDate(2017, 11, 29);
 		cases.add(new Object[] { date3, expectedDate3 });
-		
+
 		// February special case in a leap year
 		Date date4 = DateUtils.getDate(2008, 1, 1);
 		Date expectedDate4 = DateUtils.getDate(2008, 11, 31);
 		cases.add(new Object[] { date4, expectedDate4 });
-		
+
 		// February special case in a normal year
 		Date date5 = DateUtils.getDate(2009, 1, 1);
 		Date expectedDate5 = DateUtils.getDate(2009, 11, 31);
 		cases.add(new Object[] { date5, expectedDate5 });
-		
+
 		return cases.iterator();
 	}
-	
+
 	/**
 	 * @return the data to tests the formatDuration method
 	 */
 	@DataProvider
 	protected Iterator<Object[]> getDurationData() {
 		List<Object[]> cases = Lists.newArrayList();
-		
+
 		cases.add(new Object[] { 500, "500ms" });
 		cases.add(new Object[] { 1000, "1s, 0ms" });
 		cases.add(new Object[] { 1500, "1s, 500ms" });
@@ -464,25 +463,25 @@ public class DateUtilsTest {
 		cases.add(new Object[] { (1000 * 60) + 1500, "1m, 1s, 500ms" });
 		cases.add(new Object[] { 1000 * 60 * 60, "1h, 0m, 0s, 0ms" });
 		cases.add(new Object[] { (1000 * 60 * 60) + (1000 * 60) + 1500, "1h, 1m, 1s, 500ms" });
-		
+
 		return cases.iterator();
 	}
-	
+
 	@Test(dataProvider = "getDurationData")
 	public void formatDuration(long duration, String expectedResult) {
 		String result = DateUtils.formatDuration(duration);
 		Assert.assertEquals(result, expectedResult);
 	}
-	
+
 	@Test
 	public void addMonths() {
 		Assert.assertEquals(DateUtils.addMonths(DateUtils.getDate(2017, 2, 25), -1), DateUtils.getDate(2017, 1, 25));
 	}
-	
+
 	@Test
 	public void getLastWeekDayOfPreviousWeek() {
-		
-		
+
+
 		Date friday = DateUtils.getDate(2018, 3, 13);
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 15)), friday);
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 16)), friday);
@@ -491,28 +490,28 @@ public class DateUtilsTest {
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 19)), friday);
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 20)), friday);
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 21)), friday);
-		
+
 		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 15));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
-		
+
 		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 16));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
-		
+
 		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 17));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
-		
+
 		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 18));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
-		
+
 		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 19));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
-		
+
 		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 20));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
-		
+
 		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 21));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
-		
+
 	}
-	
+
 }

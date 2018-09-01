@@ -30,16 +30,16 @@ import java.util.zip.ZipOutputStream;
  * This class contains functions for working with files within the application.
  */
 public abstract class FileUtils {
-	
+
 	private static final Logger LOGGER = LoggerUtils.getLogger(FileUtils.class);
-	
+
 	// Amount of bytes on a megabyte
 	public static final int BYTES_TO_MB = 1048576;
 	private static final int BUFFER_SIZE = 16384;
-	
+
 	/**
 	 * Reads the inputStream and returns a byte array with all the information
-	 * 
+	 *
 	 * @param inputStream The inputStream to be read
 	 * @return A byte array with all the inputStream's information
 	 * @throws IOException The exception thrown when an error reading the inputStream happens
@@ -59,10 +59,10 @@ public abstract class FileUtils {
 			safeClose(is);
 		}
 	}
-	
+
 	/**
 	 * Reads the file and returns a byte array with all the information
-	 * 
+	 *
 	 * @param file The file to be read
 	 * @return A byte array with all the file's information
 	 * @throws IOException The exception thrown when an error reading the file happens
@@ -71,7 +71,7 @@ public abstract class FileUtils {
 	public static byte[] readAsBytes(File file) throws IOException {
 		return readAsBytes(new FileInputStream(file));
 	}
-	
+
 	public static List<String> readLines(InputStream inputStream) {
 		BufferedReader reader = null;
 		try {
@@ -88,7 +88,7 @@ public abstract class FileUtils {
 			safeClose(reader);
 		}
 	}
-	
+
 	public static List<String> readLines(File file) {
 		try {
 			return readLines(new FileInputStream(file));
@@ -96,7 +96,7 @@ public abstract class FileUtils {
 			throw new UnexpectedException("Error reading the file", e);
 		}
 	}
-	
+
 	/**
 	 * @param filePath The path to the file
 	 * @return a file
@@ -108,7 +108,7 @@ public abstract class FileUtils {
 		}
 		return file;
 	}
-	
+
 	/**
 	 * @param filePath The file path to the file for verify the existence
 	 * @return True if exist a file with in the file path
@@ -116,17 +116,17 @@ public abstract class FileUtils {
 	public static boolean exist(String filePath) {
 		return new File(filePath).exists();
 	}
-	
+
 	/**
 	 * Deletes an instance of {@link File} even if it is a directory containing files.<br>
 	 * If the file is a directory and has contents, then executes itself on every content.
-	 * 
-	 * @see File#delete()
+	 *
 	 * @param file The {@link File} to be deleted.
+	 * @see File#delete()
 	 */
 	public static void forceDelete(File file) {
 		if (file.exists()) {
-			
+
 			// If the File instance to delete is a directory, delete all it's
 			// contents.
 			if (file.isDirectory()) {
@@ -137,7 +137,7 @@ public abstract class FileUtils {
 					}
 				}
 			}
-			
+
 			if (file.delete()) {
 				LOGGER.debug("File " + file.getPath() + " was successfully deleted.");
 			} else {
@@ -145,16 +145,16 @@ public abstract class FileUtils {
 			}
 		}
 	}
-	
+
 	/**
 	 * Renames or moves a determined {@link File} instance to a destination defined by another {@link File} instance.<br>
 	 * Differs from the {@link File#renameTo(File)} method in the fact that this method logs if the operation was
 	 * successful.<br>
-	 * 
-	 * @see File#renameTo(File)
+	 *
 	 * @param fileToBeMoved The file to be renamed or moved.
 	 * @param destination The {@link File} instance that denotes the new location
 	 * @return <b>boolean</b> true if the file has been successfully renamed or moved.
+	 * @see File#renameTo(File)
 	 */
 	public static boolean renameOrMove(File fileToBeMoved, File destination) {
 		boolean result = fileToBeMoved.renameTo(destination);
@@ -165,7 +165,7 @@ public abstract class FileUtils {
 		}
 		return result;
 	}
-	
+
 	public static File createTempFile() {
 		File file;
 		try {
@@ -175,16 +175,16 @@ public abstract class FileUtils {
 		}
 		return file;
 	}
-	
+
 	public static File createTempDir() {
 		File file = FileUtils.createTempFile();
 		File dir = new File(file.getAbsolutePath() + "dir");
 		dir.mkdir();
 		return dir;
 	}
-	
+
 	public static File toTempFile(String content) {
-		
+
 		File file;
 		try {
 			file = File.createTempFile("tempFile", ".tmp");
@@ -200,7 +200,7 @@ public abstract class FileUtils {
 			throw new UnexpectedException(e);
 		}
 	}
-	
+
 	public static void createFile(String content, String parentPath, String fileName) {
 		try {
 			new File(parentPath).mkdirs();
@@ -211,10 +211,10 @@ public abstract class FileUtils {
 			throw new UnexpectedException(e);
 		}
 	}
-	
+
 	/**
 	 * Receives a File and iterates over all its lines and returns a String.
-	 * 
+	 *
 	 * @param file The file
 	 * @return The content of the file as String
 	 */
@@ -223,15 +223,15 @@ public abstract class FileUtils {
 			return FileUtils.toString(new FileInputStream(file));
 		} catch (FileNotFoundException e) {
 			throw new UnexpectedException(
-					new StringBuilder("The file doesn't exist [").append(file).append("]").toString(), e);
+				new StringBuilder("The file doesn't exist [").append(file).append("]").toString(), e);
 		}
 	}
-	
+
 	public static String toString(InputStream in, Boolean closeStream) {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		StringBuilder contentBuilder = new StringBuilder();
 		String text = null;
-		
+
 		// repeat until all lines are read
 		try {
 			Boolean firstLine = true;
@@ -251,17 +251,17 @@ public abstract class FileUtils {
 		}
 		return contentBuilder.toString();
 	}
-	
+
 	/**
 	 * Receives an InputStream and iterates over all its lines and returns a String.
-	 * 
+	 *
 	 * @param in the InputStream to be converted
 	 * @return The content of the file as String
 	 */
 	public static String toString(InputStream in) {
 		return toString(in, true);
 	}
-	
+
 	public static void writeLines(File file, List<String> lines) {
 		try {
 			FileOutputStream fileOutputStream = new FileOutputStream(file);
@@ -275,7 +275,7 @@ public abstract class FileUtils {
 			throw new UnexpectedException(e);
 		}
 	}
-	
+
 	/**
 	 * @param source the source {@link InputStream}
 	 * @param target the target {@link File}
@@ -292,12 +292,12 @@ public abstract class FileUtils {
 			FileUtils.copyStream(source, out);
 		} catch (IOException e) {
 			throw new UnexpectedException(
-					new StringBuilder("Error copying the file to [").append(target).append("]").toString(), e);
+				new StringBuilder("Error copying the file to [").append(target).append("]").toString(), e);
 		} finally {
 			safeClose(out);
 		}
 	}
-	
+
 	/**
 	 * @param source the source {@link InputStream}
 	 * @param destin the destin {@link OutputStream}
@@ -318,7 +318,7 @@ public abstract class FileUtils {
 			}
 		}
 	}
-	
+
 	/**
 	 * @param source the source {@link InputStream}
 	 * @param destin the destin {@link OutputStream}
@@ -326,7 +326,7 @@ public abstract class FileUtils {
 	public static void copyStream(InputStream source, OutputStream destin) {
 		copyStream(source, destin, true);
 	}
-	
+
 	/**
 	 * @param source the source {@link InputStream}
 	 * @return the input stream that can be reset {@link ByteArrayInputStream}
@@ -336,13 +336,13 @@ public abstract class FileUtils {
 		copyStream(source, tmp, true);
 		return new ByteArrayInputStream(tmp.toByteArray());
 	}
-	
+
 	public static File zipFile(String directoryToZipPath) {
 		ZipOutputStream zipOutputStream = null;
 		try {
 			File zipFile = FileUtils.createTempFile();
 			zipOutputStream = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(zipFile)));
-			
+
 			// Get a list of the files to zip
 			File directoryToZip = new File(directoryToZipPath);
 			zipFileItem(directoryToZipPath, zipOutputStream, directoryToZip, null);
@@ -353,22 +353,22 @@ public abstract class FileUtils {
 			safeClose(zipOutputStream);
 		}
 	}
-	
+
 	private static void zipFileItem(String directoryToZipPath, ZipOutputStream zipOutputStream, File fileItem,
-			String parentItemPath) {
-		
+									String parentItemPath) {
+
 		try {
 			String files[] = fileItem.list();
 
 			for (String file : files) {
 				String itemRelativePath = (parentItemPath != null ? parentItemPath + File.separatorChar : "")
-						+ file;
+					+ file;
 				File itemFile = new File(directoryToZipPath + File.separatorChar + itemRelativePath);
 				if (itemFile.isDirectory()) {
 					FileUtils.zipFileItem(directoryToZipPath, zipOutputStream, itemFile, itemRelativePath);
 				} else {
 					FileInputStream entryInputStream = new FileInputStream(fileItem.getAbsolutePath()
-							+ File.separatorChar + file);
+						+ File.separatorChar + file);
 					ZipEntry entry = new ZipEntry(itemRelativePath);
 					zipOutputStream.putNextEntry(entry);
 					FileUtils.copyStream(entryInputStream, zipOutputStream, false);
@@ -379,7 +379,7 @@ public abstract class FileUtils {
 			throw new UnexpectedException(e);
 		}
 	}
-	
+
 	public static void safeClose(Closeable closeable) {
 		if (closeable != null) {
 			try {
@@ -389,10 +389,10 @@ public abstract class FileUtils {
 			}
 		}
 	}
-	
+
 	/**
 	 * Counts the size of a directory recursively (sum of the length of all files).
-	 * 
+	 *
 	 * @param directory directory to inspect, must not be null
 	 * @return size of directory in bytes, 0 if directory is security restricted
 	 */
@@ -400,7 +400,7 @@ public abstract class FileUtils {
 		if (!directory.exists()) {
 			throw new IllegalArgumentException(directory + " does not exist");
 		}
-		
+
 		if (!directory.isDirectory()) {
 			throw new IllegalArgumentException(directory + " is not a directory");
 		}
@@ -419,18 +419,18 @@ public abstract class FileUtils {
 		}
 		return size;
 	}
-	
+
 	public static long getFileSize(File file) {
 		if (!file.exists()) {
 			throw new IllegalArgumentException(file + " does not exist");
 		}
 		return file.length();
 	}
-	
+
 	public static float getDirectorySizeInMB(File directory) {
 		return getDirectorySize(directory) / (float)FileUtils.BYTES_TO_MB;
 	}
-	
+
 	public static float getFileSizeInMB(File file) {
 		return getFileSize(file) / (float)FileUtils.BYTES_TO_MB;
 	}

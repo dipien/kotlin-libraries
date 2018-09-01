@@ -5,8 +5,8 @@ import com.firebase.client.Firebase;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.firebase.database.auth.FirebaseAuthenticationStrategy;
-import com.jdroid.java.repository.PairRepository;
 import com.jdroid.java.repository.Pair;
+import com.jdroid.java.repository.PairRepository;
 import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
@@ -75,7 +75,7 @@ public abstract class PairFirebaseRepository implements PairRepository {
 
 	@Override
 	public void addAll(Collection<Pair> items) {
-		for(Pair each : items) {
+		for (Pair each : items) {
 			add(each);
 		}
 	}
@@ -85,13 +85,13 @@ public abstract class PairFirebaseRepository implements PairRepository {
 		if (item.getId() == null) {
 			throw new UnexpectedException("Item with null id can not be updated");
 		}
-		
+
 		Firebase firebase = createFirebase();
 		firebase = firebase.child(item.getId());
-		
+
 		FirebaseCompletionListener listener = new FirebaseCompletionListener();
 		firebase.setValue(item.getValue(), listener);
-		
+
 		listener.waitOperation();
 		LOGGER.debug("Updated object in database: " + item);
 	}
@@ -100,12 +100,12 @@ public abstract class PairFirebaseRepository implements PairRepository {
 	public List<Pair> getByField(String fieldName, Object... values) {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	@Override
 	public Pair getItemByField(String fieldName, Object... values) {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	@Override
 	public List<Pair> getAll() {
 		Firebase firebase = createFirebase();
@@ -113,7 +113,7 @@ public abstract class PairFirebaseRepository implements PairRepository {
 		firebase.addListenerForSingleValueEvent(listener);
 		listener.waitOperation();
 		List<Pair> results = Lists.newArrayList();
-		for (DataSnapshot eachSnapshot: listener.getDataSnapshot().getChildren()) {
+		for (DataSnapshot eachSnapshot : listener.getDataSnapshot().getChildren()) {
 			Pair pair = new Pair();
 			pair.setId(eachSnapshot.getKey());
 			pair.setValue(eachSnapshot.getValue(String.class));
@@ -130,7 +130,7 @@ public abstract class PairFirebaseRepository implements PairRepository {
 		firebase.addListenerForSingleValueEvent(listener);
 		listener.waitOperation();
 		List<Pair> results = Lists.newArrayList();
-		for (DataSnapshot eachSnapshot: listener.getDataSnapshot().getChildren()) {
+		for (DataSnapshot eachSnapshot : listener.getDataSnapshot().getChildren()) {
 			Pair pair = new Pair();
 			pair.setId(eachSnapshot.getKey());
 			pair.setValue(eachSnapshot.getValue(String.class));
@@ -155,7 +155,7 @@ public abstract class PairFirebaseRepository implements PairRepository {
 
 	@Override
 	public void removeAll(Collection<Pair> items) {
-		for(Pair each : items) {
+		for (Pair each : items) {
 			remove(each);
 		}
 	}
@@ -195,7 +195,7 @@ public abstract class PairFirebaseRepository implements PairRepository {
 
 	@Override
 	public void replaceAll(Collection<Pair> items) {
-		for(Pair each : items) {
+		for (Pair each : items) {
 			update(each);
 		}
 	}

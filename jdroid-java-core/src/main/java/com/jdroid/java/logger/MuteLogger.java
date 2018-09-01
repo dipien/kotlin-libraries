@@ -4,16 +4,15 @@ import org.slf4j.helpers.MarkerIgnoringBase;
 
 /**
  * A logger wrapper that filter all log requests.
- * 
  */
 public class MuteLogger extends MarkerIgnoringBase {
-	
+
 	private static final long serialVersionUID = -6526350853255198576L;
-	
+
 	public MuteLogger() {
-		
+
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#isTraceEnabled()
 	 */
@@ -21,7 +20,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public boolean isTraceEnabled() {
 		return false;
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#trace(java.lang.String)
 	 */
@@ -29,7 +28,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void trace(final String msg) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#trace(java.lang.String, java.lang.Object)
 	 */
@@ -37,7 +36,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void trace(final String format, final Object param1) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#trace(java.lang.String, java.lang.Object, java.lang.Object)
 	 */
@@ -45,7 +44,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void trace(final String format, final Object param1, final Object param2) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#trace(java.lang.String, java.lang.Object[])
 	 */
@@ -53,7 +52,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void trace(final String format, final Object[] argArray) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#trace(java.lang.String, java.lang.Throwable)
 	 */
@@ -61,7 +60,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void trace(final String msg, final Throwable t) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#isDebugEnabled()
 	 */
@@ -69,7 +68,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public boolean isDebugEnabled() {
 		return false;
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#debug(java.lang.String)
 	 */
@@ -77,7 +76,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void debug(final String msg) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#debug(java.lang.String, java.lang.Object)
 	 */
@@ -85,7 +84,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void debug(final String format, final Object arg1) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#debug(java.lang.String, java.lang.Object, java.lang.Object)
 	 */
@@ -93,7 +92,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void debug(final String format, final Object param1, final Object param2) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#debug(java.lang.String, java.lang.Object[])
 	 */
@@ -101,7 +100,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void debug(final String format, final Object[] argArray) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#debug(java.lang.String, java.lang.Throwable)
 	 */
@@ -109,7 +108,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void debug(final String msg, final Throwable t) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#isInfoEnabled()
 	 */
@@ -117,7 +116,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public boolean isInfoEnabled() {
 		return false;
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#info(java.lang.String)
 	 */
@@ -125,7 +124,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void info(final String msg) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#info(java.lang.String, java.lang.Object)
 	 */
@@ -133,7 +132,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void info(final String format, final Object arg) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#info(java.lang.String, java.lang.Object, java.lang.Object)
 	 */
@@ -141,7 +140,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void info(final String format, final Object arg1, final Object arg2) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#info(java.lang.String, java.lang.Object[])
 	 */
@@ -149,7 +148,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void info(final String format, final Object[] argArray) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#info(java.lang.String, java.lang.Throwable)
 	 */
@@ -157,7 +156,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void info(final String msg, final Throwable t) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#isWarnEnabled()
 	 */
@@ -165,7 +164,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public boolean isWarnEnabled() {
 		return false;
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#warn(java.lang.String)
 	 */
@@ -173,7 +172,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void warn(final String msg) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#warn(java.lang.String, java.lang.Object)
 	 */
@@ -181,7 +180,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void warn(final String format, final Object arg) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#warn(java.lang.String, java.lang.Object, java.lang.Object)
 	 */
@@ -189,7 +188,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void warn(final String format, final Object arg1, final Object arg2) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#warn(java.lang.String, java.lang.Object[])
 	 */
@@ -197,7 +196,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void warn(final String format, final Object[] argArray) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#warn(java.lang.String, java.lang.Throwable)
 	 */
@@ -205,7 +204,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void warn(final String msg, final Throwable t) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#isErrorEnabled()
 	 */
@@ -213,7 +212,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public boolean isErrorEnabled() {
 		return false;
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#error(java.lang.String)
 	 */
@@ -221,7 +220,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void error(final String msg) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#error(java.lang.String, java.lang.Object)
 	 */
@@ -229,7 +228,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void error(final String format, final Object arg) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#error(java.lang.String, java.lang.Object, java.lang.Object)
 	 */
@@ -237,7 +236,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void error(final String format, final Object arg1, final Object arg2) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#error(java.lang.String, java.lang.Object[])
 	 */
@@ -245,7 +244,7 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void error(final String format, final Object[] argArray) {
 		// Ignore
 	}
-	
+
 	/**
 	 * @see org.slf4j.Logger#error(java.lang.String, java.lang.Throwable)
 	 */
@@ -253,5 +252,5 @@ public class MuteLogger extends MarkerIgnoringBase {
 	public void error(final String msg, final Throwable t) {
 		// Ignore
 	}
-	
+
 }
