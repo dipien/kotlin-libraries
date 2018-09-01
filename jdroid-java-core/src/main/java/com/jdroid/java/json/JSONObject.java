@@ -14,6 +14,7 @@ package com.jdroid.java.json;
  */
 
 import com.jdroid.java.collections.Lists;
+import com.jdroid.java.date.DateConfiguration;
 import com.jdroid.java.date.DateUtils;
 
 import java.io.IOException;
@@ -1499,7 +1500,7 @@ public class JSONObject {
 	}
 
 	public Date getDate(String key) {
-		return getDate(key, DateUtils.DEFAULT_DATE_TIME_FORMAT);
+		return getDate(key, DateConfiguration.getDefaultDateTimeFormat());
 	}
 
 	public Date getDate(String key, String dateFormat) {
@@ -1508,7 +1509,7 @@ public class JSONObject {
 	}
 
 	public Date optDate(String key) {
-		return optDate(key, DateUtils.DEFAULT_DATE_TIME_FORMAT);
+		return optDate(key, DateConfiguration.getDefaultDateTimeFormat());
 	}
 
 	public Date optDate(String key, String dateFormat) {

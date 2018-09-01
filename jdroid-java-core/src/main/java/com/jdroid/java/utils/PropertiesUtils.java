@@ -28,7 +28,7 @@ public abstract class PropertiesUtils {
 		} catch (IOException e) {
 			throw new UnexpectedException("Cannot read from file: " + fileName, e);
 		} finally {
-			FileUtils.safeClose(inputStream);
+			StreamUtils.safeClose(inputStream);
 		}
 	}
 	
@@ -45,7 +45,7 @@ public abstract class PropertiesUtils {
 			} catch (IOException e) {
 				throw new UnexpectedException("Cannot read from resource: " + resourceName, e);
 			} finally {
-				FileUtils.safeClose(inputStream);
+				StreamUtils.safeClose(inputStream);
 			}
 		}
 	}

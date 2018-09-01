@@ -4,10 +4,9 @@ import java.util.Date;
 
 public class DateConfiguration {
 	
-	public static String DEFAULT_DATE_TIME_FORMAT = DateTimeFormat.YYYYMMDDHHMMSSZ;
-	
+	private static String defaultDateTimeFormat = DateTimeFormat.YYYYMMDDHHMMSSZ;
 	private static Date fakeNow;
-	
+
 	public static Date getFakeNow() {
 		return fakeNow;
 	}
@@ -18,5 +17,13 @@ public class DateConfiguration {
 	
 	public static Boolean isFakeNow() {
 		return fakeNow != null;
+	}
+
+	public static String getDefaultDateTimeFormat() {
+		return defaultDateTimeFormat;
+	}
+
+	public static void setDefaultDateTimeFormat(String defaultDateTimeFormat) {
+		DateConfiguration.defaultDateTimeFormat = defaultDateTimeFormat;
 	}
 }
