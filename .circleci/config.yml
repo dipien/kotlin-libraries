@@ -85,7 +85,7 @@ jobs:
 
       - run:
           name: Uploading to Nexus Sonatype
-          command: ./gradlew uploadArchives -PLOCAL_UPLOAD=false --stacktrace
+          command: ./gradlew publish -PLOCAL_UPLOAD=false --info --stacktrace
 
 workflows:
   version: 2
