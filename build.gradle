@@ -10,13 +10,30 @@ apply plugin: "com.jdroid.component.builder"
 
 buildscript {
 	repositories {
-		jcenter()
+		jcenter {
+			mavenContent {
+				releasesOnly()
+			}
+		}
 		maven { url = "https://plugins.gradle.org/m2/" }
 		String localMavenRepo = project.hasProperty("LOCAL_MAVEN_REPO") ? project.ext.get("LOCAL_MAVEN_REPO") : System.getenv("LOCAL_MAVEN_REPO")
 		if (localMavenRepo != null) {
-			maven { url = localMavenRepo }
+			maven {
+				url = localMavenRepo
+				content {
+					includeGroup("com.jdroidtools")
+				}
+			}
 		}
-		maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
+		maven {
+			url = "https://oss.sonatype.org/content/repositories/snapshots/"
+			content {
+				includeGroup("com.jdroidtools")
+			}
+			mavenContent {
+				snapshotsOnly()
+			}
+		}
 	}
 	dependencies {
 		// https://github.com/maxirosson/jdroid-component-builder/blob/master/CHANGELOG.md
@@ -31,21 +48,55 @@ subprojects {
 
 	buildscript {
 		repositories {
-			jcenter()
+			jcenter {
+				mavenContent {
+					releasesOnly()
+				}
+			}
 			String localMavenRepo = project.hasProperty("LOCAL_MAVEN_REPO") ? project.ext.get("LOCAL_MAVEN_REPO") : System.getenv("LOCAL_MAVEN_REPO")
 			if (localMavenRepo != null) {
-				maven { url = localMavenRepo }
+				maven {
+					url = localMavenRepo
+					content {
+						includeGroup("com.jdroidtools")
+					}
+				}
 			}
-			maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
+			maven {
+				url = "https://oss.sonatype.org/content/repositories/snapshots/"
+				content {
+					includeGroup("com.jdroidtools")
+				}
+				mavenContent {
+					snapshotsOnly()
+				}
+			}
 		}
 	}
 
 	repositories {
-		jcenter()
+		jcenter {
+			mavenContent {
+				releasesOnly()
+			}
+		}
 		String localMavenRepo = project.hasProperty("LOCAL_MAVEN_REPO") ? project.ext.get("LOCAL_MAVEN_REPO") : System.getenv("LOCAL_MAVEN_REPO")
 		if (localMavenRepo != null) {
-			maven { url = localMavenRepo }
+			maven {
+				url = localMavenRepo
+				content {
+					includeGroup("com.jdroidtools")
+				}
+			}
 		}
-		maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
+		maven {
+			url = "https://oss.sonatype.org/content/repositories/snapshots/"
+			content {
+				includeGroup("com.jdroidtools")
+			}
+			mavenContent {
+				snapshotsOnly()
+			}
+		}
 	}
 }
