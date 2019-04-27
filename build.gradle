@@ -16,12 +16,16 @@ buildscript {
 			}
 		}
 		maven { url = "https://plugins.gradle.org/m2/" }
-		String localMavenRepo = project.hasProperty("LOCAL_MAVEN_REPO") ? project.ext.get("LOCAL_MAVEN_REPO") : System.getenv("LOCAL_MAVEN_REPO")
-		if (localMavenRepo != null) {
-			maven {
-				url = localMavenRepo
-				content {
-					includeGroup("com.jdroidtools")
+		String localMavenRepoEnabled = project.hasProperty('LOCAL_MAVEN_REPO_ENABLED') ? project.ext.get('LOCAL_MAVEN_REPO_ENABLED') : System.getenv('LOCAL_MAVEN_REPO_ENABLED')
+		boolean isLocalMavenRepoEnabled = localMavenRepoEnabled != null && localMavenRepoEnabled == "true"
+		if (isLocalMavenRepoEnabled) {
+			String localMavenRepo = project.hasProperty('LOCAL_MAVEN_REPO') ? project.ext.get('LOCAL_MAVEN_REPO') : System.getenv('LOCAL_MAVEN_REPO')
+			if (localMavenRepo != null) {
+				maven {
+					url = localMavenRepo
+					content {
+						includeGroup("com.jdroidtools")
+					}
 				}
 			}
 		}
@@ -53,12 +57,16 @@ subprojects {
 					releasesOnly()
 				}
 			}
-			String localMavenRepo = project.hasProperty("LOCAL_MAVEN_REPO") ? project.ext.get("LOCAL_MAVEN_REPO") : System.getenv("LOCAL_MAVEN_REPO")
-			if (localMavenRepo != null) {
-				maven {
-					url = localMavenRepo
-					content {
-						includeGroup("com.jdroidtools")
+			String localMavenRepoEnabled = project.hasProperty('LOCAL_MAVEN_REPO_ENABLED') ? project.ext.get('LOCAL_MAVEN_REPO_ENABLED') : System.getenv('LOCAL_MAVEN_REPO_ENABLED')
+			boolean isLocalMavenRepoEnabled = localMavenRepoEnabled != null && localMavenRepoEnabled == "true"
+			if (isLocalMavenRepoEnabled) {
+				String localMavenRepo = project.hasProperty('LOCAL_MAVEN_REPO') ? project.ext.get('LOCAL_MAVEN_REPO') : System.getenv('LOCAL_MAVEN_REPO')
+				if (localMavenRepo != null) {
+					maven {
+						url = localMavenRepo
+						content {
+							includeGroup("com.jdroidtools")
+						}
 					}
 				}
 			}
