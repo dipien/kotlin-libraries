@@ -24,6 +24,8 @@ public abstract class AbstractScheduler {
 			} else {
 				LoggerUtils.getLogger(getClass()).info(getClass().getSimpleName() + " already in progress, skipping this schedule.");
 			}
+		} else {
+			LoggerUtils.getLogger(getClass()).info(getClass().getSimpleName() + " disabled, skipping this schedule.");
 		}
 	}
 	
