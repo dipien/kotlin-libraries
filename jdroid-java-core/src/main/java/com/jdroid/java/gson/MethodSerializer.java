@@ -6,7 +6,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import com.jdroid.java.date.DateConfiguration;
 
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -21,9 +20,7 @@ public class MethodSerializer implements JsonSerializer<Object> {
 	}
 
 	public MethodSerializer() {
-		gsonBuilder = new GsonBuilder();
-		gsonBuilder.setDateFormat(DateConfiguration.getDefaultDateTimeFormat());
-		gsonBuilder.disableHtmlEscaping();
+		gsonBuilder = GsonBuilderFactory.createGsonBuilder();
 	}
 
 	public JsonElement serialize(Object src, Type typeOfSrc, JsonSerializationContext context) {
