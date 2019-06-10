@@ -75,6 +75,12 @@ jobs:
           path: ./jdroid-java-remote-config/build/reports/tests/test
           destination: jdroid-java-remote-config/tests
 
+  ktlint:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: ./gradlew ktlint --stacktrace
+
   deploy:
     <<: *defaults
     steps:
@@ -91,10 +97,12 @@ workflows:
   version: 2
   commit:
     jobs:
+      - ktlint
       - build
       - verify:
           requires:
             - build
       - deploy:
           requires:
+            - ktlint
             - verify

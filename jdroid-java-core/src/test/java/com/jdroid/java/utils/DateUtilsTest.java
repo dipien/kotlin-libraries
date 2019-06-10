@@ -22,7 +22,7 @@ public class DateUtilsTest {
 
 	@AfterMethod
 	public static void onAfterMethod() {
-		DateConfiguration.setFakeNow(null);
+		DateConfiguration.INSTANCE.setFakeNow(null);
 	}
 
 	/**
@@ -491,25 +491,25 @@ public class DateUtilsTest {
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 20)), friday);
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 21)), friday);
 
-		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 15));
+		DateConfiguration.INSTANCE.setFakeNow(DateUtils.getDate(2018, 3, 15));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
 
-		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 16));
+		DateConfiguration.INSTANCE.setFakeNow(DateUtils.getDate(2018, 3, 16));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
 
-		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 17));
+		DateConfiguration.INSTANCE.setFakeNow(DateUtils.getDate(2018, 3, 17));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
 
-		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 18));
+		DateConfiguration.INSTANCE.setFakeNow(DateUtils.getDate(2018, 3, 18));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
 
-		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 19));
+		DateConfiguration.INSTANCE.setFakeNow(DateUtils.getDate(2018, 3, 19));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
 
-		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 20));
+		DateConfiguration.INSTANCE.setFakeNow(DateUtils.getDate(2018, 3, 20));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
 
-		DateConfiguration.setFakeNow(DateUtils.getDate(2018, 3, 21));
+		DateConfiguration.INSTANCE.setFakeNow(DateUtils.getDate(2018, 3, 21));
 		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
 
 	}

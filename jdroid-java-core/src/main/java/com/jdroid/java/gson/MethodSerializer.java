@@ -20,7 +20,7 @@ public class MethodSerializer implements JsonSerializer<Object> {
 	}
 
 	public MethodSerializer() {
-		gsonBuilder = GsonBuilderFactory.createGsonBuilder();
+		gsonBuilder = GsonBuilderFactory.INSTANCE.createGsonBuilder();
 	}
 
 	public JsonElement serialize(Object src, Type typeOfSrc, JsonSerializationContext context) {

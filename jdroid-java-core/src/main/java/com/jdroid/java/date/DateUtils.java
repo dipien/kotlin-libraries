@@ -336,11 +336,11 @@ public abstract class DateUtils {
 	 * @return the current moment
 	 */
 	public static Date now() {
-		return DateConfiguration.isFakeNow() ? DateConfiguration.getFakeNow() : new Date();
+		return DateConfiguration.INSTANCE.isFakeNow() ? DateConfiguration.INSTANCE.getFakeNow() : new Date();
 	}
 
 	public static long nowMillis() {
-		return DateConfiguration.isFakeNow() ? DateConfiguration.getFakeNow().getTime() : System.currentTimeMillis();
+		return DateConfiguration.INSTANCE.isFakeNow() ? DateConfiguration.INSTANCE.getFakeNow().getTime() : System.currentTimeMillis();
 	}
 
 	/**

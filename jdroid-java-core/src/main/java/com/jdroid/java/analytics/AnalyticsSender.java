@@ -28,8 +28,8 @@ public class AnalyticsSender<T extends AnalyticsTracker> implements AnalyticsTra
 	}
 
 	@Override
-	public Boolean isEnabled() {
-		return null;
+	public boolean isEnabled() {
+		return true;
 	}
 
 	@Override

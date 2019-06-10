@@ -1500,7 +1500,7 @@ public class JSONObject {
 	}
 
 	public Date getDate(String key) {
-		return getDate(key, DateConfiguration.getDefaultDateTimeFormat());
+		return getDate(key, DateConfiguration.INSTANCE.getDefaultDateTimeFormat());
 	}
 
 	public Date getDate(String key, String dateFormat) {
@@ -1509,7 +1509,7 @@ public class JSONObject {
 	}
 
 	public Date optDate(String key) {
-		return optDate(key, DateConfiguration.getDefaultDateTimeFormat());
+		return optDate(key, DateConfiguration.INSTANCE.getDefaultDateTimeFormat());
 	}
 
 	public Date optDate(String key, String dateFormat) {

@@ -35,17 +35,11 @@ public class JsonMap extends LinkedHashMap<String, Object> {
 		return null;
 	}
 
-	/**
-	 * @see java.util.HashMap#put(java.lang.Object, java.lang.Object)
-	 */
 	@Override
 	public Object put(String key, Object value) {
 		return put(key, value, mode);
 	}
 
-	/**
-	 * @see java.util.AbstractMap#toString()
-	 */
 	@Override
 	public String toString() {
 		return new JSONObject(this).toString();
