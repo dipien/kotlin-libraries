@@ -98,7 +98,12 @@ public class Lists {
 		}
 		return list;
 	}
-	
+
+	@Deprecated
+	public static Boolean isNullOrEmpty(List<?> list) {
+		return (list == null) || list.isEmpty();
+	}
+
 	public static <T> List<T> filter(List<T> unfilteredList, Predicate<T> predicate) {
 		List<T> filteredList = Lists.newArrayList();
 		for (T each : unfilteredList) {
