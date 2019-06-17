@@ -220,7 +220,7 @@ public abstract class DateUtils {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-		return DayOfWeek.findByNumber(dayOfWeek);
+		return DayOfWeek.Companion.findByNumber(dayOfWeek);
 	}
 
 	public static boolean isDateOnWeekend(Date date) {
