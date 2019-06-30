@@ -1,4 +1,4 @@
-apply plugin: "com.jdroid.java.library"
+apply plugin: "com.jdroidtools.java.library"
 
 ext.ARTIFACT_ID = "jdroid-java-firebase-database"
 ext.PROJECT_NAME = "Jdroid Java Firebase Database"
