@@ -31,11 +31,11 @@ public class DateUtilsTest {
 	@DataProvider
 	public Iterator<Object[]> formatDataProvider() {
 		List<Object[]> cases = Lists.newArrayList();
-		cases.add(new Object[] { DateUtils.getDate(2010, Calendar.AUGUST, 10), DateTimeFormat.MMDDYYYY,
+		cases.add(new Object[] { DateUtils.INSTANCE.getDate(2010, Calendar.AUGUST, 10), DateTimeFormat.MMDDYYYY,
 			"08/10/2010" });
-		cases.add(new Object[] { DateUtils.getDate(2010, Calendar.AUGUST, 10), DateTimeFormat.MMDDYYYY_SLASH,
+		cases.add(new Object[] { DateUtils.INSTANCE.getDate(2010, Calendar.AUGUST, 10), DateTimeFormat.MMDDYYYY_SLASH,
 			"08-10-2010" });
-		cases.add(new Object[] { DateUtils.getTime(5, 30, true), DateTimeFormat.HHMMAA, "05:30 AM" });
+		cases.add(new Object[] { DateUtils.INSTANCE.getTime(5, 30, true), DateTimeFormat.HHMMAA, "05:30 AM" });
 		return cases.iterator();
 	}
 
@@ -46,7 +46,7 @@ public class DateUtilsTest {
 	 */
 	@Test(dataProvider = "formatDataProvider")
 	public void format(Date date, String pattern, String expected) {
-		String result = DateUtils.format(date, pattern);
+		String result = DateUtils.INSTANCE.format(date, pattern);
 		Assert.assertEquals(result, expected);
 	}
 
@@ -93,7 +93,7 @@ public class DateUtilsTest {
 	 */
 	@Test(dataProvider = "getForIsBetween")
 	public void isBetween(Date date, Date startDate, Date endDate, boolean expectedResult) {
-		Assert.assertEquals(DateUtils.isBetween(date, startDate, endDate), expectedResult);
+		Assert.assertEquals(DateUtils.INSTANCE.isBetween(date, startDate, endDate), expectedResult);
 	}
 
 	/**
@@ -106,8 +106,8 @@ public class DateUtilsTest {
 		int month = Calendar.JANUARY;
 		int date = 1;
 		calendar.set(year, month, date);
-		DateUtils.truncateTime(calendar);
-		Date createdDate = DateUtils.getDate(year, month, date);
+		DateUtils.INSTANCE.truncateTime(calendar);
+		Date createdDate = DateUtils.INSTANCE.getDate(year, month, date);
 		Assert.assertEquals(createdDate, calendar.getTime());
 	}
 
@@ -138,17 +138,17 @@ public class DateUtilsTest {
 		List<Object[]> cases = Lists.newArrayList();
 		Integer year = Calendar.getInstance().get(Calendar.YEAR);
 		Integer month = Calendar.JANUARY;
-		cases.add(new Object[] { DateUtils.getDate(year, month, 10), DateUtils.getDate(year, month, 20), true });
-		cases.add(new Object[] { DateUtils.getDate(year, month, 12), DateUtils.getDate(year, month, 18), true });
-		cases.add(new Object[] { DateUtils.getDate(year, month, 10), DateUtils.getDate(year, month, 12), true });
-		cases.add(new Object[] { DateUtils.getDate(year, month, 18), DateUtils.getDate(year, month, 20), true });
-		cases.add(new Object[] { DateUtils.getDate(year, month, 8), DateUtils.getDate(year, month, 10), true });
-		cases.add(new Object[] { DateUtils.getDate(year, month, 8), DateUtils.getDate(year, month, 12), true });
-		cases.add(new Object[] { DateUtils.getDate(year, month, 20), DateUtils.getDate(year, month, 22), true });
-		cases.add(new Object[] { DateUtils.getDate(year, month, 18), DateUtils.getDate(year, month, 22), true });
-		cases.add(new Object[] { DateUtils.getDate(year, month, 8), DateUtils.getDate(year, month, 22), true });
-		cases.add(new Object[] { DateUtils.getDate(year, month, 6), DateUtils.getDate(year, month, 8), false });
-		cases.add(new Object[] { DateUtils.getDate(year, month, 22), DateUtils.getDate(year, month, 24), false });
+		cases.add(new Object[] { DateUtils.INSTANCE.getDate(year, month, 10), DateUtils.INSTANCE.getDate(year, month, 20), true });
+		cases.add(new Object[] { DateUtils.INSTANCE.getDate(year, month, 12), DateUtils.INSTANCE.getDate(year, month, 18), true });
+		cases.add(new Object[] { DateUtils.INSTANCE.getDate(year, month, 10), DateUtils.INSTANCE.getDate(year, month, 12), true });
+		cases.add(new Object[] { DateUtils.INSTANCE.getDate(year, month, 18), DateUtils.INSTANCE.getDate(year, month, 20), true });
+		cases.add(new Object[] { DateUtils.INSTANCE.getDate(year, month, 8), DateUtils.INSTANCE.getDate(year, month, 10), true });
+		cases.add(new Object[] { DateUtils.INSTANCE.getDate(year, month, 8), DateUtils.INSTANCE.getDate(year, month, 12), true });
+		cases.add(new Object[] { DateUtils.INSTANCE.getDate(year, month, 20), DateUtils.INSTANCE.getDate(year, month, 22), true });
+		cases.add(new Object[] { DateUtils.INSTANCE.getDate(year, month, 18), DateUtils.INSTANCE.getDate(year, month, 22), true });
+		cases.add(new Object[] { DateUtils.INSTANCE.getDate(year, month, 8), DateUtils.INSTANCE.getDate(year, month, 22), true });
+		cases.add(new Object[] { DateUtils.INSTANCE.getDate(year, month, 6), DateUtils.INSTANCE.getDate(year, month, 8), false });
+		cases.add(new Object[] { DateUtils.INSTANCE.getDate(year, month, 22), DateUtils.INSTANCE.getDate(year, month, 24), false });
 		return cases.iterator();
 	}
 
@@ -163,10 +163,10 @@ public class DateUtilsTest {
 		Integer year = Calendar.getInstance().get(Calendar.YEAR);
 		Integer month = Calendar.JANUARY;
 
-		Date start = DateUtils.getDate(year, month, 10);
-		Date end = DateUtils.getDate(year, month, 20);
+		Date start = DateUtils.INSTANCE.getDate(year, month, 10);
+		Date end = DateUtils.INSTANCE.getDate(year, month, 20);
 
-		Assert.assertEquals(DateUtils.periodsOverlap(start, end, start2, end2), expected);
+		Assert.assertEquals(DateUtils.INSTANCE.periodsOverlap(start, end, start2, end2), expected);
 	}
 
 	/**
@@ -194,8 +194,8 @@ public class DateUtilsTest {
 	public void isAfterEquals(int year, int month, int date, int yearToCompare, int monthToCompare, int dateToCompare,
 							  boolean expectedResult) {
 		Assert.assertEquals(
-			DateUtils.isAfterEquals(DateUtils.getDate(year, month, date),
-				DateUtils.getDate(yearToCompare, monthToCompare, dateToCompare)), expectedResult);
+			DateUtils.INSTANCE.isAfterEquals(DateUtils.INSTANCE.getDate(year, month, date),
+				DateUtils.INSTANCE.getDate(yearToCompare, monthToCompare, dateToCompare)), expectedResult);
 	}
 
 	/**
@@ -223,8 +223,8 @@ public class DateUtilsTest {
 	public void isAfter(int year, int month, int date, int yearToCompare, int monthToCompare, int dateToCompare,
 						boolean expectedResult) {
 		Assert.assertEquals(
-			DateUtils.isAfter(DateUtils.getDate(year, month, date),
-				DateUtils.getDate(yearToCompare, monthToCompare, dateToCompare)), expectedResult);
+			DateUtils.INSTANCE.isAfter(DateUtils.INSTANCE.getDate(year, month, date),
+				DateUtils.INSTANCE.getDate(yearToCompare, monthToCompare, dateToCompare)), expectedResult);
 	}
 
 	/**
@@ -252,8 +252,8 @@ public class DateUtilsTest {
 	public void isBeforeEquals(int year, int month, int date, int yearToCompare, int monthToCompare, int dateToCompare,
 							   boolean expectedResult) {
 		Assert.assertEquals(
-			DateUtils.isBeforeEquals(DateUtils.getDate(year, month, date),
-				DateUtils.getDate(yearToCompare, monthToCompare, dateToCompare)), expectedResult);
+			DateUtils.INSTANCE.isBeforeEquals(DateUtils.INSTANCE.getDate(year, month, date),
+				DateUtils.INSTANCE.getDate(yearToCompare, monthToCompare, dateToCompare)), expectedResult);
 	}
 
 	/**
@@ -281,8 +281,8 @@ public class DateUtilsTest {
 	public void isBefore(int year, int month, int date, int yearToCompare, int monthToCompare, int dateToCompare,
 						 boolean expectedResult) {
 		Assert.assertEquals(
-			DateUtils.isBefore(DateUtils.getDate(year, month, date),
-				DateUtils.getDate(yearToCompare, monthToCompare, dateToCompare)), expectedResult);
+			DateUtils.INSTANCE.isBefore(DateUtils.INSTANCE.getDate(year, month, date),
+				DateUtils.INSTANCE.getDate(yearToCompare, monthToCompare, dateToCompare)), expectedResult);
 	}
 
 	/**
@@ -291,7 +291,7 @@ public class DateUtilsTest {
 	 */
 	@Test(dataProvider = "getLastDayOfTheMonthData", dependsOnMethods = "getDate")
 	public void lastDayOfTheMonth(Date date, Date expectedResult) {
-		Date lastDay = DateUtils.getLastDayOfMonth(date);
+		Date lastDay = DateUtils.INSTANCE.getLastDayOfMonth(date);
 		Assert.assertEquals(lastDay, expectedResult);
 	}
 
@@ -303,28 +303,28 @@ public class DateUtilsTest {
 		List<Object[]> cases = Lists.newArrayList();
 
 		// 31-day month
-		Date date1 = DateUtils.getDate(2010, 0, 10);
-		Date expectedDate1 = DateUtils.getDate(2010, 0, 31);
+		Date date1 = DateUtils.INSTANCE.getDate(2010, 0, 10);
+		Date expectedDate1 = DateUtils.INSTANCE.getDate(2010, 0, 31);
 		cases.add(new Object[] { date1, expectedDate1 });
 
 		// 31-day month but in the 31th day
-		Date date2 = DateUtils.getDate(2010, 0, 31);
-		Date expectedDate2 = DateUtils.getDate(2010, 0, 31);
+		Date date2 = DateUtils.INSTANCE.getDate(2010, 0, 31);
+		Date expectedDate2 = DateUtils.INSTANCE.getDate(2010, 0, 31);
 		cases.add(new Object[] { date2, expectedDate2 });
 
 		// 30-day month
-		Date date3 = DateUtils.getDate(2010, 3, 1);
-		Date expectedDate3 = DateUtils.getDate(2010, 3, 30);
+		Date date3 = DateUtils.INSTANCE.getDate(2010, 3, 1);
+		Date expectedDate3 = DateUtils.INSTANCE.getDate(2010, 3, 30);
 		cases.add(new Object[] { date3, expectedDate3 });
 
 		// February special case in a leap year
-		Date date4 = DateUtils.getDate(2008, 1, 1);
-		Date expectedDate4 = DateUtils.getDate(2008, 1, 29);
+		Date date4 = DateUtils.INSTANCE.getDate(2008, 1, 1);
+		Date expectedDate4 = DateUtils.INSTANCE.getDate(2008, 1, 29);
 		cases.add(new Object[] { date4, expectedDate4 });
 
 		// February special case in a normal year
-		Date date5 = DateUtils.getDate(2009, 1, 1);
-		Date expectedDate5 = DateUtils.getDate(2009, 1, 28);
+		Date date5 = DateUtils.INSTANCE.getDate(2009, 1, 1);
+		Date expectedDate5 = DateUtils.INSTANCE.getDate(2009, 1, 28);
 		cases.add(new Object[] { date5, expectedDate5 });
 
 		return cases.iterator();
@@ -332,7 +332,7 @@ public class DateUtilsTest {
 
 	@Test(dataProvider = "getLastWeekDayOfTheMonthData")
 	public void lastWeekDayOfTheMonth(Date date, Date expectedResult) {
-		Date lastDay = DateUtils.getLastWeekDayOfMonth(date);
+		Date lastDay = DateUtils.INSTANCE.getLastWeekDayOfMonth(date);
 		Assert.assertEquals(lastDay, expectedResult);
 	}
 
@@ -341,28 +341,28 @@ public class DateUtilsTest {
 		List<Object[]> cases = Lists.newArrayList();
 
 		// 31-day month
-		Date date1 = DateUtils.getDate(2017, 11, 1);
-		Date expectedDate1 = DateUtils.getDate(2017, 11, 29);
+		Date date1 = DateUtils.INSTANCE.getDate(2017, 11, 1);
+		Date expectedDate1 = DateUtils.INSTANCE.getDate(2017, 11, 29);
 		cases.add(new Object[] { date1, expectedDate1 });
 
 		// 31-day month but in the 31th day
-		Date date2 = DateUtils.getDate(2017, 11, 31);
-		Date expectedDate2 = DateUtils.getDate(2017, 11, 29);
+		Date date2 = DateUtils.INSTANCE.getDate(2017, 11, 31);
+		Date expectedDate2 = DateUtils.INSTANCE.getDate(2017, 11, 29);
 		cases.add(new Object[] { date2, expectedDate2 });
 
 		// 30-day month
-		Date date3 = DateUtils.getDate(2017, 10, 1);
-		Date expectedDate3 = DateUtils.getDate(2017, 10, 30);
+		Date date3 = DateUtils.INSTANCE.getDate(2017, 10, 1);
+		Date expectedDate3 = DateUtils.INSTANCE.getDate(2017, 10, 30);
 		cases.add(new Object[] { date3, expectedDate3 });
 
 		// February special case in a leap year
-		Date date4 = DateUtils.getDate(2008, 1, 1);
-		Date expectedDate4 = DateUtils.getDate(2008, 1, 29);
+		Date date4 = DateUtils.INSTANCE.getDate(2008, 1, 1);
+		Date expectedDate4 = DateUtils.INSTANCE.getDate(2008, 1, 29);
 		cases.add(new Object[] { date4, expectedDate4 });
 
 		// February special case in a normal year
-		Date date5 = DateUtils.getDate(2009, 1, 1);
-		Date expectedDate5 = DateUtils.getDate(2009, 1, 27);
+		Date date5 = DateUtils.INSTANCE.getDate(2009, 1, 1);
+		Date expectedDate5 = DateUtils.INSTANCE.getDate(2009, 1, 27);
 		cases.add(new Object[] { date5, expectedDate5 });
 
 		return cases.iterator();
@@ -375,7 +375,7 @@ public class DateUtilsTest {
 	 */
 	@Test(dataProvider = "getLastDayOfTheYearData", dependsOnMethods = "getDate")
 	public void lastDayOfTheYear(Date date, Date expectedResult) {
-		Date lastDay = DateUtils.getLastDayOfYear(date);
+		Date lastDay = DateUtils.INSTANCE.getLastDayOfYear(date);
 		Assert.assertEquals(lastDay, expectedResult);
 	}
 
@@ -384,28 +384,28 @@ public class DateUtilsTest {
 		List<Object[]> cases = Lists.newArrayList();
 
 		// 31-day month
-		Date date1 = DateUtils.getDate(2010, 0, 10);
-		Date expectedDate1 = DateUtils.getDate(2010, 11, 31);
+		Date date1 = DateUtils.INSTANCE.getDate(2010, 0, 10);
+		Date expectedDate1 = DateUtils.INSTANCE.getDate(2010, 11, 31);
 		cases.add(new Object[] { date1, expectedDate1 });
 
 		// 31-day month but in the 31th day
-		Date date2 = DateUtils.getDate(2010, 0, 31);
-		Date expectedDate2 = DateUtils.getDate(2010, 11, 31);
+		Date date2 = DateUtils.INSTANCE.getDate(2010, 0, 31);
+		Date expectedDate2 = DateUtils.INSTANCE.getDate(2010, 11, 31);
 		cases.add(new Object[] { date2, expectedDate2 });
 
 		// 30-day month
-		Date date3 = DateUtils.getDate(2010, 3, 1);
-		Date expectedDate3 = DateUtils.getDate(2010, 11, 31);
+		Date date3 = DateUtils.INSTANCE.getDate(2010, 3, 1);
+		Date expectedDate3 = DateUtils.INSTANCE.getDate(2010, 11, 31);
 		cases.add(new Object[] { date3, expectedDate3 });
 
 		// February special case in a leap year
-		Date date4 = DateUtils.getDate(2008, 1, 1);
-		Date expectedDate4 = DateUtils.getDate(2008, 11, 31);
+		Date date4 = DateUtils.INSTANCE.getDate(2008, 1, 1);
+		Date expectedDate4 = DateUtils.INSTANCE.getDate(2008, 11, 31);
 		cases.add(new Object[] { date4, expectedDate4 });
 
 		// February special case in a normal year
-		Date date5 = DateUtils.getDate(2009, 1, 1);
-		Date expectedDate5 = DateUtils.getDate(2009, 11, 31);
+		Date date5 = DateUtils.INSTANCE.getDate(2009, 1, 1);
+		Date expectedDate5 = DateUtils.INSTANCE.getDate(2009, 11, 31);
 		cases.add(new Object[] { date5, expectedDate5 });
 
 		return cases.iterator();
@@ -413,7 +413,7 @@ public class DateUtilsTest {
 
 	@Test(dataProvider = "getLastWeekDayOfTheYearData")
 	public void lastWeekDayOfTheYear(Date date, Date expectedResult) {
-		Date lastDay = DateUtils.getLastWeekDayOfYear(date);
+		Date lastDay = DateUtils.INSTANCE.getLastWeekDayOfYear(date);
 		Assert.assertEquals(lastDay, expectedResult);
 	}
 
@@ -422,28 +422,28 @@ public class DateUtilsTest {
 		List<Object[]> cases = Lists.newArrayList();
 
 		// 31-day month
-		Date date1 = DateUtils.getDate(2017, 11, 1);
-		Date expectedDate1 = DateUtils.getDate(2017, 11, 29);
+		Date date1 = DateUtils.INSTANCE.getDate(2017, 11, 1);
+		Date expectedDate1 = DateUtils.INSTANCE.getDate(2017, 11, 29);
 		cases.add(new Object[] { date1, expectedDate1 });
 
 		// 31-day month but in the 31th day
-		Date date2 = DateUtils.getDate(2017, 11, 31);
-		Date expectedDate2 = DateUtils.getDate(2017, 11, 29);
+		Date date2 = DateUtils.INSTANCE.getDate(2017, 11, 31);
+		Date expectedDate2 = DateUtils.INSTANCE.getDate(2017, 11, 29);
 		cases.add(new Object[] { date2, expectedDate2 });
 
 		// 30-day month
-		Date date3 = DateUtils.getDate(2017, 10, 1);
-		Date expectedDate3 = DateUtils.getDate(2017, 11, 29);
+		Date date3 = DateUtils.INSTANCE.getDate(2017, 10, 1);
+		Date expectedDate3 = DateUtils.INSTANCE.getDate(2017, 11, 29);
 		cases.add(new Object[] { date3, expectedDate3 });
 
 		// February special case in a leap year
-		Date date4 = DateUtils.getDate(2008, 1, 1);
-		Date expectedDate4 = DateUtils.getDate(2008, 11, 31);
+		Date date4 = DateUtils.INSTANCE.getDate(2008, 1, 1);
+		Date expectedDate4 = DateUtils.INSTANCE.getDate(2008, 11, 31);
 		cases.add(new Object[] { date4, expectedDate4 });
 
 		// February special case in a normal year
-		Date date5 = DateUtils.getDate(2009, 1, 1);
-		Date expectedDate5 = DateUtils.getDate(2009, 11, 31);
+		Date date5 = DateUtils.INSTANCE.getDate(2009, 1, 1);
+		Date expectedDate5 = DateUtils.INSTANCE.getDate(2009, 11, 31);
 		cases.add(new Object[] { date5, expectedDate5 });
 
 		return cases.iterator();
@@ -469,48 +469,48 @@ public class DateUtilsTest {
 
 	@Test(dataProvider = "getDurationData")
 	public void formatDuration(long duration, String expectedResult) {
-		String result = DateUtils.formatDuration(duration);
+		String result = DateUtils.INSTANCE.formatDuration(duration);
 		Assert.assertEquals(result, expectedResult);
 	}
 
 	@Test
 	public void addMonths() {
-		Assert.assertEquals(DateUtils.addMonths(DateUtils.getDate(2017, 2, 25), -1), DateUtils.getDate(2017, 1, 25));
+		Assert.assertEquals(DateUtils.INSTANCE.addMonths(DateUtils.INSTANCE.getDate(2017, 2, 25), -1), DateUtils.INSTANCE.getDate(2017, 1, 25));
 	}
 
 	@Test
 	public void getLastWeekDayOfPreviousWeek() {
 
 
-		Date friday = DateUtils.getDate(2018, 3, 13);
-		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 15)), friday);
-		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 16)), friday);
-		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 17)), friday);
-		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 18)), friday);
-		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 19)), friday);
-		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 20)), friday);
-		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(DateUtils.getDate(2018, 3, 21)), friday);
+		Date friday = DateUtils.INSTANCE.getDate(2018, 3, 13);
+		Assert.assertEquals(DateUtils.INSTANCE.getLastWeekDayOfPreviousWeek(DateUtils.INSTANCE.getDate(2018, 3, 15)), friday);
+		Assert.assertEquals(DateUtils.INSTANCE.getLastWeekDayOfPreviousWeek(DateUtils.INSTANCE.getDate(2018, 3, 16)), friday);
+		Assert.assertEquals(DateUtils.INSTANCE.getLastWeekDayOfPreviousWeek(DateUtils.INSTANCE.getDate(2018, 3, 17)), friday);
+		Assert.assertEquals(DateUtils.INSTANCE.getLastWeekDayOfPreviousWeek(DateUtils.INSTANCE.getDate(2018, 3, 18)), friday);
+		Assert.assertEquals(DateUtils.INSTANCE.getLastWeekDayOfPreviousWeek(DateUtils.INSTANCE.getDate(2018, 3, 19)), friday);
+		Assert.assertEquals(DateUtils.INSTANCE.getLastWeekDayOfPreviousWeek(DateUtils.INSTANCE.getDate(2018, 3, 20)), friday);
+		Assert.assertEquals(DateUtils.INSTANCE.getLastWeekDayOfPreviousWeek(DateUtils.INSTANCE.getDate(2018, 3, 21)), friday);
 
-		DateConfiguration.INSTANCE.setFakeNow(DateUtils.getDate(2018, 3, 15));
-		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
+		DateConfiguration.INSTANCE.setFakeNow(DateUtils.INSTANCE.getDate(2018, 3, 15));
+		Assert.assertEquals(DateUtils.INSTANCE.getLastWeekDayOfPreviousWeek(), friday);
 
-		DateConfiguration.INSTANCE.setFakeNow(DateUtils.getDate(2018, 3, 16));
-		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
+		DateConfiguration.INSTANCE.setFakeNow(DateUtils.INSTANCE.getDate(2018, 3, 16));
+		Assert.assertEquals(DateUtils.INSTANCE.getLastWeekDayOfPreviousWeek(), friday);
 
-		DateConfiguration.INSTANCE.setFakeNow(DateUtils.getDate(2018, 3, 17));
-		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
+		DateConfiguration.INSTANCE.setFakeNow(DateUtils.INSTANCE.getDate(2018, 3, 17));
+		Assert.assertEquals(DateUtils.INSTANCE.getLastWeekDayOfPreviousWeek(), friday);
 
-		DateConfiguration.INSTANCE.setFakeNow(DateUtils.getDate(2018, 3, 18));
-		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
+		DateConfiguration.INSTANCE.setFakeNow(DateUtils.INSTANCE.getDate(2018, 3, 18));
+		Assert.assertEquals(DateUtils.INSTANCE.getLastWeekDayOfPreviousWeek(), friday);
 
-		DateConfiguration.INSTANCE.setFakeNow(DateUtils.getDate(2018, 3, 19));
-		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
+		DateConfiguration.INSTANCE.setFakeNow(DateUtils.INSTANCE.getDate(2018, 3, 19));
+		Assert.assertEquals(DateUtils.INSTANCE.getLastWeekDayOfPreviousWeek(), friday);
 
-		DateConfiguration.INSTANCE.setFakeNow(DateUtils.getDate(2018, 3, 20));
-		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
+		DateConfiguration.INSTANCE.setFakeNow(DateUtils.INSTANCE.getDate(2018, 3, 20));
+		Assert.assertEquals(DateUtils.INSTANCE.getLastWeekDayOfPreviousWeek(), friday);
 
-		DateConfiguration.INSTANCE.setFakeNow(DateUtils.getDate(2018, 3, 21));
-		Assert.assertEquals(DateUtils.getLastWeekDayOfPreviousWeek(), friday);
+		DateConfiguration.INSTANCE.setFakeNow(DateUtils.INSTANCE.getDate(2018, 3, 21));
+		Assert.assertEquals(DateUtils.INSTANCE.getLastWeekDayOfPreviousWeek(), friday);
 
 	}
 

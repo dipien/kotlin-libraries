@@ -1505,7 +1505,7 @@ public class JSONObject {
 
 	public Date getDate(String key, String dateFormat) {
 		String value = getString(key);
-		return DateUtils.parse(value, dateFormat);
+		return DateUtils.INSTANCE.parse(value, dateFormat);
 	}
 
 	public Date optDate(String key) {
