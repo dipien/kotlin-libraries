@@ -37,5 +37,5 @@ interface ErrorCode {
     /**
      * @return The status code
      */
-    fun getStatusCode(): String
+    fun getStatusCode(): String?
 }

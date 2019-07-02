@@ -4,8 +4,8 @@ enum class CommonErrorCode(private var resourceId: Int?, private var statusCode:
 
     UNEXPECTED_ERROR(null);
 
-    override fun getStatusCode(): String {
-        return statusCode!!.toString()
+    override fun getStatusCode(): String? {
+        return statusCode?.toString()
     }
 
     override fun getTitleResId(): Int? {
