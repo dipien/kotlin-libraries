@@ -5,15 +5,15 @@ class UnexpectedException : ErrorCodeException {
     private var useCause = false
 
     constructor(message: String, cause: Throwable) : super(CommonErrorCode.UNEXPECTED_ERROR, message, cause) {
-        isTrackable = true
+        setTrackable(true)
     }
 
     constructor(message: String) : super(CommonErrorCode.UNEXPECTED_ERROR, message) {
-        isTrackable = true
+        setTrackable(true)
     }
 
     constructor(cause: Throwable) : super(CommonErrorCode.UNEXPECTED_ERROR, cause) {
-        isTrackable = true
+        setTrackable(true)
         useCause = true
     }
 
