@@ -5,7 +5,7 @@ import com.jdroid.java.utils.LoggerUtils
 
 import java.util.concurrent.Executor
 
-class AnalyticsSender<T : AnalyticsTracker>(trackers: List<T>) : AnalyticsTracker {
+open class AnalyticsSender<T : AnalyticsTracker>(trackers: List<T>) : AnalyticsTracker {
 
     companion object {
         private val LOGGER = LoggerUtils.getLogger(AnalyticsSender::class.java)
