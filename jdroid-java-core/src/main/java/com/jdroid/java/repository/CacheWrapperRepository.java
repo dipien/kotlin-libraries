@@ -24,12 +24,12 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 	public CacheWrapperRepository(Repository<T> wrappedRepository) {
 		this.wrappedRepository = wrappedRepository;
 		cache = createCacheMap();
-		cachedIds = Lists.newArrayList();
+		cachedIds = Lists.INSTANCE.newArrayList();
 		synced = false;
 	}
 
 	protected Map<String, T> createCacheMap() {
-		return Maps.newConcurrentHashMap();
+		return Maps.INSTANCE.newConcurrentHashMap();
 	}
 
 	protected Map<String, T> getCache() {
@@ -37,7 +37,7 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 	}
 
 	public List<T> getCachedItems() {
-		return Lists.newArrayList(cache.values());
+		return Lists.INSTANCE.newArrayList(cache.values());
 	}
 
 	protected Repository<T> getWrappedRepository() {
@@ -133,7 +133,7 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 	@Override
 	public List<T> getAll() {
 		if (synced) {
-			List<T> items = Lists.newArrayList(cache.values());
+			List<T> items = Lists.INSTANCE.newArrayList(cache.values());
 			LOGGER.info("Retrieved all cached objects [" + items.size() + "]");
 			return items;
 		} else {
@@ -151,7 +151,7 @@ public class CacheWrapperRepository<T extends Identifiable> implements Repositor
 	@Override
 	public List<T> getByIds(List<String> ids) {
 		if (synced) {
-			List<T> items = Lists.newArrayList();
+			List<T> items = Lists.INSTANCE.newArrayList();
 			for (String each : ids) {
 				items.add(cache.get(each));
 			}

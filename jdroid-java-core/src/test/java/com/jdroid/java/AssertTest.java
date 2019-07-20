@@ -1,6 +1,5 @@
 package com.jdroid.java;
 
-import com.jdroid.java.collections.Iterables;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.collections.Sets;
 import com.jdroid.java.domain.Identifiable;
@@ -24,8 +23,6 @@ public class AssertTest {
 	 * <pre>
 	 * {@link AssertTest#assertEqualsNoOrderTest(Iterable, Iterable)}
 	 * {@link AssertTest#assertEqualsNoOrderMessageTest(Iterable, Iterable)}
-	 * {@link AssertTest#assertEqualsNoOrderArraysTest(Iterable, Iterable)}
-	 * {@link AssertTest#assertEqualsNoOrderArraysMessageTest(Iterable, Iterable)}
 	 * </pre>
 	 * <p>
 	 * Provides successful cases.
@@ -36,23 +33,23 @@ public class AssertTest {
 	public Object[][] assertEqualsNoOrderDataProvider() {
 
 		// Case 1: 2 ArrayLists with the same contents in the same order.
-		Object[] case1 = { Lists.newArrayList(1, 2, 3), Lists.newArrayList(1, 2, 3) };
+		Object[] case1 = { Lists.INSTANCE.newArrayList(1, 2, 3), Lists.INSTANCE.newArrayList(1, 2, 3) };
 
 		// Case 2: 2 HashSets with the same contents in the different order.
-		Object[] case2 = { Sets.newHashSet(1, 1, 2, 3), Sets.newHashSet(3, 2, 1, 1) };
+		Object[] case2 = { Sets.INSTANCE.newHashSet(1, 1, 2, 3), Sets.INSTANCE.newHashSet(3, 2, 1, 1) };
 
 		// Case 3: 2 Empty ArrayLists.
-		Object[] case3 = { Lists.newArrayList(), Lists.newArrayList() };
+		Object[] case3 = { Lists.INSTANCE.newArrayList(), Lists.INSTANCE.newArrayList() };
 
 		// Case 4: 2 HashSets with same amount of only 1 content.
-		Object[] case4 = { Sets.newHashSet(1, 1, 1, 1), Sets.newHashSet(1, 1, 1, 1) };
+		Object[] case4 = { Sets.INSTANCE.newHashSet(1, 1, 1, 1), Sets.INSTANCE.newHashSet(1, 1, 1, 1) };
 
 		// Case 5: The same ArrayList as both parameters.
-		List<?> aux = Lists.newArrayList(1, 2, 3);
+		List<?> aux = Lists.INSTANCE.newArrayList(1, 2, 3);
 		Object[] case5 = { aux, aux };
 
 		// Case 6: 1 ArrayList with the same contents of 1 HashSet.
-		Object[] case6 = { Lists.newArrayList(1, 2, 3), Sets.newHashSet(1, 2, 3) };
+		Object[] case6 = { Lists.INSTANCE.newArrayList(1, 2, 3), Sets.INSTANCE.newHashSet(1, 2, 3) };
 
 		Object[][] result = { case1, case2, case3, case4, case5, case6 };
 		return result;
@@ -83,45 +80,11 @@ public class AssertTest {
 	}
 
 	/**
-	 * Test method for the {@link Assert#assertEqualsNoOrder(Object[], Object[])} method.<br>
-	 * Data provided by {@link AssertTest#assertEqualsNoOrderDataProvider()}.
-	 *
-	 * @param actual {@link Iterable} instance containing the "actual" parameter for the method. Needs to be converted
-	 * 	into an array.
-	 * @param expected {@link Iterable} instance containing the "expected" parameter for the method. Needs to be
-	 * 	converted into an array.
-	 */
-	@Test(dataProvider = "assertEqualsNoOrderDataProvider")
-	public void assertEqualsNoOrderArraysTest(Iterable<Object> actual, Iterable<Object> expected) {
-		Object[] actualArray = Iterables.toArray(actual, Object.class);
-		Object[] expectedArray = Iterables.toArray(expected, Object.class);
-		Assert.assertEqualsNoOrder(actualArray, expectedArray);
-	}
-
-	/**
-	 * Test method for the {@link Assert#assertEqualsNoOrder(Object[], Object[], String)} method.<br>
-	 * Data provided by {@link AssertTest#assertEqualsNoOrderDataProvider()}.
-	 *
-	 * @param actual {@link Iterable} instance containing the "actual" parameter for the method. Needs to be converted
-	 * 	into an array.
-	 * @param expected {@link Iterable} instance containing the "expected" parameter for the method. Needs to be
-	 * 	converted into an array.
-	 */
-	@Test(dataProvider = "assertEqualsNoOrderDataProvider")
-	public void assertEqualsNoOrderArraysMessageTest(Iterable<Object> actual, Iterable<Object> expected) {
-		Object[] actualArray = Iterables.toArray(actual, Object.class);
-		Object[] expectedArray = Iterables.toArray(expected, Object.class);
-		Assert.assertEqualsNoOrder(actualArray, expectedArray, AssertTest.DEFAULT_MSG);
-	}
-
-	/**
 	 * Data provider for the following methods:
 	 * <p>
 	 * <pre>
 	 * {@link AssertTest#assertEqualsNoOrderExceptionTest(Iterable, Iterable)}
 	 * {@link AssertTest#assertEqualsNoOrderMessageExceptionTest(Iterable, Iterable)}
-	 * {@link AssertTest#assertEqualsNoOrderArraysExceptionTest(Iterable, Iterable)}
-	 * {@link AssertTest#assertEqualsNoOrderArraysMessageExceptionTest(Iterable, Iterable)}
 	 * </pre>
 	 * <p>
 	 * Provides failed cases.
@@ -132,18 +95,18 @@ public class AssertTest {
 	public Object[][] assertEqualsNoOrderExceptionDataProvider() {
 
 		// Case 1: 2 HashSets with the different contents.
-		Object[] case1 = { Sets.newHashSet(1, 2, 3), Sets.newHashSet(4, 5, 6) };
+		Object[] case1 = { Sets.INSTANCE.newHashSet(1, 2, 3), Sets.INSTANCE.newHashSet(4, 5, 6) };
 
 		// Case 2: 2 ArrayLists with the repeated contents in the different
 		// amounts.
-		Object[] case2 = { Lists.newArrayList(1, 2, 3), Lists.newArrayList(1, 1, 2, 3) };
+		Object[] case2 = { Lists.INSTANCE.newArrayList(1, 2, 3), Lists.INSTANCE.newArrayList(1, 1, 2, 3) };
 
 		// Case 3: 2 ArrayLists with only one content with different repetitions
 		// of it.
-		Object[] case3 = { Lists.newArrayList(1, 1, 1), Lists.newArrayList(1, 1, 1, 1) };
+		Object[] case3 = { Lists.INSTANCE.newArrayList(1, 1, 1), Lists.INSTANCE.newArrayList(1, 1, 1, 1) };
 
 		// Case 4: 1 ArrayList and 1 HashSet containing some contents in common.
-		Object[] case4 = { Lists.newArrayList(1, 2, 3), Sets.newHashSet(2, 3, 4) };
+		Object[] case4 = { Lists.INSTANCE.newArrayList(1, 2, 3), Sets.INSTANCE.newHashSet(2, 3, 4) };
 
 		Object[][] result = { case1, case2, case3, case4 };
 		return result;
@@ -184,48 +147,6 @@ public class AssertTest {
 	}
 
 	/**
-	 * Exceptions test method for the {@link Assert#assertEqualsNoOrder(Object[], Object[])} method.<br>
-	 * Data provided by {@link AssertTest#assertEqualsNoOrderExceptionDataProvider()}.
-	 *
-	 * @param actual {@link Iterable} instance containing the "actual" parameter for the method. Needs to be converted
-	 * 	into an array.
-	 * @param expected {@link Iterable} instance containing the "expected" parameter for the method. Needs to be
-	 * 	converted into an array.
-	 */
-	@Test(dataProvider = "assertEqualsNoOrderExceptionDataProvider", expectedExceptions = AssertionError.class)
-	public void assertEqualsNoOrderArraysExceptionTest(Iterable<Object> actual, Iterable<Object> expected) {
-		Object[] actualArray = Iterables.toArray(actual, Object.class);
-		Object[] expectedArray = Iterables.toArray(expected, Object.class);
-		Assert.assertEqualsNoOrder(actualArray, expectedArray);
-	}
-
-	/**
-	 * Exceptions test method for the {@link Assert#assertEqualsNoOrder(Object[], Object[], String)} method.The @expectedException
-	 * annotation is not used because we need to check if the message is correct.<br>
-	 * Data provided by {@link AssertTest#assertEqualsNoOrderExceptionDataProvider()}.
-	 *
-	 * @param actual {@link Iterable} instance containing the "actual" parameter for the method. Needs to be converted
-	 * 	into an array.
-	 * @param expected {@link Iterable} instance containing the "expected" parameter for the method. Needs to be
-	 * 	converted into an array.
-	 */
-	@Test(dataProvider = "assertEqualsNoOrderExceptionDataProvider")
-	public void assertEqualsNoOrderArraysMessageExceptionTest(Iterable<Object> actual, Iterable<Object> expected) {
-		try {
-			Object[] actualArray = Iterables.toArray(actual, Object.class);
-			Object[] expectedArray = Iterables.toArray(expected, Object.class);
-			Assert.assertEqualsNoOrder(actualArray, expectedArray, AssertTest.DEFAULT_MSG);
-			org.testng.Assert.fail("AssertionError must have been thrown.");
-		} catch (AssertionError error) {
-
-			// Check if the message sent as parameter is within the AssertionError
-			// message.
-			boolean isContained = error.getMessage().contains(AssertTest.DEFAULT_MSG);
-			org.testng.Assert.assertTrue(isContained);
-		}
-	}
-
-	/**
 	 * Data provider for the methods:
 	 * <p>
 	 * <pre>
@@ -239,16 +160,16 @@ public class AssertTest {
 	public Object[][] assertContentsNotPresentDataProvider() {
 
 		// Case 1: Container does not contain a single object.
-		Object[] case1 = { Lists.newArrayList(1, 2, 3), Lists.newArrayList(4) };
+		Object[] case1 = { Lists.INSTANCE.newArrayList(1, 2, 3), Lists.INSTANCE.newArrayList(4) };
 
 		// Case 2: Container does not contain a series of objects.
-		Object[] case2 = { Lists.newArrayList(1, 2, 3), Lists.newArrayList(4, 5, 6) };
+		Object[] case2 = { Lists.INSTANCE.newArrayList(1, 2, 3), Lists.INSTANCE.newArrayList(4, 5, 6) };
 
 		// Case 3: Empty container does not contain a series of objects.
-		Object[] case3 = { Lists.newArrayList(), Lists.newArrayList(1, 2, 3) };
+		Object[] case3 = { Lists.INSTANCE.newArrayList(), Lists.INSTANCE.newArrayList(1, 2, 3) };
 
 		// Case 4: Container does not contain an empty list of objects.
-		Object[] case4 = { Lists.newArrayList(1, 2, 3), Lists.newArrayList() };
+		Object[] case4 = { Lists.INSTANCE.newArrayList(1, 2, 3), Lists.INSTANCE.newArrayList() };
 
 		Object[][] result = { case1, case2, case3, case4 };
 		return result;
@@ -292,13 +213,13 @@ public class AssertTest {
 	public Object[][] assertContentsNotPresentExceptionDataProvider() {
 
 		// Case 1: Container contains a single object.
-		Object[] case1 = { Lists.newArrayList(1, 2, 3), Lists.newArrayList(1) };
+		Object[] case1 = { Lists.INSTANCE.newArrayList(1, 2, 3), Lists.INSTANCE.newArrayList(1) };
 
 		// Case 2: Container contains some objects.
-		Object[] case2 = { Lists.newArrayList(1, 2, 3), Lists.newArrayList(1, 2, 4) };
+		Object[] case2 = { Lists.INSTANCE.newArrayList(1, 2, 3), Lists.INSTANCE.newArrayList(1, 2, 4) };
 
 		// Case 3: Container contains all objects.
-		Object[] case3 = { Lists.newArrayList(1, 2, 3), Lists.newArrayList(1) };
+		Object[] case3 = { Lists.INSTANCE.newArrayList(1, 2, 3), Lists.INSTANCE.newArrayList(1) };
 
 		Object[][] result = { case1, case2, case3 };
 		return result;
@@ -442,16 +363,16 @@ public class AssertTest {
 	 */
 	@DataProvider
 	public Object[][] assertEntityIdsExceptionDataProvider() {
-		List<Identifiable> actualEntities = Lists.newArrayList();
-		List<String> expectedIds = Lists.newArrayList();
+		List<Identifiable> actualEntities = Lists.INSTANCE.newArrayList();
+		List<String> expectedIds = Lists.INSTANCE.newArrayList();
 
 		// Case 1: Empty entity list. Single ID.
 		expectedIds.add("1");
 		Object[] case1 = { actualEntities, expectedIds };
 
 		// Case 2: Single entity list. No IDs.
-		actualEntities = Lists.newArrayList();
-		expectedIds = Lists.newArrayList();
+		actualEntities = Lists.INSTANCE.newArrayList();
+		expectedIds = Lists.INSTANCE.newArrayList();
 		actualEntities.add(new Identifiable() {
 
 			@Override
@@ -462,8 +383,8 @@ public class AssertTest {
 		Object[] case2 = { actualEntities, expectedIds };
 
 		// Case 2: Single entity list. Single ID. No match.
-		actualEntities = Lists.newArrayList();
-		expectedIds = Lists.newArrayList();
+		actualEntities = Lists.INSTANCE.newArrayList();
+		expectedIds = Lists.INSTANCE.newArrayList();
 		actualEntities.add(new Identifiable() {
 
 			@Override
@@ -475,8 +396,8 @@ public class AssertTest {
 		Object[] case3 = { actualEntities, expectedIds };
 
 		// Case 4: Multiple entities list. Multiple IDs. No match.
-		actualEntities = Lists.newArrayList();
-		expectedIds = Lists.newArrayList();
+		actualEntities = Lists.INSTANCE.newArrayList();
+		expectedIds = Lists.INSTANCE.newArrayList();
 		actualEntities.add(new Identifiable() {
 
 			@Override
@@ -496,8 +417,8 @@ public class AssertTest {
 		Object[] case4 = { actualEntities, expectedIds };
 
 		// Case 5: Multiple entities list. Multiple IDs. Partial match.
-		actualEntities = Lists.newArrayList();
-		expectedIds = Lists.newArrayList();
+		actualEntities = Lists.INSTANCE.newArrayList();
+		expectedIds = Lists.INSTANCE.newArrayList();
 		actualEntities.add(new Identifiable() {
 
 			@Override
@@ -517,8 +438,8 @@ public class AssertTest {
 		Object[] case5 = { actualEntities, expectedIds };
 
 		// Case 6: Multiple repeated entities list. Single IDs. Match.
-		actualEntities = Lists.newArrayList();
-		expectedIds = Lists.newArrayList();
+		actualEntities = Lists.INSTANCE.newArrayList();
+		expectedIds = Lists.INSTANCE.newArrayList();
 		actualEntities.add(new Identifiable() {
 
 			@Override

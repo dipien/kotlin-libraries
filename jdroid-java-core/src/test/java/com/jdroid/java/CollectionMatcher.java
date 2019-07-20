@@ -20,9 +20,6 @@ public class CollectionMatcher<E> extends ArgumentMatcher<E> {
 		this.collection = collection;
 	}
 
-	/**
-	 * @see org.mockito.ArgumentMatcher#matches(java.lang.Object)
-	 */
 	@Override
 	public boolean matches(Object argument) {
 		return this.collection.contains(argument);

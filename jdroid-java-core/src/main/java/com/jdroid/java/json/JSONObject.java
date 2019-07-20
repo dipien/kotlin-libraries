@@ -1483,7 +1483,7 @@ public class JSONObject {
 
 	public List<String> optList(String key) {
 		JSONArray jsonArray = optJSONArray(key);
-		List<String> list = Lists.newArrayList();
+		List<String> list = Lists.INSTANCE.newArrayList();
 		if (jsonArray != null) {
 			list = jsonArray.optList();
 		}
@@ -1492,7 +1492,7 @@ public class JSONObject {
 
 	public List<Long> optLongList(String key) {
 		JSONArray jsonArray = optJSONArray(key);
-		List<Long> list = Lists.newArrayList();
+		List<Long> list = Lists.INSTANCE.newArrayList();
 		if (jsonArray != null) {
 			list = jsonArray.optLongList();
 		}

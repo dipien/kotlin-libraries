@@ -112,7 +112,7 @@ public abstract class PairFirebaseRepository implements PairRepository {
 		FirebaseValueEventListener listener = new FirebaseValueEventListener();
 		firebase.addListenerForSingleValueEvent(listener);
 		listener.waitOperation();
-		List<Pair> results = Lists.newArrayList();
+		List<Pair> results = Lists.INSTANCE.newArrayList();
 		for (DataSnapshot eachSnapshot : listener.getDataSnapshot().getChildren()) {
 			Pair pair = new Pair();
 			pair.setId(eachSnapshot.getKey());
@@ -129,7 +129,7 @@ public abstract class PairFirebaseRepository implements PairRepository {
 		FirebaseValueEventListener listener = new FirebaseValueEventListener();
 		firebase.addListenerForSingleValueEvent(listener);
 		listener.waitOperation();
-		List<Pair> results = Lists.newArrayList();
+		List<Pair> results = Lists.INSTANCE.newArrayList();
 		for (DataSnapshot eachSnapshot : listener.getDataSnapshot().getChildren()) {
 			Pair pair = new Pair();
 			pair.setId(eachSnapshot.getKey());

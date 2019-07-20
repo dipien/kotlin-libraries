@@ -144,7 +144,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		FirebaseValueEventListener listener = new FirebaseValueEventListener();
 		query.addListenerForSingleValueEvent(listener);
 		listener.waitOperation();
-		List<T> results = Lists.newArrayList();
+		List<T> results = Lists.INSTANCE.newArrayList();
 		for (DataSnapshot eachSnapshot: listener.getDataSnapshot().getChildren()) {
 			results.add(loadItem(eachSnapshot));
 		}
@@ -158,7 +158,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		FirebaseValueEventListener listener = new FirebaseValueEventListener();
 		firebase.addListenerForSingleValueEvent(listener);
 		listener.waitOperation();
-		List<T> results = Lists.newArrayList();
+		List<T> results = Lists.INSTANCE.newArrayList();
 		for (DataSnapshot eachSnapshot: listener.getDataSnapshot().getChildren()) {
 			results.add(loadItem(eachSnapshot));
 		}
@@ -172,7 +172,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		FirebaseValueEventListener listener = new FirebaseValueEventListener();
 		firebase.addListenerForSingleValueEvent(listener);
 		listener.waitOperation();
-		List<T> results = Lists.newArrayList();
+		List<T> results = Lists.INSTANCE.newArrayList();
 		for (DataSnapshot eachSnapshot: listener.getDataSnapshot().getChildren()) {
 			T each = loadItem(eachSnapshot);
 			if (ids.contains(each.getId())) {

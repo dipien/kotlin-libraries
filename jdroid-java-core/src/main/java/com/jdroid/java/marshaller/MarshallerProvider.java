@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class MarshallerProvider {
 	
-	private Map<Class<?>, Marshaller<Object, Object>> marshallers = Maps.newHashMap();
+	private Map<Class<?>, Marshaller<Object, Object>> marshallers = Maps.INSTANCE.newHashMap();
 	private Marshaller<Object, Object> defaultMarshaller = new DefaultMarshaller();
 	private MarshallerTypeEvaluator marshallerTypeEvaluator = new DefaultMarshallerTypeEvaluator();
 	
@@ -32,7 +32,7 @@ public class MarshallerProvider {
 		if (object != null) {
 			if (object instanceof Collection<?>) {
 				Collection<?> collection = (Collection<?>)object;
-				List<Object> list = Lists.newArrayList();
+				List<Object> list = Lists.INSTANCE.newArrayList();
 				
 				for (Object each : collection) {
 					list.add(innerMarshall(each, mode, extras));
@@ -50,7 +50,7 @@ public class MarshallerProvider {
 		if (object != null) {
 			if (object instanceof Collection<?>) {
 				Collection<?> collection = (Collection<?>)object;
-				List<Object> list = Lists.newArrayList();
+				List<Object> list = Lists.INSTANCE.newArrayList();
 				
 				for (Object each : collection) {
 					list.add(innerMarshall(each, mode, extras));

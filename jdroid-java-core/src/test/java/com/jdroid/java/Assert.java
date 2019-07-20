@@ -39,10 +39,10 @@ public class Assert extends org.testng.Assert {
 	public static void assertEqualsNoOrder(Iterable<?> actual, Iterable<?> expected, String message) {
 
 		// Check if both iterables have the same size.
-		org.testng.Assert.assertEquals(Iterables.size(actual), Iterables.size(expected), message);
+		org.testng.Assert.assertEquals(Iterables.INSTANCE.size(actual), Iterables.INSTANCE.size(expected), message);
 
 		// Create a list based on the expected results.
-		List<?> expectedList = Lists.newArrayList(expected);
+		List<?> expectedList = Lists.INSTANCE.newArrayList(expected);
 
 		// Iterate over the obtained results and check if the expected list
 		// contains the item. If the item is contained within the expected list
@@ -64,7 +64,7 @@ public class Assert extends org.testng.Assert {
 	 * @param expected The expected value.
 	 */
 	public static void assertEqualsNoOrder(Object[] actual, Object[] expected) {
-		Assert.assertEqualsNoOrder(Lists.newArrayList(actual), Lists.newArrayList(expected));
+		Assert.assertEqualsNoOrder(Lists.INSTANCE.newArrayList(actual), Lists.INSTANCE.newArrayList(expected));
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class Assert extends org.testng.Assert {
 	 * @param message The assertion error message.
 	 */
 	public static void assertEqualsNoOrder(Object[] actual, Object[] expected, String message) {
-		Assert.assertEqualsNoOrder(Lists.newArrayList(actual), Lists.newArrayList(expected), message);
+		Assert.assertEqualsNoOrder(Lists.INSTANCE.newArrayList(actual), Lists.INSTANCE.newArrayList(expected), message);
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class Assert extends org.testng.Assert {
 	 */
 	@SafeVarargs
 	public static <T> void assertContentsNotPresent(Collection<T> container, T... contents) {
-		Assert.assertContentsNotPresent(container, Lists.newArrayList(contents));
+		Assert.assertContentsNotPresent(container, Lists.INSTANCE.newArrayList(contents));
 	}
 
 	// /**

@@ -15,7 +15,7 @@ public class LoggerUtils {
 	private static ExceptionLogger exceptionLogger;
 	
 	private static final Logger MUTE_LOGGER = new MuteLogger();
-	private static List<String> DISABLED_LOGGERS = Lists.newArrayList();
+	private static List<String> DISABLED_LOGGERS = Lists.INSTANCE.newArrayList();
 	private static ILoggerFactory DEFAULT_LOGGER_FACTORY;
 	
 	public static Logger getLogger(Class<?> clazz) {

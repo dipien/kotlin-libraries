@@ -26,7 +26,7 @@ public class PagedResult<T> {
 	 * @param lastPage Whether the paginates list contains the last page or not.
 	 */
 	public PagedResult(Boolean lastPage) {
-		this(Lists.<T>newArrayList(), lastPage);
+		this(Lists.INSTANCE.<T>newArrayList(), lastPage);
 	}
 
 	public PagedResult(List<T> results) {

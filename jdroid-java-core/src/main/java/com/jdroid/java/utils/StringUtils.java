@@ -276,7 +276,7 @@ public abstract class StringUtils {
 				} else {
 
 					// The words are not truncated and the ellipsis is not added
-					List<String> words = Lists.newArrayList(text.split(SPACE));
+					List<String> words = Lists.INSTANCE.newArrayList(text.split(SPACE));
 					Iterator<String> it = words.iterator();
 					int usedChars = 0;
 					Boolean exit = false;
@@ -318,7 +318,7 @@ public abstract class StringUtils {
 	 */
 	public static Set<String> extractPlaceHolders(String string) {
 		Matcher matcher = Pattern.compile(StringUtils.PLACEHOLDER_PATTERN).matcher(string);
-		Set<String> placeHolders = Sets.newHashSet();
+		Set<String> placeHolders = Sets.INSTANCE.newHashSet();
 		while (matcher.find()) {
 			placeHolders.add(matcher.group(1));
 		}
@@ -342,9 +342,9 @@ public abstract class StringUtils {
 	public static List<String> split(String text, String separator) {
 		List<String> values;
 		if (isNotEmpty(text)) {
-			values = Lists.newArrayList(text.split(separator));
+			values = Lists.INSTANCE.newArrayList(text.split(separator));
 		} else {
-			values = Lists.newArrayList();
+			values = Lists.INSTANCE.newArrayList();
 		}
 		return values;
 	}

@@ -21,7 +21,7 @@ public class InMemoryRepository<T extends Identifiable> implements Repository<T>
 	private static final Logger LOGGER = LoggerUtils.getLogger(InMemoryRepository.class);
 
 	private long nextId = 1;
-	private Map<String, T> items = Maps.newLinkedHashMap();
+	private Map<String, T> items = Maps.INSTANCE.newLinkedHashMap();
 
 	@Override
 	public void add(T item) {
@@ -71,7 +71,7 @@ public class InMemoryRepository<T extends Identifiable> implements Repository<T>
 
 	@Override
 	public List<T> getAll() {
-		List<T> results = Lists.newArrayList(items.values());
+		List<T> results = Lists.INSTANCE.newArrayList(items.values());
 		LOGGER.debug("Retrieved all objects [" + results.size() + "] from memory");
 		return results;
 	}
@@ -114,7 +114,7 @@ public class InMemoryRepository<T extends Identifiable> implements Repository<T>
 
 	@Override
 	public List<T> getByIds(List<String> ids) {
-		List<T> itemsList = Lists.newArrayList();
+		List<T> itemsList = Lists.INSTANCE.newArrayList();
 		for (String each : ids) {
 			T item = items.get(each);
 			if (item != null) {

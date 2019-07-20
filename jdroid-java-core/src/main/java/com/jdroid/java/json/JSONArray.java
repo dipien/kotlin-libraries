@@ -796,7 +796,7 @@ public class JSONArray {
 	// Custom methods
 
 	public List<String> optList() {
-		List<String> list = Lists.newArrayList();
+		List<String> list = Lists.INSTANCE.newArrayList();
 		int length = length();
 		for (int i = 0; i < length; i++) {
 			list.add(getString(i));
@@ -805,7 +805,7 @@ public class JSONArray {
 	}
 
 	public List<Long> optLongList() {
-		List<Long> list = Lists.newArrayList();
+		List<Long> list = Lists.INSTANCE.newArrayList();
 		int length = length();
 		for (int i = 0; i < length; i++) {
 			list.add(getLong(i));
