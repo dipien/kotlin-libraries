@@ -13,6 +13,7 @@ object Lists {
      *
      * @return a new, empty `ArrayList`
      */
+    @Deprecated(message = "Use kotlin listOf or mutableListOf")
     fun <E> newArrayList(): ArrayList<E> {
         return ArrayList()
     }
@@ -23,6 +24,7 @@ object Lists {
      * @param elements the elements that the list should contain, in order
      * @return a new `ArrayList` containing those elements
      */
+    @Deprecated(message = "Use kotlin listOf or mutableListOf")
     @SafeVarargs
     fun <E> newArrayList(vararg elements: E): ArrayList<E> {
         val list = ArrayList<E>()
