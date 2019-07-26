@@ -22,11 +22,11 @@ abstract class AbstractException : RuntimeException {
 
     constructor() : super()
 
-    constructor(message: String, cause: Throwable) : super(message, cause)
+    constructor(message: String, cause: Throwable?) : super(message, cause)
 
     constructor(message: String) : super(message)
 
-    constructor(cause: Throwable) : super(cause)
+    constructor(cause: Throwable?) : super(cause)
 
     fun getParameters(): Map<String, Any> {
         return parameters
