@@ -32,7 +32,7 @@ abstract class AbstractException : RuntimeException {
         return parameters
     }
 
-    fun hasParameter(key: String): Boolean? {
+    fun hasParameter(key: String): Boolean {
         return parameters.containsKey(key)
     }
 
