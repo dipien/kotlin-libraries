@@ -1,12 +1,14 @@
 apply plugin: "com.jdroidtools.java.library"
+apply from: "$rootDir/dependencies.gradle"
 
 ext.ARTIFACT_ID = "jdroid-java-remote-config"
 ext.PROJECT_NAME = "Jdroid Java Remote Config"
 description = "Remote Config"
 
 buildscript {
+	apply from: "$rootDir/build_dependencies.gradle"
 	dependencies {
-		classpath("com.jdroidtools:jdroid-gradle-java-plugin:" + JDROID_GRADLE_PLUGIN_VERSION)
+		classpath(libs.jdroid_gradle_java_plugin)
 	}
 }
 
@@ -15,7 +17,7 @@ dependencies {
 	implementation project(":jdroid-java-core")
 
 	// Testing
-	testImplementation("org.testng:testng:6.8.21")
+	testImplementation(libs.testng)
 }
 
 test {
