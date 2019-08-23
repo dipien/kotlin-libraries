@@ -1,26 +1,24 @@
 apply plugin: "com.jdroidtools.java.library"
-apply from: "$rootDir/dependencies.gradle"
 
 ext.ARTIFACT_ID = "jdroid-java-core"
 ext.PROJECT_NAME = "Jdroid Java"
 description = "Java library for both Android & Java apps"
 
 buildscript {
-	apply from: "$rootDir/build_dependencies.gradle"
 	dependencies {
-		classpath(libs.jdroid_gradle_java_plugin)
+		classpath(BuildLibs.jdroid_gradle_java_plugin)
 	}
 }
 
 dependencies {
 
-	api(libs.gson)
-	api(libs.slf4j_api)
-	api(libs.koin)
+	api(Libs.gson)
+	api(Libs.slf4j_api)
+	api(Libs.koin)
 
 	// Testing
-	testImplementation(libs.testng)
-	testImplementation(libs.mockito)
+	testImplementation(Libs.testng)
+	testImplementation(Libs.mockito)
 }
 
 test {

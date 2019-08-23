@@ -1,24 +1,22 @@
 apply plugin: "com.jdroidtools.java.library"
-apply from: "$rootDir/dependencies.gradle"
 
 ext.ARTIFACT_ID = "jdroid-java-firebase-database"
 ext.PROJECT_NAME = "Jdroid Java Firebase Database"
 description = "Firebase Database Repository for Jdroid"
 
 buildscript {
-	apply from: "$rootDir/build_dependencies.gradle"
 	dependencies {
-		classpath(libs.jdroid_gradle_java_plugin)
+		classpath(BuildLibs.jdroid_gradle_java_plugin)
 	}
 }
 
 dependencies {
 
 	implementation project(":jdroid-java-core")
-	api(libs.firebase_client)
+	api(Libs.firebase_client)
 
 	// Testing
-	testImplementation(libs.testng)
+	testImplementation(Libs.testng)
 }
 
 test {
