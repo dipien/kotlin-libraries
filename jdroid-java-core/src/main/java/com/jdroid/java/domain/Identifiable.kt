@@ -14,5 +14,5 @@ interface Identifiable {
      *
      * @return the id of this [Identifiable]
      */
-    fun getId(): String
+    fun getId(): String?
 }

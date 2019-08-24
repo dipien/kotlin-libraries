@@ -1,9 +1,7 @@
 package com.jdroid.java
 
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.collections.Sets
 import com.jdroid.java.domain.Identifiable
-
 import org.testng.annotations.DataProvider
 import org.testng.annotations.Test
 
@@ -34,23 +32,23 @@ class AssertTest {
     fun assertEqualsNoOrderDataProvider(): Array<Array<Any>> {
 
         // Case 1: 2 ArrayLists with the same contents in the same order.
-        val case1 = arrayOf<Any>(Lists.newArrayList(1, 2, 3), Lists.newArrayList(1, 2, 3))
+        val case1 = arrayOf<Any>(listOf(1, 2, 3), listOf(1, 2, 3))
 
         // Case 2: 2 HashSets with the same contents in the different order.
         val case2 = arrayOf<Any>(Sets.newHashSet(1, 1, 2, 3), Sets.newHashSet(3, 2, 1, 1))
 
         // Case 3: 2 Empty ArrayLists.
-        val case3 = arrayOf<Any>(Lists.newArrayList<Any>(), Lists.newArrayList<Any>())
+        val case3 = arrayOf<Any>(listOf<Any>(), listOf<Any>())
 
         // Case 4: 2 HashSets with same amount of only 1 content.
         val case4 = arrayOf<Any>(Sets.newHashSet(1, 1, 1, 1), Sets.newHashSet(1, 1, 1, 1))
 
         // Case 5: The same ArrayList as both parameters.
-        val aux = Lists.newArrayList(1, 2, 3)
+        val aux = listOf(1, 2, 3)
         val case5 = arrayOf<Any>(aux, aux)
 
         // Case 6: 1 ArrayList with the same contents of 1 HashSet.
-        val case6 = arrayOf<Any>(Lists.newArrayList(1, 2, 3), Sets.newHashSet(1, 2, 3))
+        val case6 = arrayOf<Any>(listOf(1, 2, 3), Sets.newHashSet(1, 2, 3))
 
         return arrayOf(case1, case2, case3, case4, case5, case6)
     }
@@ -101,14 +99,14 @@ class AssertTest {
 
         // Case 2: 2 ArrayLists with the repeated contents in the different
         // amounts.
-        val case2 = arrayOf<Any>(Lists.newArrayList(1, 2, 3), Lists.newArrayList(1, 1, 2, 3))
+        val case2 = arrayOf<Any>(listOf(1, 2, 3), listOf(1, 1, 2, 3))
 
         // Case 3: 2 ArrayLists with only one content with different repetitions
         // of it.
-        val case3 = arrayOf<Any>(Lists.newArrayList(1, 1, 1), Lists.newArrayList(1, 1, 1, 1))
+        val case3 = arrayOf<Any>(listOf(1, 1, 1), listOf(1, 1, 1, 1))
 
         // Case 4: 1 ArrayList and 1 HashSet containing some contents in common.
-        val case4 = arrayOf<Any>(Lists.newArrayList(1, 2, 3), Sets.newHashSet(2, 3, 4))
+        val case4 = arrayOf<Any>(listOf(1, 2, 3), Sets.newHashSet(2, 3, 4))
 
         return arrayOf(case1, case2, case3, case4)
     }
@@ -162,16 +160,16 @@ class AssertTest {
     fun assertContentsNotPresentDataProvider(): Array<Array<Any>> {
 
         // Case 1: Container does not contain a single object.
-        val case1 = arrayOf<Any>(Lists.newArrayList(1, 2, 3), Lists.newArrayList(4))
+        val case1 = arrayOf<Any>(listOf(1, 2, 3), listOf(4))
 
         // Case 2: Container does not contain a series of objects.
-        val case2 = arrayOf<Any>(Lists.newArrayList(1, 2, 3), Lists.newArrayList(4, 5, 6))
+        val case2 = arrayOf<Any>(listOf(1, 2, 3), listOf(4, 5, 6))
 
         // Case 3: Empty container does not contain a series of objects.
-        val case3 = arrayOf<Any>(Lists.newArrayList<Any>(), Lists.newArrayList(1, 2, 3))
+        val case3 = arrayOf<Any>(listOf<Any>(), listOf(1, 2, 3))
 
         // Case 4: Container does not contain an empty list of objects.
-        val case4 = arrayOf<Any>(Lists.newArrayList(1, 2, 3), Lists.newArrayList<Any>())
+        val case4 = arrayOf<Any>(listOf(1, 2, 3), listOf<Any>())
 
         return arrayOf(case1, case2, case3, case4)
     }
@@ -215,13 +213,13 @@ class AssertTest {
     fun assertContentsNotPresentExceptionDataProvider(): Array<Array<Any>> {
 
         // Case 1: Container contains a single object.
-        val case1 = arrayOf<Any>(Lists.newArrayList(1, 2, 3), Lists.newArrayList(1))
+        val case1 = arrayOf<Any>(listOf(1, 2, 3), listOf(1))
 
         // Case 2: Container contains some objects.
-        val case2 = arrayOf<Any>(Lists.newArrayList(1, 2, 3), Lists.newArrayList(1, 2, 4))
+        val case2 = arrayOf<Any>(listOf(1, 2, 3), listOf(1, 2, 4))
 
         // Case 3: Container contains all objects.
-        val case3 = arrayOf<Any>(Lists.newArrayList(1, 2, 3), Lists.newArrayList(1))
+        val case3 = arrayOf<Any>(listOf(1, 2, 3), listOf(1))
 
         return arrayOf(case1, case2, case3)
     }
@@ -257,15 +255,15 @@ class AssertTest {
     // */
     // @DataProvider
     // public Object[][] assertEntityIdsDataProvider() {
-    // List<Identifiable> actualEntities = Lists.newArrayList();
-    // List<Long> expectedIds = Lists.newArrayList();
+    // List<Identifiable> actualEntities = mutableListOf();
+    // List<Long> expectedIds = mutableListOf();
     //
     // // Case 1: Empty lists.
     // Object[] case1 = { actualEntities, expectedIds };
     //
     // // Case 2: Single entity list. Single ID. Match.
-    // actualEntities = Lists.newArrayList();
-    // expectedIds = Lists.newArrayList();
+    // actualEntities = mutableListOf();
+    // expectedIds = mutableListOf();
     // actualEntities.add(new Identifiable() {
     //
     // @Override
@@ -277,8 +275,8 @@ class AssertTest {
     // Object[] case2 = { actualEntities, expectedIds };
     //
     // // Case 3: Multiple entities list. Multiple IDs. Match.
-    // actualEntities = Lists.newArrayList();
-    // expectedIds = Lists.newArrayList();
+    // actualEntities = mutableListOf();
+    // expectedIds = mutableListOf();
     // actualEntities.add(new Identifiable() {
     //
     // @Override
@@ -299,8 +297,8 @@ class AssertTest {
     //
     // // Case 4: Multiple repeated entities list. Multiple repeated IDs. No
     // // Match.
-    // actualEntities = Lists.newArrayList();
-    // expectedIds = Lists.newArrayList();
+    // actualEntities = mutableListOf();
+    // expectedIds = mutableListOf();
     // actualEntities.add(new Identifiable() {
     //
     // @Override
@@ -320,8 +318,8 @@ class AssertTest {
     // Object[] case4 = { actualEntities, expectedIds };
     //
     // // Case 5: Multiple repeated entities list. Single IDs. Unsorted match.
-    // actualEntities = Lists.newArrayList();
-    // expectedIds = Lists.newArrayList();
+    // actualEntities = mutableListOf();
+    // expectedIds = mutableListOf();
     // actualEntities.add(new Identifiable() {
     //
     // @Override
@@ -364,30 +362,30 @@ class AssertTest {
      */
     @DataProvider
     fun assertEntityIdsExceptionDataProvider(): Array<Array<Any>> {
-        var actualEntities: MutableList<Identifiable> = Lists.newArrayList()
-        var expectedIds: MutableList<String> = Lists.newArrayList()
+        var actualEntities: MutableList<Identifiable> = mutableListOf()
+        var expectedIds: MutableList<String> = mutableListOf()
 
         // Case 1: Empty entity list. Single ID.
         expectedIds.add("1")
         val case1 = arrayOf<Any>(actualEntities, expectedIds)
 
         // Case 2: Single entity list. No IDs.
-        actualEntities = Lists.newArrayList()
-        expectedIds = Lists.newArrayList()
+        actualEntities = mutableListOf()
+        expectedIds = mutableListOf()
         actualEntities.add(object : Identifiable {
 
-            override fun getId(): String {
+            override fun getId(): String? {
                 return "1"
             }
         })
         val case2 = arrayOf<Any>(actualEntities, expectedIds)
 
         // Case 2: Single entity list. Single ID. No match.
-        actualEntities = Lists.newArrayList()
-        expectedIds = Lists.newArrayList()
+        actualEntities = mutableListOf()
+        expectedIds = mutableListOf()
         actualEntities.add(object : Identifiable {
 
-            override fun getId(): String {
+            override fun getId(): String? {
                 return "1"
             }
         })
@@ -395,17 +393,17 @@ class AssertTest {
         val case3 = arrayOf<Any>(actualEntities, expectedIds)
 
         // Case 4: Multiple entities list. Multiple IDs. No match.
-        actualEntities = Lists.newArrayList()
-        expectedIds = Lists.newArrayList()
+        actualEntities = mutableListOf()
+        expectedIds = mutableListOf()
         actualEntities.add(object : Identifiable {
 
-            override fun getId(): String {
+            override fun getId(): String? {
                 return "1"
             }
         })
         actualEntities.add(object : Identifiable {
 
-            override fun getId(): String {
+            override fun getId(): String? {
                 return "2"
             }
         })
@@ -414,17 +412,17 @@ class AssertTest {
         val case4 = arrayOf<Any>(actualEntities, expectedIds)
 
         // Case 5: Multiple entities list. Multiple IDs. Partial match.
-        actualEntities = Lists.newArrayList()
-        expectedIds = Lists.newArrayList()
+        actualEntities = mutableListOf()
+        expectedIds = mutableListOf()
         actualEntities.add(object : Identifiable {
 
-            override fun getId(): String {
+            override fun getId(): String? {
                 return "1"
             }
         })
         actualEntities.add(object : Identifiable {
 
-            override fun getId(): String {
+            override fun getId(): String? {
                 return "2"
             }
         })
@@ -433,17 +431,17 @@ class AssertTest {
         val case5 = arrayOf<Any>(actualEntities, expectedIds)
 
         // Case 6: Multiple repeated entities list. Single IDs. Match.
-        actualEntities = Lists.newArrayList()
-        expectedIds = Lists.newArrayList()
+        actualEntities = mutableListOf()
+        expectedIds = mutableListOf()
         actualEntities.add(object : Identifiable {
 
-            override fun getId(): String {
+            override fun getId(): String? {
                 return "1"
             }
         })
         actualEntities.add(object : Identifiable {
 
-            override fun getId(): String {
+            override fun getId(): String? {
                 return "1"
             }
         })
