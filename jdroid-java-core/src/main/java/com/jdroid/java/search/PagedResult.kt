@@ -8,7 +8,7 @@ import java.util.Comparator
  *
  * @param <T> The list item.
 </T> */
-class PagedResult<T> @JvmOverloads constructor(private val results: MutableList<T>, private val lastPage: Boolean = true) {
+open class PagedResult<T> @JvmOverloads constructor(private val results: MutableList<T>, private val lastPage: Boolean = true) {
 
     /**
      * @return the lastPage
