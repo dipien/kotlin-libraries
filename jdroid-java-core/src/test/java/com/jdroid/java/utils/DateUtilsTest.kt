@@ -1,15 +1,12 @@
 package com.jdroid.java.utils
 
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.date.DateConfiguration
 import com.jdroid.java.date.DateTimeFormat
 import com.jdroid.java.date.DateUtils
-
 import org.testng.Assert
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.DataProvider
 import org.testng.annotations.Test
-
 import java.util.Calendar
 import java.util.Date
 
@@ -28,7 +25,7 @@ class DateUtilsTest {
      */
     @DataProvider
     fun formatDataProvider(): Iterator<Array<Any>> {
-        val cases = Lists.newArrayList<Array<Any>>()
+        val cases = mutableListOf<Array<Any>>()
         cases.add(arrayOf(DateUtils.getDate(2010, Calendar.AUGUST, 10), DateTimeFormat.MMDDYYYY, "08/10/2010"))
         cases.add(arrayOf(DateUtils.getDate(2010, Calendar.AUGUST, 10), DateTimeFormat.MMDDYYYY_SLASH, "08-10-2010"))
         cases.add(arrayOf(DateUtils.getTime(5, 30, true), DateTimeFormat.HHMMAA, "05:30 AM"))
@@ -57,7 +54,7 @@ class DateUtilsTest {
         calendar.set(2009, Calendar.JANUARY, 20)
         val date = calendar.time
 
-        val cases = Lists.newArrayList<Array<Any>>()
+        val cases = mutableListOf<Array<Any>>()
         calendar.set(2009, Calendar.JANUARY, 20)
         var startDate = calendar.time
         calendar.set(2009, Calendar.JANUARY, 20)
@@ -133,7 +130,7 @@ class DateUtilsTest {
      */
     @DataProvider
     fun periodsOverlapDataProvider(): Iterator<Array<Any>> {
-        val cases = Lists.newArrayList<Array<Any>>()
+        val cases = mutableListOf<Array<Any>>()
         val year = Calendar.getInstance().get(Calendar.YEAR)
         val month = Calendar.JANUARY
         cases.add(arrayOf(DateUtils.getDate(year, month, 10), DateUtils.getDate(year, month, 20), true))
@@ -172,7 +169,7 @@ class DateUtilsTest {
      */
     @DataProvider
     fun getForIsAfterEquals(): Iterator<Array<Any>> {
-        val cases = Lists.newArrayList<Array<Any>>()
+        val cases = mutableListOf<Array<Any>>()
         cases.add(arrayOf(2009, Calendar.JANUARY, 11, 2009, Calendar.JANUARY, 11, true))
         cases.add(arrayOf(2009, Calendar.JANUARY, 11, 2009, Calendar.JANUARY, 12, false))
         cases.add(arrayOf(2009, Calendar.JANUARY, 11, 2009, Calendar.JANUARY, 10, true))
@@ -211,7 +208,7 @@ class DateUtilsTest {
      */
     @DataProvider
     fun getForIsAfter(): Iterator<Array<Any>> {
-        val cases = Lists.newArrayList<Array<Any>>()
+        val cases = mutableListOf<Array<Any>>()
         cases.add(arrayOf(2009, Calendar.JANUARY, 11, 2009, Calendar.JANUARY, 11, false))
         cases.add(arrayOf(2009, Calendar.JANUARY, 11, 2009, Calendar.JANUARY, 12, false))
         cases.add(arrayOf(2009, Calendar.JANUARY, 11, 2009, Calendar.JANUARY, 10, true))
@@ -250,7 +247,7 @@ class DateUtilsTest {
      */
     @DataProvider
     fun getForIsBeforeEquals(): Iterator<Array<Any>> {
-        val cases = Lists.newArrayList<Array<Any>>()
+        val cases = mutableListOf<Array<Any>>()
         cases.add(arrayOf(2009, Calendar.JANUARY, 11, 2009, Calendar.JANUARY, 11, true))
         cases.add(arrayOf(2009, Calendar.JANUARY, 11, 2009, Calendar.JANUARY, 12, true))
         cases.add(arrayOf(2009, Calendar.JANUARY, 11, 2009, Calendar.JANUARY, 10, false))
@@ -289,7 +286,7 @@ class DateUtilsTest {
      */
     @DataProvider
     fun getForIsBefore(): Iterator<Array<Any>> {
-        val cases = Lists.newArrayList<Array<Any>>()
+        val cases = mutableListOf<Array<Any>>()
         cases.add(arrayOf(2009, Calendar.JANUARY, 11, 2009, Calendar.JANUARY, 11, false))
         cases.add(arrayOf(2009, Calendar.JANUARY, 11, 2009, Calendar.JANUARY, 12, true))
         cases.add(arrayOf(2009, Calendar.JANUARY, 11, 2009, Calendar.JANUARY, 10, false))
@@ -338,7 +335,7 @@ class DateUtilsTest {
      */
     @DataProvider
     protected fun getLastDayOfTheMonthData(): Iterator<Array<Any>> {
-        val cases = Lists.newArrayList<Array<Any>>()
+        val cases = mutableListOf<Array<Any>>()
 
         // 31-day month
         val date1 = DateUtils.getDate(2010, 0, 10)
@@ -376,7 +373,7 @@ class DateUtilsTest {
 
     @DataProvider
     protected fun getLastWeekDayOfTheMonthData(): Iterator<Array<Any>> {
-        val cases = Lists.newArrayList<Array<Any>>()
+        val cases = mutableListOf<Array<Any>>()
 
         // 31-day month
         val date1 = DateUtils.getDate(2017, 11, 1)
@@ -418,7 +415,7 @@ class DateUtilsTest {
 
     @DataProvider
     protected fun getLastDayOfTheYearData(): Iterator<Array<Any>> {
-        val cases = Lists.newArrayList<Array<Any>>()
+        val cases = mutableListOf<Array<Any>>()
 
         // 31-day month
         val date1 = DateUtils.getDate(2010, 0, 10)
@@ -456,7 +453,7 @@ class DateUtilsTest {
 
     @DataProvider
     protected fun getLastWeekDayOfTheYearData(): Iterator<Array<Any>> {
-        val cases = Lists.newArrayList<Array<Any>>()
+        val cases = mutableListOf<Array<Any>>()
 
         // 31-day month
         val date1 = DateUtils.getDate(2017, 11, 1)
@@ -491,7 +488,7 @@ class DateUtilsTest {
      */
     @DataProvider
     protected fun getDurationData(): Iterator<Array<Any>> {
-        val cases = Lists.newArrayList<Array<Any>>()
+        val cases = mutableListOf<Array<Any>>()
 
         cases.add(arrayOf(500, "500ms"))
         cases.add(arrayOf(1000, "1s, 0ms"))

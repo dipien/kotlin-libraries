@@ -1,6 +1,5 @@
 package com.jdroid.java.utils
 
-import com.jdroid.java.collections.Lists
 import org.testng.Assert.assertEquals
 import org.testng.annotations.DataProvider
 import org.testng.annotations.Test
@@ -9,7 +8,7 @@ class SanitizerTest {
 
     @DataProvider
     fun plainStringDataProvider(): Iterator<Array<Any>> {
-        val cases = Lists.newArrayList<Array<Any>>()
+        val cases = mutableListOf<Array<Any>>()
 
         // removingAccentsInLowercase
         cases.add(arrayOf("bcdfghjklmnñpqrstvwxyz", "bcdfghjklmnnpqrstvwxyz"))

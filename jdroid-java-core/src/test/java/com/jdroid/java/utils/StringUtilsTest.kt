@@ -1,7 +1,6 @@
 package com.jdroid.java.utils
 
 import com.jdroid.java.Assert
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.collections.Sets
 import org.testng.Assert.assertEquals
 import org.testng.Assert.assertFalse
@@ -82,7 +81,7 @@ class StringUtilsTest {
      */
     @DataProvider
     fun toAlphanumericProvider(): Iterator<Array<Any>> {
-        val cases = Lists.newArrayList<Array<Any>>()
+        val cases = mutableListOf<Array<Any>>()
         cases.add(arrayOf("text", "text"))
         cases.add(arrayOf("text.", "text"))
         cases.add(arrayOf("text.\\", "text"))
@@ -111,7 +110,7 @@ class StringUtilsTest {
      */
     @DataProvider
     fun truncateProvider(): Iterator<Array<Any?>> {
-        val cases = Lists.newArrayList<Array<Any?>>()
+        val cases = mutableListOf<Array<Any?>>()
         cases.add(arrayOf(null, 5, null, null))
         cases.add(arrayOf("", 5, "", ""))
         cases.add(arrayOf("text1", 1, "t", ""))
@@ -154,7 +153,7 @@ class StringUtilsTest {
      */
     @DataProvider
     fun extractPlaceholdersProvider(): Iterator<Array<Any>> {
-        val cases = Lists.newArrayList<Array<Any>>()
+        val cases = mutableListOf<Array<Any>>()
         cases.add(arrayOf("", Sets.newHashSet<Any>()))
         cases.add(arrayOf("a", Sets.newHashSet<Any>()))
         cases.add(arrayOf("\${a}", Sets.newHashSet("a")))

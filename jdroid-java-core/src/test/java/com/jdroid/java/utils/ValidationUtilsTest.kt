@@ -1,7 +1,5 @@
 package com.jdroid.java.utils
 
-import com.jdroid.java.collections.Lists
-
 import org.testng.Assert
 import org.testng.annotations.DataProvider
 import org.testng.annotations.Test
@@ -16,7 +14,7 @@ class ValidationUtilsTest {
      */
     @DataProvider
     fun urlDataProvider(): Iterator<Array<Any>> {
-        val cases = Lists.newArrayList<Array<Any>>()
+        val cases = mutableListOf<Array<Any>>()
 
         cases.add(arrayOf("http://www.validUrl.com", true))
         cases.add(arrayOf("http://www.validUrl.com/;kw=[service,110343]", true))

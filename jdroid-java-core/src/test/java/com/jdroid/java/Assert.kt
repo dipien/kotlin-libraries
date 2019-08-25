@@ -74,7 +74,7 @@ object Assert : org.testng.Assert() {
     </T> */
     @SafeVarargs
     fun <T> assertContentsNotPresent(container: Collection<T>, vararg contents: T) {
-        Assert.assertContentsNotPresent(container, Lists.newArrayList(*contents))
+        Assert.assertContentsNotPresent(container, listOf(*contents))
     }
 
 // /**
