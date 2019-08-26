@@ -19,11 +19,11 @@ abstract class PairFirebaseRepository : PairRepository {
         firebaseAuthenticationStrategy = createFirebaseAuthenticationStrategy()
     }
 
-    protected fun createFirebaseAuthenticationStrategy(): FirebaseAuthenticationStrategy? {
+    protected open fun createFirebaseAuthenticationStrategy(): FirebaseAuthenticationStrategy? {
         return null
     }
 
-    protected fun createFirebase(): Firebase {
+    protected open fun createFirebase(): Firebase {
         var firebase = Firebase(firebaseUrl)
         if (firebaseAuthenticationStrategy != null && firebase.auth == null) {
             firebaseAuthenticationStrategy.authenticate(firebase)
