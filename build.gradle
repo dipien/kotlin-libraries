@@ -1,7 +1,6 @@
 version = "3.0.0"
 
 ext.GITHUB_REPOSITORY_NAME = "jdroid-java"
-ext.RELEASES_HUB_GRADLE_PLUGIN_ENABLED = true
 
 apply plugin: "com.jdroidtools.component.builder"
 apply plugin: "com.jdroidtools.root"

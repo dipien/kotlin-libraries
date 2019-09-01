@@ -1,8 +1,8 @@
-apply plugin: "com.jdroidtools.java.library"
-
 ext.ARTIFACT_ID = "jdroid-java-remote-config"
 ext.PROJECT_NAME = "Jdroid Java Remote Config"
 description = "Remote Config"
+
+apply plugin: "com.jdroidtools.java.library"
 
 buildscript {
 	dependencies {
