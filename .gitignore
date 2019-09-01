@@ -2,6 +2,7 @@
 .gradle
 build/
 gradle.properties
+gradle-local.properties
 
 # IntelliJ
 *.iml
@@ -11,6 +12,7 @@ gradle.properties
 .idea/libraries
 .idea/markdown-navigator
 .idea/copyright
+.idea/modules
 
 # Android Studio
 /local.properties

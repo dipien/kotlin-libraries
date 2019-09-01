@@ -1,26 +1,24 @@
-apply plugin: 'com.jdroid.java.library'
+apply plugin: "com.jdroidtools.java.library"
 
-ext.ARTIFACT_ID = 'jdroid-java-core'
-ext.PROJECT_NAME = 'Jdroid Java'
-description = 'Java library for both Android & Java apps'
+ext.ARTIFACT_ID = "jdroid-java-core"
+ext.PROJECT_NAME = "Jdroid Java"
+description = "Java library for both Android & Java apps"
 
 buildscript {
 	dependencies {
-		classpath 'com.jdroidtools:jdroid-gradle-java-plugin:' + JDROID_GRADLE_PLUGIN_VERSION
+		classpath(BuildLibs.jdroid_gradle_java_plugin)
 	}
 }
 
 dependencies {
 
-	// https://github.com/google/gson/blob/master/CHANGELOG.md
-	api 'com.google.code.gson:gson:2.8.5'
-
-	// Logging
-	api "org.slf4j:slf4j-api:1.6.3"
+	api(Libs.gson)
+	api(Libs.slf4j_api)
+	api(Libs.koin)
 
 	// Testing
-	testImplementation "org.testng:testng:6.8.21"
-	testImplementation "org.mockito:mockito-all:1.10.19"
+	testImplementation(Libs.testng)
+	testImplementation(Libs.mockito)
 }
 
 test {

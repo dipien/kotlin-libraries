@@ -49,7 +49,7 @@ public class StreamUtils {
 	public static List<String> readLines(InputStream inputStream) {
 		BufferedReader reader = null;
 		try {
-			List<String> lines = Lists.newArrayList();
+			List<String> lines = Lists.INSTANCE.newArrayList();
 			reader = new BufferedReader(new InputStreamReader(inputStream));
 			String line;
 			while ((line = reader.readLine()) != null) {

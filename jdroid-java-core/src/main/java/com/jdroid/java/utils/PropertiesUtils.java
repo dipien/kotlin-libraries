@@ -15,7 +15,7 @@ import java.util.Set;
 
 public abstract class PropertiesUtils {
 	
-	private static List<Properties> propertiesList = Lists.newArrayList();
+	private static List<Properties> propertiesList = Lists.INSTANCE.newArrayList();
 	
 	@SuppressWarnings("resource")
 	public static void loadExternalProperties(String fileName) {
@@ -90,6 +90,6 @@ public abstract class PropertiesUtils {
 	
 	public static Set<String> getStringSetProperty(String name) {
 		String value = getStringProperty(name);
-		return Sets.newHashSet(StringUtils.splitWithCommaSeparator(value));
+		return Sets.INSTANCE.newHashSet(StringUtils.splitWithCommaSeparator(value));
 	}
 }

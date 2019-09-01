@@ -1483,7 +1483,7 @@ public class JSONObject {
 
 	public List<String> optList(String key) {
 		JSONArray jsonArray = optJSONArray(key);
-		List<String> list = Lists.newArrayList();
+		List<String> list = Lists.INSTANCE.newArrayList();
 		if (jsonArray != null) {
 			list = jsonArray.optList();
 		}
@@ -1492,7 +1492,7 @@ public class JSONObject {
 
 	public List<Long> optLongList(String key) {
 		JSONArray jsonArray = optJSONArray(key);
-		List<Long> list = Lists.newArrayList();
+		List<Long> list = Lists.INSTANCE.newArrayList();
 		if (jsonArray != null) {
 			list = jsonArray.optLongList();
 		}
@@ -1500,16 +1500,16 @@ public class JSONObject {
 	}
 
 	public Date getDate(String key) {
-		return getDate(key, DateConfiguration.getDefaultDateTimeFormat());
+		return getDate(key, DateConfiguration.INSTANCE.getDefaultDateTimeFormat());
 	}
 
 	public Date getDate(String key, String dateFormat) {
 		String value = getString(key);
-		return DateUtils.parse(value, dateFormat);
+		return DateUtils.INSTANCE.parse(value, dateFormat);
 	}
 
 	public Date optDate(String key) {
-		return optDate(key, DateConfiguration.getDefaultDateTimeFormat());
+		return optDate(key, DateConfiguration.INSTANCE.getDefaultDateTimeFormat());
 	}
 
 	public Date optDate(String key, String dateFormat) {
