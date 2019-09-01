@@ -1,5 +1,12 @@
 # Change Log
 
+## [v3.0.0](https://github.com/maxirosson/jdroid-java/tree/v3.0.0) (2019-09-01)
+[Full Changelog](https://github.com/maxirosson/jdroid-java/compare/v2.0.0...v3.0.0)
+
+**Implemented enhancements:**
+
+- Migrated some classes to kotlin [\#13](https://github.com/maxirosson/jdroid-java/issues/13)
+
 ## [v2.0.0](https://github.com/maxirosson/jdroid-java/tree/v2.0.0) (2018-09-01)
 [Full Changelog](https://github.com/maxirosson/jdroid-java/compare/v1.0.0...v2.0.0)
 
