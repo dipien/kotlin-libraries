@@ -106,7 +106,7 @@ jobs:
 
       - run:
           name: Uploading to Nexus Sonatype
-          command: ./gradlew publish -PLOCAL_UPLOAD=false --info --stacktrace
+          command: ./gradlew publish -PLOCAL_UPLOAD=false --stacktrace
 
   upgradeDependencies:
     <<: *jdk_config
