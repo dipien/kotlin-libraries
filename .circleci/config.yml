@@ -67,7 +67,7 @@ jobs:
 
       - run:
           name: Verifying
-          command: ./gradlew check --stacktrace
+          command: ./gradlew test --stacktrace
 
       - run:
           name: Saving test results

@@ -7,7 +7,7 @@ object LocaleUtils {
     fun getAcceptLanguage(): String {
         var language = Locale.getDefault().language
         val country = Locale.getDefault().country
-        if (StringUtils.isNotBlank(country)) {
+        if (country.isNotBlank()) {
             language = "$language-$country"
         }
         return language

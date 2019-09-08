@@ -36,6 +36,7 @@ abstract class AbstractException : RuntimeException {
         return parameters.containsKey(key)
     }
 
+    @Suppress("UNCHECKED_CAST")
     fun <E> getParameter(key: String): E {
         return parameters[key] as E
     }

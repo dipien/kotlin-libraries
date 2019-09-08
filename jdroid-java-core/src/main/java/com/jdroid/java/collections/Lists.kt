@@ -32,8 +32,9 @@ object Lists {
         return list
     }
 
+    @Deprecated(message = "Use kotlin orEmpty")
     fun <E> safeArrayList(list: List<E>?): List<E> {
-        return list ?: Lists.newArrayList()
+        return list.orEmpty()
     }
 
     /**

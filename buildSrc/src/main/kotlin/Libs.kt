@@ -12,6 +12,6 @@ object Libs {
     const val firebase_client = "com.firebase:firebase-client-jvm:2.5.2"
 
     // Testing
-    const val testng = "org.testng:testng:6.8.21"
+    const val junit = "junit:junit:4.12"
     const val mockito = "org.mockito:mockito-all:1.10.19"
 }

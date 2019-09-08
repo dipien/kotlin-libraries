@@ -110,3 +110,7 @@ subprojects {
 		}
 	}
 }
+
+releasesHub {
+	excludes = ["org.slf4j"]
+}

@@ -1,8 +1,6 @@
 package com.jdroid.java.analytics
 
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.utils.LoggerUtils
-
 import java.util.concurrent.Executor
 
 open class AnalyticsSender<T : AnalyticsTracker>(trackers: List<T>) : AnalyticsTracker {
@@ -11,10 +9,10 @@ open class AnalyticsSender<T : AnalyticsTracker>(trackers: List<T>) : AnalyticsT
         private val LOGGER = LoggerUtils.getLogger(AnalyticsSender::class.java)
     }
 
-    private val trackers = Lists.newArrayList<T>()
+    private val trackers = mutableListOf<T>()
 
     @SafeVarargs
-    constructor(vararg trackers: T) : this(Lists.newArrayList<T>(*trackers)) {
+    constructor(vararg trackers: T) : this(listOf<T>(*trackers)) {
     }
 
     init {

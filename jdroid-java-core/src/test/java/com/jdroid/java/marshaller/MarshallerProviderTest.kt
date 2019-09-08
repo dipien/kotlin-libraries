@@ -2,9 +2,8 @@ package com.jdroid.java.marshaller
 
 import com.jdroid.java.collections.Maps
 import com.jdroid.java.json.JsonMap
-import org.testng.Assert
-import org.testng.annotations.DataProvider
-import org.testng.annotations.Test
+import org.junit.Assert
+import org.junit.Test
 import java.util.HashMap
 
 class MarshallerProviderTest {
@@ -15,63 +14,62 @@ class MarshallerProviderTest {
         marshallerProvider.addMarshaller(DummyClass::class.java, DummyClassMarshaller())
     }
 
-    @DataProvider
-    fun marshallDataProvider(): Iterator<Array<Any>> {
-        val cases = mutableListOf<Array<Any>>()
-        cases.add(arrayOf(1, "1"))
-        cases.add(arrayOf("1", "1"))
-        cases.add(arrayOf(listOf(1, 2, 3), "[1,2,3]"))
-        cases.add(arrayOf(listOf("1", "2", "3"), "[\"1\",\"2\",\"3\"]"))
+    @Test
+    fun marshallDataProvider() {
+        marshall(1, "1")
+        marshall("1", "1")
+        marshall(listOf(1, 2, 3), "[1,2,3]")
+        marshall(listOf("1", "2", "3"), "[\"1\",\"2\",\"3\"]")
 
         var dummyClass = DummyClass()
         dummyClass.stringProperty = "1"
         var dummyJson = "{\"stringProperty\":\"1\"}"
-        cases.add(arrayOf(dummyClass, dummyJson))
-        cases.add(arrayOf(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]"))
+        marshall(dummyClass, dummyJson)
+        marshall(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]")
 
         dummyClass = DummyClass()
         dummyClass.longProperty = 2L
         dummyJson = "{\"longProperty\":2}"
-        cases.add(arrayOf(dummyClass, dummyJson))
-        cases.add(arrayOf(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]"))
+        marshall(dummyClass, dummyJson)
+        marshall(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]")
 
         dummyClass = DummyClass()
         dummyClass.stringListProperty = listOf("3", "4")
         dummyJson = "{\"stringListProperty\":[\"3\",\"4\"]}"
-        cases.add(arrayOf(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]"))
+        marshall(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]")
 
         dummyClass = DummyClass()
         dummyClass.longListProperty = listOf(5L, 6L)
         dummyJson = "{\"longListProperty\":[5,6]}"
-        cases.add(arrayOf(dummyClass, dummyJson))
-        cases.add(arrayOf(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]"))
+        marshall(dummyClass, dummyJson)
+        marshall(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]")
 
         dummyClass = DummyClass()
         dummyClass.stringMapProperty = Maps.newLinkedHashMap()
         dummyJson = "{}"
-        cases.add(arrayOf(dummyClass, dummyJson))
-        cases.add(arrayOf(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]"))
+        marshall(dummyClass, dummyJson)
+        marshall(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]")
 
         dummyClass = DummyClass()
         dummyClass.stringMapProperty = Maps.newLinkedHashMap()
         dummyClass.stringMapProperty!!["a"] = "b"
         dummyJson = "{\"stringMapProperty\":{\"a\":\"b\"}}"
-        cases.add(arrayOf(dummyClass, dummyJson))
-        cases.add(arrayOf(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]"))
+        marshall(dummyClass, dummyJson)
+        marshall(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]")
 
         val map = HashMap<String, String>()
         map["a"] = "b"
         map["c"] = "d"
         dummyJson = "{\"a\":\"b\",\"c\":\"d\"}"
-        cases.add(arrayOf(map, dummyJson))
-        cases.add(arrayOf(listOf<Map<String, String>>(map, map), "[$dummyJson,$dummyJson]"))
+        marshall(map, dummyJson)
+        marshall(listOf<Map<String, String>>(map, map), "[$dummyJson,$dummyJson]")
 
         dummyClass = DummyClass()
         dummyClass.longMapProperty = Maps.newLinkedHashMap()
         dummyClass.longMapProperty!!["a"] = 1L
         dummyJson = "{\"longMapProperty\":{\"a\":1}}"
-        cases.add(arrayOf(dummyClass, dummyJson))
-        cases.add(arrayOf(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]"))
+        marshall(dummyClass, dummyJson)
+        marshall(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]")
 
         dummyClass = DummyClass()
         dummyClass.dummyClassMapProperty = Maps.newLinkedHashMap()
@@ -82,18 +80,15 @@ class MarshallerProviderTest {
 
         dummyClass.dummyClassMapProperty!!["a"] = innerDummyClass
         dummyJson = "{\"dummyClassMapProperty\":{\"a\":{\"longProperty\":1,\"stringProperty\":\"2\"}}}"
-        cases.add(arrayOf(dummyClass, dummyJson))
-        cases.add(arrayOf(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]"))
+        marshall(dummyClass, dummyJson)
+        marshall(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]")
 
-        cases.add(arrayOf(DummyClass(), "{}"))
-
-        return cases.iterator()
+        marshall(DummyClass(), "{}")
     }
 
-    @Test(dataProvider = "marshallDataProvider")
-    fun marshall(data: Any, expectedJson: String) {
+    private fun marshall(data: Any, expectedJson: String) {
         val result = marshallerProvider.marshall(data, null, null)!!.toString()
-        Assert.assertEquals(result.replace(" ", ""), expectedJson)
+        Assert.assertEquals(expectedJson, result.replace(" ", ""))
     }
 
     inner class DummyClass {

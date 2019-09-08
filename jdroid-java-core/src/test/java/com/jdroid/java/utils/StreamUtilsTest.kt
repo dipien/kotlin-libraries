@@ -1,8 +1,8 @@
 package com.jdroid.java.utils
 
-import org.testng.Assert.assertTrue
-import org.testng.AssertJUnit.assertFalse
-import org.testng.annotations.Test
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Test
 import java.io.ByteArrayInputStream
 
 class StreamUtilsTest {

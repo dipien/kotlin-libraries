@@ -106,9 +106,7 @@ abstract class FirebaseDatabaseRepository<T : Entity> : Repository<T> {
         val firebase = createFirebase()
         var query = firebase.orderByChild(fieldName)
 
-        if (values == null) {
-            throw UnexpectedException("Null value type not supported")
-        } else if (values.size > 1) {
+        if (values.size > 1) {
             throw UnexpectedException("Just one value is supported")
         }
         val value = values[0]

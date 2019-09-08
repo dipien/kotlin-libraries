@@ -1,64 +1,53 @@
 package com.jdroid.java.utils
 
-import org.testng.Assert.assertEquals
-import org.testng.annotations.DataProvider
-import org.testng.annotations.Test
+import org.junit.Assert.assertEquals
+import org.junit.Test
 
 class SanitizerTest {
 
-    @DataProvider
-    fun plainStringDataProvider(): Iterator<Array<Any>> {
-        val cases = mutableListOf<Array<Any>>()
+    @Test
+    fun plainString() {
 
         // removingAccentsInLowercase
-        cases.add(arrayOf("bcdfghjklmnñpqrstvwxyz", "bcdfghjklmnnpqrstvwxyz"))
-        cases.add(arrayOf("áéíóú", "aeiou"))
-        cases.add(arrayOf("äëïöü", "aeiou"))
-        cases.add(arrayOf("àèìòù", "aeiou"))
-        cases.add(arrayOf("âêîôû", "aeiou"))
-        cases.add(arrayOf("ãõ", "ao"))
-        cases.add(arrayOf("å", "a"))
+        plainString("bcdfghjklmnñpqrstvwxyz", "bcdfghjklmnnpqrstvwxyz")
+        plainString("áéíóú", "aeiou")
+        plainString("äëïöü", "aeiou")
+        plainString("àèìòù", "aeiou")
+        plainString("âêîôû", "aeiou")
+        plainString("ãõ", "ao")
+        plainString("å", "a")
 
         // removingAccentsInUppercase
-        cases.add(arrayOf("BCDFGHJKLMNÑPQRSTVWXYZ", "BCDFGHJKLMNNPQRSTVWXYZ"))
-        cases.add(arrayOf("ÁÉÍÓÚ", "AEIOU"))
-        cases.add(arrayOf("ÄËÏÖÜ", "AEIOU"))
-        cases.add(arrayOf("ÀÈÌÒÙ", "AEIOU"))
-        cases.add(arrayOf("ÂÊÎÔÛ", "AEIOU"))
-        cases.add(arrayOf("ÃÕ", "AO"))
-        cases.add(arrayOf("Å", "A"))
-
-        return cases.iterator()
+        plainString("BCDFGHJKLMNÑPQRSTVWXYZ", "BCDFGHJKLMNNPQRSTVWXYZ")
+        plainString("ÁÉÍÓÚ", "AEIOU")
+        plainString("ÄËÏÖÜ", "AEIOU")
+        plainString("ÀÈÌÒÙ", "AEIOU")
+        plainString("ÂÊÎÔÛ", "AEIOU")
+        plainString("ÃÕ", "AO")
+        plainString("Å", "A")
     }
 
-    @Test(dataProvider = "plainStringDataProvider")
-    fun plainString(value: String, expected: String) {
-        assertEquals(Sanitizer.plainString(value), expected)
+    private fun plainString(value: String, expected: String) {
+        assertEquals(expected, Sanitizer.plainString(value))
     }
 
     @Test
     fun removingNumbers() {
-        assertEquals(
-            Sanitizer.plainStringWithoutNumbers("1213123BCDF7G6H5JK4LM3N1ÑPQ2RSTVWXYZ888"),
-            "BCDFGHJKLMNNPQRSTVWXYZ"
-        )
+        assertEquals("BCDFGHJKLMNNPQRSTVWXYZ", Sanitizer.plainStringWithoutNumbers("1213123BCDF7G6H5JK4LM3N1ÑPQ2RSTVWXYZ888"))
     }
 
     @Test
     fun removingExtraSpaces() {
-        assertEquals(
-            Sanitizer.plainStringWithoutExtraSpaces(" B     C DF GH JKL MNÑP QRST VWXY Z "),
-            "B C DF GH JKL MNNP QRST VWXY Z"
-        )
+        assertEquals("B C DF GH JKL MNNP QRST VWXY Z", Sanitizer.plainStringWithoutExtraSpaces(" B     C DF GH JKL MNÑP QRST VWXY Z "))
     }
 
     @Test
     fun removeNumbers() {
-        assertEquals(Sanitizer.removeNumbers("5BCDF5G6H5JK4LM3N1ÑPQ2RSTVWXYZ888"), "BCDFGHJKLMNÑPQRSTVWXYZ")
+        assertEquals("BCDFGHJKLMNÑPQRSTVWXYZ", Sanitizer.removeNumbers("5BCDF5G6H5JK4LM3N1ÑPQ2RSTVWXYZ888"))
     }
 
     @Test
     fun removingNonNumbers() {
-        assertEquals(Sanitizer.justNumbers("5BCDF5G6H5JK4LM3N1ÑPQ2RSTVWXYZ888"), "55654312888")
+        assertEquals("55654312888", Sanitizer.justNumbers("5BCDF5G6H5JK4LM3N1ÑPQ2RSTVWXYZ888"))
     }
 }

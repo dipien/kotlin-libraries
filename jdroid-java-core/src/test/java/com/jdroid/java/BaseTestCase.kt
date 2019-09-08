@@ -1,9 +1,9 @@
 package com.jdroid.java
 
-import org.testng.annotations.AfterClass
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.BeforeClass
-import org.testng.annotations.BeforeMethod
+import org.junit.After
+import org.junit.AfterClass
+import org.junit.Before
+import org.junit.BeforeClass
 
 /**
  * Base TestCase class
@@ -36,7 +36,7 @@ open class BaseTestCase {
      *
      * @throws Exception The exception by configuration
      */
-    @BeforeMethod
+    @Before
     @Throws(Exception::class)
     protected fun setUp() {
         onSetUp()
@@ -53,11 +53,11 @@ open class BaseTestCase {
     }
 
     /**
-     * Method executed after the class is being tested.
+     * Method executed after the method is being tested.
      *
      * @throws Exception The exception by configuration
      */
-    @AfterMethod
+    @After
     @Throws(Exception::class)
     protected fun tearDown() {
         onTearDown()

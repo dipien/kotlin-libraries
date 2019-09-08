@@ -2,66 +2,23 @@ package com.jdroid.java.utils
 
 import com.jdroid.java.Assert
 import com.jdroid.java.collections.Sets
-import org.testng.Assert.assertEquals
-import org.testng.Assert.assertFalse
-import org.testng.Assert.assertTrue
-import org.testng.annotations.DataProvider
-import org.testng.annotations.Test
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Test
 
 class StringUtilsTest {
 
     @Test
-    fun isStringBlank() {
-        assertTrue(StringUtils.isBlank(" "))
-        assertTrue(StringUtils.isBlank(null))
-        assertTrue(StringUtils.isBlank(""))
-    }
-
-    @Test
-    fun isStringEmpty() {
-        assertTrue(StringUtils.isEmpty(""))
-        assertFalse(StringUtils.isEmpty(" "))
-        assertTrue(StringUtils.isEmpty(null))
-    }
-
-    @Test
-    fun isNotBlank() {
-        assertFalse(StringUtils.isNotBlank(""))
-        assertTrue(StringUtils.isNotBlank("asdadsa"))
-        assertFalse(StringUtils.isNotBlank(null))
-        assertFalse(StringUtils.isNotBlank(" "))
-    }
-
-    @Test
-    fun areTwoStringsEquals() {
-        assertTrue(StringUtils.equal("hola", "hola"))
-        assertFalse(StringUtils.equal("hola", "holaa"))
-    }
-
-    @Test
-    fun capitalizing() {
-        assertEquals(StringUtils.capitalize("hola"), "Hola")
-        assertFalse("hola" == StringUtils.capitalize("hola"))
-    }
-
-    @Test
-    fun defaultStringShouldNotBeNull() {
-        assertEquals(StringUtils.defaultString("hola"), "hola")
-        assertEquals(StringUtils.defaultString(null), "")
-        assertEquals(StringUtils.defaultString(""), "")
-        assertEquals(StringUtils.defaultString(null), "")
-    }
-
-    @Test
     fun getFirstToken() {
-        assertEquals(StringUtils.getFirstToken("hola,como,estas"), "hola")
-        assertEquals(StringUtils.getFirstToken("hola;como;estas", ";"), "hola")
+        assertEquals("hola", StringUtils.getFirstToken("hola,como,estas"))
+        assertEquals("hola", StringUtils.getFirstToken("hola;como;estas", ";"))
     }
 
     @Test
     fun getNotEmptyString() {
-        assertEquals(StringUtils.getNotEmptyString(""), null)
-        assertEquals(StringUtils.getNotEmptyString("holi"), "holi")
+        assertEquals(null, StringUtils.getNotEmptyString(""), null)
+        assertEquals("holi", StringUtils.getNotEmptyString("holi"))
     }
 
     @Test
@@ -72,62 +29,47 @@ class StringUtilsTest {
 
     @Test
     fun removeNonAlphanumericCharacters() {
-        assertEquals(StringUtils.toAlphanumeric("12sa'sd"), "12sasd")
-        assertEquals(StringUtils.toAlphanumeric("sasd12"), "sasd12")
+        assertEquals("12sasd", StringUtils.toAlphanumeric("12sa'sd"))
+        assertEquals("sasd12", StringUtils.toAlphanumeric("sasd12"))
     }
 
-    /**
-     * @return The different scenarios for test [StringUtils.toAlphanumeric]
-     */
-    @DataProvider
-    fun toAlphanumericProvider(): Iterator<Array<Any>> {
-        val cases = mutableListOf<Array<Any>>()
-        cases.add(arrayOf("text", "text"))
-        cases.add(arrayOf("text.", "text"))
-        cases.add(arrayOf("text.\\", "text"))
-        cases.add(arrayOf("?text.\\", "text"))
-        cases.add(arrayOf(" ?text.\\", " text"))
-        cases.add(arrayOf("text.\\text2", "texttext2"))
-        cases.add(arrayOf("text.\\text2??", "texttext2"))
-        cases.add(arrayOf("text.\\text2??text3", "texttext2text3"))
-        cases.add(arrayOf("text .\\text2 ??text3", "text text2 text3"))
-        cases.add(arrayOf("text text2 text3", "text text2 text3"))
-        cases.add(arrayOf("text  text2", "text  text2"))
-        return cases.iterator()
+    @Test
+    fun toAlphanumeric() {
+        toAlphanumeric("text", "text")
+        toAlphanumeric("text.", "text")
+        toAlphanumeric("text.\\", "text")
+        toAlphanumeric("?text.\\", "text")
+        toAlphanumeric(" ?text.\\", " text")
+        toAlphanumeric("text.\\text2", "texttext2")
+        toAlphanumeric("text.\\text2??", "texttext2")
+        toAlphanumeric("text.\\text2??text3", "texttext2text3")
+        toAlphanumeric("text .\\text2 ??text3", "text text2 text3")
+        toAlphanumeric("text text2 text3", "text text2 text3")
+        toAlphanumeric("text  text2", "text  text2")
     }
 
-    /**
-     * @param text The text to transform
-     * @param expectedText The expected transformed text
-     */
-    @Test(dataProvider = "toAlphanumericProvider")
-    fun toAlphanumeric(text: String, expectedText: String) {
-        assertEquals(StringUtils.toAlphanumeric(text), expectedText)
+    private fun toAlphanumeric(text: String, expectedText: String) {
+        assertEquals(expectedText, StringUtils.toAlphanumeric(text))
     }
 
-    /**
-     * @return The different scenarios for test [StringUtils.truncate]
-     */
-    @DataProvider
-    fun truncateProvider(): Iterator<Array<Any?>> {
-        val cases = mutableListOf<Array<Any?>>()
-        cases.add(arrayOf(null, 5, null, null))
-        cases.add(arrayOf("", 5, "", ""))
-        cases.add(arrayOf("text1", 1, "t", ""))
-        cases.add(arrayOf("text1", 2, "te", ""))
-        cases.add(arrayOf("text1", 3, "tex", ""))
-        cases.add(arrayOf("text1", 4, "t...", ""))
-        cases.add(arrayOf("text1", 5, "text1", "text1"))
-        cases.add(arrayOf("text1", 6, "text1", "text1"))
-        cases.add(arrayOf("text1", 10, "text1", "text1"))
-        cases.add(arrayOf("text1 text2", 4, "t...", ""))
-        cases.add(arrayOf("text1 text2", 5, "te...", "text1"))
-        cases.add(arrayOf("text1 text2", 6, "tex...", "text1"))
-        cases.add(arrayOf("text1 text2", 7, "text...", "text1"))
-        cases.add(arrayOf("text1 text2", 11, "text1 text2", "text1 text2"))
-        cases.add(arrayOf("text1 text2 ", 11, "text1 te...", "text1 text2"))
-        cases.add(arrayOf("text1  text2 ", 11, "text1  t...", "text1 "))
-        return cases.iterator()
+    @Test
+    fun truncate() {
+        truncate(null, 5, null, null)
+        truncate("", 5, "", "")
+        truncate("text1", 1, "t", "")
+        truncate("text1", 2, "te", "")
+        truncate("text1", 3, "tex", "")
+        truncate("text1", 4, "t...", "")
+        truncate("text1", 5, "text1", "text1")
+        truncate("text1", 6, "text1", "text1")
+        truncate("text1", 10, "text1", "text1")
+        truncate("text1 text2", 4, "t...", "")
+        truncate("text1 text2", 5, "te...", "text1")
+        truncate("text1 text2", 6, "tex...", "text1")
+        truncate("text1 text2", 7, "text...", "text1")
+        truncate("text1 text2", 11, "text1 text2", "text1 text2")
+        truncate("text1 text2 ", 11, "text1 te...", "text1 text2")
+        truncate("text1  text2 ", 11, "text1  t...", "text1 ")
     }
 
     /**
@@ -136,30 +78,24 @@ class StringUtilsTest {
      * @param expectedWordsTruncatedText The expected truncated text with words truncated
      * @param expectedWordsNotTruncatedText The expected truncated text without words truncated
      */
-    @Test(dataProvider = "truncateProvider")
-    fun truncate(
+    private fun truncate(
         text: String?,
         maxCharacters: Int?,
         expectedWordsTruncatedText: String?,
         expectedWordsNotTruncatedText: String?
     ) {
-        assertEquals(StringUtils.truncate(text, maxCharacters), expectedWordsTruncatedText)
-        assertEquals(StringUtils.truncate(text, maxCharacters, true), expectedWordsTruncatedText)
-        assertEquals(StringUtils.truncate(text, maxCharacters, false), expectedWordsNotTruncatedText)
+        assertEquals(expectedWordsTruncatedText, StringUtils.truncate(text, maxCharacters))
+        assertEquals(expectedWordsTruncatedText, StringUtils.truncate(text, maxCharacters, true))
+        assertEquals(expectedWordsNotTruncatedText, StringUtils.truncate(text, maxCharacters, false))
     }
 
-    /**
-     * @return The different scenarios
-     */
-    @DataProvider
-    fun extractPlaceholdersProvider(): Iterator<Array<Any>> {
-        val cases = mutableListOf<Array<Any>>()
-        cases.add(arrayOf("", Sets.newHashSet<Any>()))
-        cases.add(arrayOf("a", Sets.newHashSet<Any>()))
-        cases.add(arrayOf("\${a}", Sets.newHashSet("a")))
-        cases.add(arrayOf("\${a}\${a}", Sets.newHashSet("a")))
-        cases.add(arrayOf("\${a}\${b}", Sets.newHashSet("a", "b")))
-        return cases.iterator()
+    @Test
+    fun extractPlaceholders() {
+        extractPlaceholders("", hashSetOf())
+        extractPlaceholders("a", hashSetOf())
+        extractPlaceholders("\${a}", Sets.newHashSet("a"))
+        extractPlaceholders("\${a}\${a}", Sets.newHashSet("a"))
+        extractPlaceholders("\${a}\${b}", Sets.newHashSet("a", "b"))
     }
 
     /**
@@ -168,8 +104,7 @@ class StringUtilsTest {
      * @param string The string
      * @param placeholderNames The placeholder names
      */
-    @Test(dataProvider = "extractPlaceholdersProvider")
-    fun extractPlaceholders(string: String, placeholderNames: Set<String>) {
+    private fun extractPlaceholders(string: String, placeholderNames: Set<String>) {
         val result = StringUtils.extractPlaceHolders(string)
         Assert.assertEqualsNoOrder(result, placeholderNames)
     }
@@ -182,17 +117,17 @@ class StringUtilsTest {
             "Aerolineas\nArgentinas"
         )
         // Word wrap with the first word longer than the second
-        assertEquals(StringUtils.wordWrapToTwoLines("Southern Winds", 10), "Southern\nWinds")
+        assertEquals("Southern\nWinds", StringUtils.wordWrapToTwoLines("Southern Winds", 10))
         // Word wrap with the first word shorter than the second
-        assertEquals(StringUtils.wordWrapToTwoLines("Virgin Airlines", 10), "Virgin\nAirlines")
+        assertEquals("Virgin\nAirlines", StringUtils.wordWrapToTwoLines("Virgin Airlines", 10))
         // Without Word wrap, text length less than the minimum
-        assertEquals(StringUtils.wordWrapToTwoLines("Swiss Air", 10), "Swiss Air")
+        assertEquals("Swiss Air", StringUtils.wordWrapToTwoLines("Swiss Air", 10))
         // Without Word wrap, text length less than minimun and one word
-        assertEquals(StringUtils.wordWrapToTwoLines("Tam", 10), "Tam")
+        assertEquals("Tam", StringUtils.wordWrapToTwoLines("Tam", 10))
         // Without Word wrap, text length greater than minimun and one word
-        assertEquals(StringUtils.wordWrapToTwoLines("LargeNameAirline", 10), "LargeNameAirline")
+        assertEquals("LargeNameAirline", StringUtils.wordWrapToTwoLines("LargeNameAirline", 10))
         // Word wrap with more than two words
-        assertEquals(StringUtils.wordWrapToTwoLines("Large Name Airline", 10), "Large Name\nAirline")
+        assertEquals("Large Name\nAirline", StringUtils.wordWrapToTwoLines("Large Name Airline", 10))
     }
 
     @Test

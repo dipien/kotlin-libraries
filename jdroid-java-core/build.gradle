@@ -16,11 +16,6 @@ dependencies {
 	api(Libs.koin)
 
 	// Testing
-	testImplementation(Libs.testng)
+	testImplementation(Libs.junit)
 	testImplementation(Libs.mockito)
-}
-
-test {
-	useTestNG {
-	}
 }

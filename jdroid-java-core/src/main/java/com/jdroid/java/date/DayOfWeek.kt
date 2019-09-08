@@ -1,7 +1,5 @@
 package com.jdroid.java.date
 
-import com.jdroid.java.collections.Lists
-
 enum class DayOfWeek(val displayName: String, val number: Int, val isWeekend: Boolean) {
 
     SUNDAY("Sunday", 1, true),
@@ -43,7 +41,7 @@ enum class DayOfWeek(val displayName: String, val number: Int, val isWeekend: Bo
         }
 
         fun getWeekDays(): List<DayOfWeek> {
-            val weekDays = Lists.newArrayList<DayOfWeek>()
+            val weekDays = mutableListOf<DayOfWeek>()
             for (each in values()) {
                 if (!each.isWeekend) {
                     weekDays.add(each)

@@ -11,6 +11,7 @@ import java.io.Serializable
 
 object CopyUtils {
 
+    @Suppress("UNCHECKED_CAST")
     fun <T : Serializable> cloneSerializable(serializable: T): T {
         val cloneObject: T
         try {
@@ -22,7 +23,8 @@ object CopyUtils {
 
             val bin = ByteArrayInputStream(bytes)
             val oin = ObjectInputStream(bin)
-            cloneObject = oin.readObject() as T
+            cloneObject = oin.readObject() as
+                T
             oin.close()
         } catch (e: IOException) {
             throw UnexpectedException(

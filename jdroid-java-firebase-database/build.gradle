@@ -16,10 +16,5 @@ dependencies {
 	api(Libs.firebase_client)
 
 	// Testing
-	testImplementation(Libs.testng)
-}
-
-test {
-	useTestNG {
-	}
+	testImplementation(Libs.junit)
 }

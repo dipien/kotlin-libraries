@@ -23,7 +23,7 @@ object ValidationUtils {
     }
 
     private fun match(value: String, pattern: Pattern): Boolean {
-        return StringUtils.isNotEmpty(value)!! && pattern.matcher(value).matches()
+        return value.isNotEmpty() && pattern.matcher(value).matches()
     }
 
     /**

@@ -15,10 +15,5 @@ dependencies {
 	implementation project(":jdroid-java-core")
 
 	// Testing
-	testImplementation(Libs.testng)
-}
-
-test {
-	useTestNG {
-	}
+	testImplementation(Libs.junit)
 }

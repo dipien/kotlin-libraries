@@ -9,24 +9,24 @@ import com.jdroid.java.collections.Lists
  *
  * @see org.testng.Assert
  */
-object Assert : org.testng.Assert() {
+object Assert : org.junit.Assert() {
 
     /**
      * Asserts that two [Iterable] instances contain the same elements in no particular order. If they do not, an
      * AssertionError is thrown.<br></br>
-     * This method replaces the use of [org.testng.Assert.assertEqualsNoOrder].
+     * This method replaces the use of [org.junit.Assert.assertEqualsNoOrder].
      *
      * @param actual The actual value.
      * @param expected The expected value.
      */
     fun assertEqualsNoOrder(actual: Iterable<*>, expected: Iterable<*>) {
-        Assert.assertEqualsNoOrder(actual, expected, null)
+        assertEqualsNoOrder(actual, expected, null)
     }
 
     /**
      * Asserts that two [Iterable] instances contain the same elements in no particular order. If they do not, an
      * AssertionError, with the given message, is thrown.<br></br>
-     * This method replaces the use of [org.testng.Assert.assertEqualsNoOrder].
+     * This method replaces the use of [org.junit.Assert.assertEqualsNoOrder].
      *
      * @param actual The actual value.
      * @param expected The expected value.
@@ -35,7 +35,7 @@ object Assert : org.testng.Assert() {
     fun assertEqualsNoOrder(actual: Iterable<*>, expected: Iterable<*>, message: String?) {
 
         // Check if both iterables have the same size.
-        org.testng.Assert.assertEquals(Iterables.size(actual), Iterables.size(expected), message)
+        assertEquals(message, Iterables.size(expected), Iterables.size(actual))
 
         // Create a list based on the expected results.
         val expectedList = Lists.newArrayList(expected)
@@ -44,7 +44,7 @@ object Assert : org.testng.Assert() {
         // contains the item. If the item is contained within the expected list
         // then it is removed from it so that repeated items can be checked.
         for (o in actual) {
-            org.testng.Assert.assertTrue(expectedList.contains(o), message)
+            assertTrue(message, expectedList.contains(o))
             expectedList.remove(o)
         }
     }
@@ -58,7 +58,7 @@ object Assert : org.testng.Assert() {
     </T> */
     fun <T> assertContentsNotPresent(container: Collection<T>, contents: Iterable<T>) {
         for (content in contents) {
-            org.testng.Assert.assertFalse(container.contains(content))
+            assertFalse(container.contains(content))
         }
     }
 
@@ -74,7 +74,7 @@ object Assert : org.testng.Assert() {
     </T> */
     @SafeVarargs
     fun <T> assertContentsNotPresent(container: Collection<T>, vararg contents: T) {
-        Assert.assertContentsNotPresent(container, listOf(*contents))
+        assertContentsNotPresent(container, listOf(*contents))
     }
 
 // /**

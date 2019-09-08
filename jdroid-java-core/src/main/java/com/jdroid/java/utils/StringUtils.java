@@ -35,14 +35,17 @@ public abstract class StringUtils {
 		return StringUtils.isEmpty(text) ? null : text;
 	}
 
+	@Deprecated
 	public static Boolean equal(String text1, String text2) {
 		return defaultString(text1).equals(defaultString(text2));
 	}
 
+	@Deprecated
 	public static Boolean isEmpty(String text) {
 		return text == null || text.length() == 0;
 	}
 
+	@Deprecated
 	public static Boolean isNotEmpty(String text) {
 		return !isEmpty(text);
 	}
@@ -63,6 +66,7 @@ public abstract class StringUtils {
 	 * @param str the String to check, may be null
 	 * @return <code>true</code> if the String is null, empty or whitespace
 	 */
+	@Deprecated
 	public static boolean isBlank(String str) {
 		int strLen;
 		if ((str == null) || ((strLen = str.length()) == 0)) {
@@ -92,6 +96,7 @@ public abstract class StringUtils {
 	 * @param str the String to check, may be null
 	 * @return <code>true</code> if the String is not empty and not null and not whitespace
 	 */
+	@Deprecated
 	public static boolean isNotBlank(String str) {
 		return !StringUtils.isBlank(str);
 	}
@@ -110,6 +115,7 @@ public abstract class StringUtils {
 	 * @param str the String to check, may be null
 	 * @return the passed in String, or the empty String if it was <code>null</code>
 	 */
+	@Deprecated
 	public static String defaultString(String str) {
 		return defaultString(str, EMPTY);
 	}
@@ -118,6 +124,7 @@ public abstract class StringUtils {
 		return str == null ? defaultString : str;
 	}
 
+	@Deprecated
 	public static String capitalize(String text) {
 		if (isEmpty(text) || (text.length() == 1)) {
 			return text.toUpperCase();

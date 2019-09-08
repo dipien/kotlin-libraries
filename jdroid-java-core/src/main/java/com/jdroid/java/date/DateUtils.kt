@@ -1,7 +1,6 @@
 package com.jdroid.java.date
 
 import com.jdroid.java.exception.UnexpectedException
-import com.jdroid.java.utils.StringUtils
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -43,7 +42,7 @@ object DateUtils {
 
     fun parse(dateFormatted: String, dateFormat: SimpleDateFormat, useUtc: Boolean): Date? {
         var date: Date? = null
-        if (StringUtils.isNotEmpty(dateFormatted)) {
+        if (dateFormatted.isNotEmpty()) {
             try {
                 if (useUtc) {
                     dateFormat.timeZone = TimeZone.getTimeZone("UTC")
