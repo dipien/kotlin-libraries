@@ -62,8 +62,8 @@ open class InMemoryRepository<T : Identifiable> : Repository<T> {
         return results
     }
 
-    override fun get(id: String): T {
-        return items[id]!!
+    override fun get(id: String): T? {
+        return items[id]
     }
 
     override fun removeAll() {
@@ -87,7 +87,7 @@ open class InMemoryRepository<T : Identifiable> : Repository<T> {
         throw UnsupportedOperationException()
     }
 
-    override fun getItemByField(fieldName: String, vararg values: Any): T {
+    override fun getItemByField(fieldName: String, vararg values: Any): T? {
         throw UnsupportedOperationException()
     }
 
