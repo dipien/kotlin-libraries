@@ -5,17 +5,17 @@ apply plugin: "com.jdroidtools.java.library"
 
 buildscript {
 	dependencies {
-		classpath(BuildLibs.jdroid_gradle_java_plugin)
+		classpath(BuildLibs.JDROID_GRADLE_JAVA_PLUGIN)
 	}
 }
 
 dependencies {
 
-	api(Libs.gson)
-	api(Libs.slf4j_api)
-	api(Libs.koin)
+	api(Libs.GSON)
+	api(Libs.SLF4J_API)
+	api(Libs.KOIN)
 
 	// Testing
-	testImplementation(Libs.junit)
-	testImplementation(Libs.mockito)
+	testImplementation(Libs.JUNIT)
+	testImplementation(Libs.MOCKITO)
 }

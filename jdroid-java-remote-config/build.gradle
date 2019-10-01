@@ -6,7 +6,7 @@ apply plugin: "com.jdroidtools.java.library"
 
 buildscript {
 	dependencies {
-		classpath(BuildLibs.jdroid_gradle_java_plugin)
+		classpath(BuildLibs.JDROID_GRADLE_JAVA_PLUGIN)
 	}
 }
 
@@ -15,5 +15,5 @@ dependencies {
 	implementation project(":jdroid-java-core")
 
 	// Testing
-	testImplementation(Libs.junit)
+	testImplementation(Libs.JUNIT)
 }
