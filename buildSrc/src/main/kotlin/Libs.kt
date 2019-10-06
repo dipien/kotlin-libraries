@@ -1,6 +1,6 @@
 object Libs {
     // https://github.com/google/gson/blob/master/CHANGELOG.md
-    const val GSON = "com.google.code.gson:gson:2.8.5"
+    const val GSON = "com.google.code.gson:gson:2.8.6"
 
     // Logging
     const val SLF4J_API = "org.slf4j:slf4j-api:1.6.3"
