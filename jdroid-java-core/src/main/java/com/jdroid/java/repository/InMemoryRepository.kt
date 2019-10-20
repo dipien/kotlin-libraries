@@ -18,7 +18,7 @@ open class InMemoryRepository<T : Identifiable> : Repository<T> {
 
     override fun add(item: T) {
         if (item.getId() == null) {
-            ReflectionUtils.setId(item, nextId++)
+            ReflectionUtils.setId(item, (nextId++).toString())
         }
         items[item.getId()!!] = item
         LOGGER.debug("Added object in memory: $item")
