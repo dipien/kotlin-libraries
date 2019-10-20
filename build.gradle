@@ -112,5 +112,6 @@ subprojects {
 }
 
 releasesHub {
-	excludes = ["org.slf4j"]
+	// TODO com.google.code.gson:gson:2.8.6 is causing issues on webapps
+	excludes = ["org.slf4j", "com.google.code.gson:gson"]
 }
