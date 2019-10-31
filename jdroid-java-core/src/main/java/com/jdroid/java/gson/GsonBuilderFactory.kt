@@ -9,6 +9,7 @@ object GsonBuilderFactory {
         val gsonBuilder = GsonBuilder()
         gsonBuilder.setDateFormat(DateConfiguration.getDefaultDateTimeFormat())
         gsonBuilder.disableHtmlEscaping()
+        gsonBuilder.setExclusionStrategies(HiddenAnnotationExclusionStrategy())
         return gsonBuilder
     }
 }
