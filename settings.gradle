@@ -1,3 +1,0 @@
-include ':jdroid-java-core'
-include ':jdroid-java-firebase-database'
-include ':jdroid-java-remote-config'
