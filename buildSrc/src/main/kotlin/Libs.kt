@@ -6,7 +6,7 @@ object Libs {
     const val SLF4J_API = "org.slf4j:slf4j-api:1.6.3"
 
     // https://github.com/InsertKoinIO/koin/blob/master/CHANGELOG.md
-    const val KOIN = "org.koin:koin-core:2.1.4"
+    const val KOIN = "org.koin:koin-core:2.1.5"
 
     // https://www.firebase.com/docs/android/changelog.html
     const val FIREBASE_CLIENT = "com.firebase:firebase-client-jvm:2.5.2"
