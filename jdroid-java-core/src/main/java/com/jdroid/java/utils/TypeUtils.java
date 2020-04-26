@@ -2,6 +2,7 @@ package com.jdroid.java.utils;
 
 import com.jdroid.java.exception.UnexpectedException;
 
+@Deprecated
 public class TypeUtils {
 	
 	// Float
