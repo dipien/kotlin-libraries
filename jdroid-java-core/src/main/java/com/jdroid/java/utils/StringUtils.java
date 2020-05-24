@@ -342,10 +342,12 @@ public abstract class StringUtils {
 		return Pattern.compile(StringUtils.ALPHANUMERIC_PATTERN).matcher(value).replaceAll("");
 	}
 
+	@Deprecated
 	public static List<String> splitWithCommaSeparator(String text) {
 		return split(text, COMMA);
 	}
 
+	@Deprecated
 	public static List<String> split(String text, String separator) {
 		List<String> values;
 		if (isNotEmpty(text)) {
