@@ -13,7 +13,6 @@ dependencies {
 
 	api(Libs.GSON)
 	api(Libs.SLF4J_API)
-	api(Libs.KOIN)
 
 	// Testing
 	testImplementation(Libs.JUNIT)
