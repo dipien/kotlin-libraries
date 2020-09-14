@@ -1,0 +1,25 @@
+ext.PROJECT_NAME = 'Jdroid Java - Firebase Firestore'
+description = 'Firebase Firestore'
+
+apply plugin: 'com.jdroidtools.java.library'
+
+configurations.all {
+	// check for updates every build
+	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+buildscript {
+	dependencies {
+		classpath(BuildLibs.JDROID_GRADLE_JAVA_PLUGIN)
+	}
+}
+
+dependencies {
+
+	// Jdroid dependencies
+	api project(":jdroid-java-firebase-admin")
+	implementation project(":jdroid-java-core")
+
+	testImplementation(Libs.JUNIT)
+	testImplementation(Libs.MOCKITO)
+}

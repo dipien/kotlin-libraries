@@ -11,6 +11,9 @@ object Libs {
     // https://www.firebase.com/docs/android/changelog.html
     const val FIREBASE_CLIENT = "com.firebase:firebase-client-jvm:2.5.2"
 
+    // https://firebase.google.com/support/release-notes/admin/java
+    const val FIREBASE_ADMIN = "com.google.firebase:firebase-admin:7.0.0"
+
     // Testing
     const val JUNIT = "junit:junit:4.13"
     const val MOCKITO = "org.mockito:mockito-all:1.10.19"
