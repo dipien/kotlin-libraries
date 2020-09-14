@@ -1,5 +1,14 @@
 # Change Log
 
+## [v3.1.0](https://github.com/maxirosson/jdroid-java/tree/v3.1.0) (2020-09-14)
+[Full Changelog](https://github.com/maxirosson/jdroid-java/compare/v3.0.0...v3.1.0)
+
+**Implemented enhancements:**
+
+- Remove Koin support [\#20](https://github.com/maxirosson/jdroid-java/issues/20)
+- New jdroid-java-firebase-firestore library [\#19](https://github.com/maxirosson/jdroid-java/issues/19)
+- New jdroid-java-firebase-admin library [\#18](https://github.com/maxirosson/jdroid-java/issues/18)
+
 ## [v3.0.0](https://github.com/maxirosson/jdroid-java/tree/v3.0.0) (2019-09-01)
 [Full Changelog](https://github.com/maxirosson/jdroid-java/compare/v2.0.0...v3.0.0)
 
