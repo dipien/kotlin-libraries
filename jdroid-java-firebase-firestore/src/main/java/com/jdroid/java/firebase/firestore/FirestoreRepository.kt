@@ -9,16 +9,18 @@ import com.google.cloud.firestore.Firestore
 import com.google.cloud.firestore.Query
 import com.google.cloud.firestore.QuerySnapshot
 import com.google.cloud.firestore.WriteResult
+import com.google.firebase.FirebaseApp
 import com.google.firebase.cloud.FirestoreClient
 import com.jdroid.java.collections.Lists
 import com.jdroid.java.domain.Entity
 import com.jdroid.java.exception.UnexpectedException
+import com.jdroid.java.firebase.admin.FirebaseAdminSdkHelper
 import com.jdroid.java.repository.Repository
 import com.jdroid.java.utils.LoggerUtils
 import java.util.HashMap
 import java.util.concurrent.ExecutionException
 
-abstract class FirestoreRepository<T : Entity> : Repository<T> {
+abstract class FirestoreRepository<T : Entity>(val firestoreServiceAccountPath: String? = null) : Repository<T> {
 
     companion object {
         private val LOGGER = LoggerUtils.getLogger(FirestoreRepository::class.java)
@@ -48,6 +50,9 @@ abstract class FirestoreRepository<T : Entity> : Repository<T> {
     }
 
     protected open fun createFirestore(): Firestore {
+        if (firestoreServiceAccountPath != null && FirebaseApp.getApps().isEmpty()) {
+            FirebaseAdminSdkHelper.init(firestoreServiceAccountPath)
+        }
         return FirestoreClient.getFirestore()
     }
 
