@@ -189,7 +189,6 @@ workflows:
           requires:
             - ktlint
             - test
-            - validatePlugins
             - security
   release:
     when: << pipeline.parameters.release >>
