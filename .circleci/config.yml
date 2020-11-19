@@ -194,7 +194,7 @@ workflows:
     when: << pipeline.parameters.release >>
     jobs:
       - release
-  weekly:
+  upgradeDependencies:
     triggers:
       - schedule:
           cron: "0 0 * * 0"
