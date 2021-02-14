@@ -12,6 +12,6 @@ object Libs {
     const val FIREBASE_ADMIN = "com.google.firebase:firebase-admin:7.0.1"
 
     // Testing
-    const val JUNIT = "junit:junit:4.13.1"
+    const val JUNIT = "junit:junit:4.13.2"
     const val MOCKITO = "org.mockito:mockito-all:1.10.19"
 }
