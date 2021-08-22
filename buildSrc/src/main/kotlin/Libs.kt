@@ -9,7 +9,7 @@ object Libs {
     const val FIREBASE_CLIENT = "com.firebase:firebase-client-jvm:2.5.2"
 
     // https://firebase.google.com/support/release-notes/admin/java
-    const val FIREBASE_ADMIN = "com.google.firebase:firebase-admin:8.0.0"
+    const val FIREBASE_ADMIN = "com.google.firebase:firebase-admin:8.0.1"
 
     // Testing
     const val JUNIT = "junit:junit:4.13.1"
