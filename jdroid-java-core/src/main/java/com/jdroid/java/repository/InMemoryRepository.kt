@@ -1,7 +1,5 @@
 package com.jdroid.java.repository
 
-import com.jdroid.java.collections.Lists
-import com.jdroid.java.exception.UnexpectedException
 import com.jdroid.java.logging.LoggerUtils
 
 open class InMemoryRepository<T : Identifiable> : Repository<T> {
@@ -30,7 +28,7 @@ open class InMemoryRepository<T : Identifiable> : Repository<T> {
 
     override fun update(item: T) {
         if (item.getId() == null) {
-            throw UnexpectedException("Item with null id can not be updated")
+            throw RuntimeException("Item with null id can not be updated")
         }
         items[item.getId()!!] = item
         LOGGER.debug("Updated object in memory: $item")
@@ -54,7 +52,7 @@ open class InMemoryRepository<T : Identifiable> : Repository<T> {
     }
 
     override fun getAll(): List<T> {
-        val results = Lists.newArrayList(items.values)
+        val results = items.values.toList()
         LOGGER.debug("Retrieved all objects [" + results.size + "] from memory")
         return results
     }
