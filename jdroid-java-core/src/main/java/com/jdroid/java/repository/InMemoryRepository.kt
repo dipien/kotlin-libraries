@@ -4,7 +4,7 @@ import com.jdroid.java.collections.Lists
 import com.jdroid.java.collections.Maps
 import com.jdroid.java.domain.Identifiable
 import com.jdroid.java.exception.UnexpectedException
-import com.jdroid.java.utils.LoggerUtils
+import com.jdroid.java.logging.LoggerUtils
 import com.jdroid.java.utils.ReflectionUtils
 
 open class InMemoryRepository<T : Identifiable> : Repository<T> {

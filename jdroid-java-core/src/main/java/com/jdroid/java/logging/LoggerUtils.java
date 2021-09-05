@@ -1,12 +1,10 @@
-package com.jdroid.java.utils;
-
-import com.jdroid.java.collections.Lists;
-import com.jdroid.java.logger.MuteLogger;
+package com.jdroid.java.logging;
 
 import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoggerUtils {
@@ -15,7 +13,7 @@ public class LoggerUtils {
 	private static ExceptionLogger exceptionLogger;
 	
 	private static final Logger MUTE_LOGGER = new MuteLogger();
-	private static List<String> DISABLED_LOGGERS = Lists.INSTANCE.newArrayList();
+	private static List<String> DISABLED_LOGGERS = new ArrayList();
 	private static ILoggerFactory DEFAULT_LOGGER_FACTORY;
 	
 	public static Logger getLogger(Class<?> clazz) {
@@ -76,11 +74,6 @@ public class LoggerUtils {
 		} else {
 			defaultLogger.error(e.getMessage(), e);
 		}
-	}
-	
-	public static interface ExceptionLogger {
-		
-		public void logHandledException(Throwable throwable);
 	}
 	
 	public static void setExceptionLogger(ExceptionLogger exceptionLogger) {

@@ -1,4 +1,4 @@
-package com.jdroid.java.logger
+package com.jdroid.java.logging
 
 import org.slf4j.helpers.MarkerIgnoringBase
 

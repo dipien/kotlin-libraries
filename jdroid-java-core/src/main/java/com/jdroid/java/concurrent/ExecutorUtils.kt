@@ -1,6 +1,6 @@
 package com.jdroid.java.concurrent
 
-import com.jdroid.java.utils.LoggerUtils
+import com.jdroid.java.logging.LoggerUtils
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit

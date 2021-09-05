@@ -1,6 +1,6 @@
 package com.jdroid.java.analytics
 
-import com.jdroid.java.utils.LoggerUtils
+import com.jdroid.java.logging.LoggerUtils
 import java.util.concurrent.Executor
 
 open class AnalyticsSender<T : AnalyticsTracker>(trackers: List<T>) : AnalyticsTracker {

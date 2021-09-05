@@ -4,7 +4,7 @@ import com.jdroid.java.collections.Lists
 import com.jdroid.java.collections.Maps
 import com.jdroid.java.domain.Identifiable
 import com.jdroid.java.exception.UnexpectedException
-import com.jdroid.java.utils.LoggerUtils
+import com.jdroid.java.logging.LoggerUtils
 
 open class CacheWrapperRepository<T : Identifiable>(protected val wrappedRepository: Repository<T>) : Repository<T> {
 

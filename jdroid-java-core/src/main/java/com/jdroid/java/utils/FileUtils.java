@@ -1,6 +1,7 @@
 package com.jdroid.java.utils;
 
 import com.jdroid.java.exception.UnexpectedException;
+import com.jdroid.java.logging.LoggerUtils;
 
 import org.slf4j.Logger;
 

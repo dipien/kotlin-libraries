@@ -6,7 +6,7 @@ import com.jdroid.java.domain.Entity
 import com.jdroid.java.exception.UnexpectedException
 import com.jdroid.java.firebase.database.auth.FirebaseAuthenticationStrategy
 import com.jdroid.java.repository.Repository
-import com.jdroid.java.utils.LoggerUtils
+import com.jdroid.java.logging.LoggerUtils
 import java.util.HashMap
 
 abstract class FirebaseDatabaseRepository<T : Entity> : Repository<T> {

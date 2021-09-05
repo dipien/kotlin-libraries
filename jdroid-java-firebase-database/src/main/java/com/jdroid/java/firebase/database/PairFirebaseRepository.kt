@@ -5,7 +5,7 @@ import com.jdroid.java.exception.UnexpectedException
 import com.jdroid.java.firebase.database.auth.FirebaseAuthenticationStrategy
 import com.jdroid.java.repository.Pair
 import com.jdroid.java.repository.PairRepository
-import com.jdroid.java.utils.LoggerUtils
+import com.jdroid.java.logging.LoggerUtils
 
 abstract class PairFirebaseRepository : PairRepository {
 

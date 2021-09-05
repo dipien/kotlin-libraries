@@ -5,7 +5,7 @@ import com.firebase.client.Firebase
 import com.firebase.client.FirebaseError
 import com.jdroid.java.exception.UnexpectedException
 import com.jdroid.java.firebase.database.FirebaseDatabaseRepository
-import com.jdroid.java.utils.LoggerUtils
+import com.jdroid.java.logging.LoggerUtils
 import java.util.concurrent.CountDownLatch
 
 abstract class FirebaseAuthenticationStrategy : Firebase.AuthResultHandler {
