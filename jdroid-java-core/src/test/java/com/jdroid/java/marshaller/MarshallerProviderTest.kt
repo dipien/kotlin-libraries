@@ -1,6 +1,5 @@
 package com.jdroid.java.marshaller
 
-import com.jdroid.java.collections.Maps
 import com.jdroid.java.json.JsonMap
 import org.junit.Assert
 import org.junit.Test
@@ -45,13 +44,13 @@ class MarshallerProviderTest {
         marshall(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]")
 
         dummyClass = DummyClass()
-        dummyClass.stringMapProperty = Maps.newLinkedHashMap()
+        dummyClass.stringMapProperty = linkedMapOf()
         dummyJson = "{}"
         marshall(dummyClass, dummyJson)
         marshall(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]")
 
         dummyClass = DummyClass()
-        dummyClass.stringMapProperty = Maps.newLinkedHashMap()
+        dummyClass.stringMapProperty = linkedMapOf()
         dummyClass.stringMapProperty!!["a"] = "b"
         dummyJson = "{\"stringMapProperty\":{\"a\":\"b\"}}"
         marshall(dummyClass, dummyJson)
@@ -65,14 +64,14 @@ class MarshallerProviderTest {
         marshall(listOf<Map<String, String>>(map, map), "[$dummyJson,$dummyJson]")
 
         dummyClass = DummyClass()
-        dummyClass.longMapProperty = Maps.newLinkedHashMap()
+        dummyClass.longMapProperty = linkedMapOf()
         dummyClass.longMapProperty!!["a"] = 1L
         dummyJson = "{\"longMapProperty\":{\"a\":1}}"
         marshall(dummyClass, dummyJson)
         marshall(listOf(dummyClass, dummyClass), "[$dummyJson,$dummyJson]")
 
         dummyClass = DummyClass()
-        dummyClass.dummyClassMapProperty = Maps.newLinkedHashMap()
+        dummyClass.dummyClassMapProperty = linkedMapOf()
 
         val innerDummyClass = DummyClass()
         innerDummyClass.stringProperty = "2"

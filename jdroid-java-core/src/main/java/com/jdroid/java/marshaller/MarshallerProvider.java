@@ -1,17 +1,17 @@
 package com.jdroid.java.marshaller;
 
 import com.jdroid.java.collections.Lists;
-import com.jdroid.java.collections.Maps;
 import com.jdroid.java.json.JSONArray;
 import com.jdroid.java.json.JSONObject;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class MarshallerProvider {
 
-	private Map<Class<?>, Marshaller<Object, Object>> marshallers = Maps.INSTANCE.newHashMap();
+	private Map<Class<?>, Marshaller<Object, Object>> marshallers = new HashMap();
 	private Marshaller<Object, Object> defaultMarshaller = new DefaultMarshaller();
 	private MarshallerTypeEvaluator marshallerTypeEvaluator = new DefaultMarshallerTypeEvaluator();
 

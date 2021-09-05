@@ -1,9 +1,7 @@
 package com.jdroid.java.repository
 
-import com.jdroid.java.collections.Lists
-import com.jdroid.java.collections.Maps
-import com.jdroid.java.exception.UnexpectedException
 import com.jdroid.java.logging.LoggerUtils
+import java.util.concurrent.ConcurrentHashMap
 
 open class CacheWrapperRepository<T : Identifiable>(protected val wrappedRepository: Repository<T>) : Repository<T> {
 
@@ -16,10 +14,10 @@ open class CacheWrapperRepository<T : Identifiable>(protected val wrappedReposit
     protected open var isSynced: Boolean = false
 
     val cachedItems: List<T>
-        get() = Lists.newArrayList(cache.values)
+        get() = cache.values.toList()
 
     protected open fun createCacheMap(): MutableMap<String, T> {
-        return Maps.newConcurrentHashMap()
+        return ConcurrentHashMap()
     }
 
     override operator fun get(id: String): T? {
@@ -97,7 +95,7 @@ open class CacheWrapperRepository<T : Identifiable>(protected val wrappedReposit
 
     override fun getAll(): List<T> {
         return if (isSynced) {
-            val items = Lists.newArrayList(cache.values)
+            val items = cache.values.toList()
             LOGGER.info("Retrieved all cached objects [" + items.size + "]")
             items
         } else {
@@ -133,7 +131,7 @@ open class CacheWrapperRepository<T : Identifiable>(protected val wrappedReposit
 
     private fun addToCache(each: T) {
         if (each.getId() == null) {
-            throw UnexpectedException("Missing item id")
+            throw RuntimeException("Missing item id")
         }
         cache[each.getId()!!] = each
         cachedIds.add(each.getId()!!)
@@ -141,7 +139,7 @@ open class CacheWrapperRepository<T : Identifiable>(protected val wrappedReposit
 
     private fun removeFromCache(each: T) {
         if (each.getId() == null) {
-            throw UnexpectedException("Missing item id")
+            throw RuntimeException("Missing item id")
         }
         cache.remove(each.getId()!!)
         cachedIds.remove(each.getId()!!)

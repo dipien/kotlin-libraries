@@ -1,7 +1,5 @@
 package com.jdroid.java.exception
 
-import com.jdroid.java.collections.Maps
-
 import java.io.PrintStream
 import java.io.PrintWriter
 
@@ -13,7 +11,7 @@ abstract class AbstractException : RuntimeException {
         const val LOW_PRIORITY = 90
     }
 
-    private val parameters = Maps.newHashMap<String, Any>()
+    private val parameters = hashMapOf<String, Any>()
     var title: String? = null
     var description: String? = null
     private var trackable: Boolean = true

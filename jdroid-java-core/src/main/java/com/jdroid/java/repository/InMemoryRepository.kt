@@ -1,7 +1,6 @@
 package com.jdroid.java.repository
 
 import com.jdroid.java.collections.Lists
-import com.jdroid.java.collections.Maps
 import com.jdroid.java.exception.UnexpectedException
 import com.jdroid.java.logging.LoggerUtils
 
@@ -12,7 +11,7 @@ open class InMemoryRepository<T : Identifiable> : Repository<T> {
     }
 
     private var nextId: Long = 1
-    private val items = Maps.newLinkedHashMap<String, T>()
+    private val items = linkedMapOf<String, T>()
 
     override fun add(item: T) {
         if (item.getId() == null) {
