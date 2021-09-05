@@ -11,7 +11,6 @@ import com.google.cloud.firestore.QuerySnapshot
 import com.google.cloud.firestore.WriteResult
 import com.google.firebase.FirebaseApp
 import com.google.firebase.cloud.FirestoreClient
-import com.jdroid.java.exception.UnexpectedException
 import com.jdroid.java.firebase.admin.FirebaseAdminSdkHelper
 import com.jdroid.java.logging.LoggerUtils
 import com.jdroid.java.repository.Entity
@@ -112,15 +111,15 @@ abstract class FirestoreRepository<T : Entity>(val firestoreServiceAccountPath: 
         try {
             batch.commit().get()
         } catch (e: InterruptedException) {
-            throw UnexpectedException(e)
+            throw RuntimeException(e)
         } catch (e: ExecutionException) {
-            throw UnexpectedException(e)
+            throw RuntimeException(e)
         }
     }
 
     override fun update(item: T) {
         if (item.getId() == null) {
-            throw UnexpectedException("Item with null id can not be updated")
+            throw RuntimeException("Item with null id can not be updated")
         }
 
         val collectionReference = createCollectionReference()
@@ -316,9 +315,9 @@ abstract class FirestoreRepository<T : Entity>(val firestoreServiceAccountPath: 
         try {
             return futureResult.get()
         } catch (e: InterruptedException) {
-            throw UnexpectedException(e)
+            throw RuntimeException(e)
         } catch (e: ExecutionException) {
-            throw UnexpectedException(e)
+            throw RuntimeException(e)
         }
     }
 
@@ -326,9 +325,9 @@ abstract class FirestoreRepository<T : Entity>(val firestoreServiceAccountPath: 
         try {
             return futureResult.get()
         } catch (e: InterruptedException) {
-            throw UnexpectedException(e)
+            throw RuntimeException(e)
         } catch (e: ExecutionException) {
-            throw UnexpectedException(e)
+            throw RuntimeException(e)
         }
     }
 
@@ -336,9 +335,9 @@ abstract class FirestoreRepository<T : Entity>(val firestoreServiceAccountPath: 
         try {
             return futureResult.get()
         } catch (e: InterruptedException) {
-            throw UnexpectedException(e)
+            throw RuntimeException(e)
         } catch (e: ExecutionException) {
-            throw UnexpectedException(e)
+            throw RuntimeException(e)
         }
     }
 }
