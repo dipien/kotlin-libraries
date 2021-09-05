@@ -1,7 +1,5 @@
 package com.jdroid.java.repository
 
-import com.jdroid.java.domain.Entity
-
 class Pair : Entity {
 
     var value: String? = null

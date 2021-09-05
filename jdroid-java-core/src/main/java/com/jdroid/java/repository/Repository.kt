@@ -1,7 +1,5 @@
 package com.jdroid.java.repository
 
-import com.jdroid.java.domain.Identifiable
-
 /**
  * Interface that all repositories must adhere to. It provides basic repository functionality.
  *

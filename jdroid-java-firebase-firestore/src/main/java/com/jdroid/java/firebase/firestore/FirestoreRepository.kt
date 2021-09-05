@@ -11,11 +11,11 @@ import com.google.cloud.firestore.QuerySnapshot
 import com.google.cloud.firestore.WriteResult
 import com.google.firebase.FirebaseApp
 import com.google.firebase.cloud.FirestoreClient
-import com.jdroid.java.domain.Entity
 import com.jdroid.java.exception.UnexpectedException
 import com.jdroid.java.firebase.admin.FirebaseAdminSdkHelper
-import com.jdroid.java.repository.Repository
 import com.jdroid.java.logging.LoggerUtils
+import com.jdroid.java.repository.Entity
+import com.jdroid.java.repository.Repository
 import java.util.HashMap
 import java.util.concurrent.ExecutionException
 

@@ -1,4 +1,4 @@
-package com.jdroid.java.domain
+package com.jdroid.java.repository
 
 import java.io.Serializable
 

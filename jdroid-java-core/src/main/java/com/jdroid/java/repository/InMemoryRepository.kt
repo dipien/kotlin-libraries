@@ -2,10 +2,8 @@ package com.jdroid.java.repository
 
 import com.jdroid.java.collections.Lists
 import com.jdroid.java.collections.Maps
-import com.jdroid.java.domain.Identifiable
 import com.jdroid.java.exception.UnexpectedException
 import com.jdroid.java.logging.LoggerUtils
-import com.jdroid.java.utils.ReflectionUtils
 
 open class InMemoryRepository<T : Identifiable> : Repository<T> {
 
@@ -18,7 +16,7 @@ open class InMemoryRepository<T : Identifiable> : Repository<T> {
 
     override fun add(item: T) {
         if (item.getId() == null) {
-            ReflectionUtils.setId(item, (nextId++).toString())
+            Identifiable.setIdByReflection(item, (nextId++).toString())
         }
         items[item.getId()!!] = item
         LOGGER.debug("Added object in memory: $item")

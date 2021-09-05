@@ -2,7 +2,7 @@ package com.jdroid.java.firebase.database
 
 import com.firebase.client.DataSnapshot
 import com.firebase.client.Firebase
-import com.jdroid.java.domain.Entity
+import com.jdroid.java.repository.Entity
 import com.jdroid.java.exception.UnexpectedException
 import com.jdroid.java.firebase.database.auth.FirebaseAuthenticationStrategy
 import com.jdroid.java.repository.Repository

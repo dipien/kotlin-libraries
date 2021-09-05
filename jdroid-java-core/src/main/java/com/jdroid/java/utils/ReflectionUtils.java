@@ -1,6 +1,5 @@
 package com.jdroid.java.utils;
 
-import com.jdroid.java.domain.Identifiable;
 import com.jdroid.java.exception.UnexpectedException;
 
 import java.lang.reflect.Constructor;
@@ -234,9 +233,5 @@ public abstract class ReflectionUtils {
 		} catch (SecurityException | NoSuchFieldException e) {
 			throw new UnexpectedException(e);
 		}
-	}
-	
-	public static void setId(Identifiable identifiable, Object id) {
-		ReflectionUtils.set(identifiable, "id", id);
 	}
 }
