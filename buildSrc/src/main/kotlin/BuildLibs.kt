@@ -9,5 +9,5 @@ object BuildLibs {
     const val JDROID_COMPONENT_BUILDER = "com.jdroidtools:jdroid-component-builder:2.3.0"
 
     // TODO Remove this once this prokject is migrated to jdroid gradle plugins v2.5.0
-    const val RELEASES_HUB_GRADLE_PLUGIN = "com.dipien:releases-hub-gradle-plugin:2.0.2"
+    const val RELEASES_HUB_GRADLE_PLUGIN = "com.dipien:releases-hub-gradle-plugin:2.0.3"
 }
