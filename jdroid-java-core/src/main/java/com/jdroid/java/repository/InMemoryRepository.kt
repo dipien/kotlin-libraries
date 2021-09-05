@@ -12,8 +12,8 @@ open class InMemoryRepository<T : Identifiable> : Repository<T> {
     private val items = linkedMapOf<String, T>()
 
     override fun add(item: T) {
-        if (item.getId() == null) {
-            Identifiable.setIdByReflection(item, (nextId++).toString())
+        if (item.getId() == null && item is Entity) {
+            item.setId((nextId++).toString())
         }
         items[item.getId()!!] = item
         LOGGER.debug("Added object in memory: $item")
