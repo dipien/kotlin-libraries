@@ -80,7 +80,7 @@ abstract class FirestoreRepository<T : Entity>(val firestoreServiceAccountPath: 
 
     override fun addAll(items: Collection<T>) {
         val firestore = createFirestore()
-        var pendingItems = mutableListOf<T>(items)
+        var pendingItems = items.toMutableList()
         while (!pendingItems.isEmpty()) {
             processBatch(firestore, pendingItems.subList(0, Math.min(pendingItems.size, ADD_BATCH_LIMIT)))
             if (pendingItems.size > ADD_BATCH_LIMIT) {
