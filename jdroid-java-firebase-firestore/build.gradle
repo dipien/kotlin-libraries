@@ -19,6 +19,7 @@ dependencies {
 	// Jdroid dependencies
 	api project(":jdroid-java-firebase-admin")
 	implementation project(":jdroid-java-core")
+	implementation project(":jdroid-java-repository")
 
 	testImplementation(Libs.JUNIT)
 	testImplementation(Libs.MOCKITO)
