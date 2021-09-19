@@ -4,9 +4,7 @@ parameters:
 
   releaseGradleFlags:
     type: string
-    default: "-PSNAPSHOT=false -PLOCAL_UPLOAD=false -PRELEASE_BUILD_TYPE_ENABLED=true -PRELEASE_FAKE_ENABLED=true -PACCEPT_SNAPSHOT_DEPENDENCIES=false -Dorg.gradle.internal.publish.checksums.insecure=true --stacktrace"
-
-  # API
+    default: "--max-workers 1 -PSNAPSHOT=false -PLOCAL_UPLOAD=false -PRELEASE_BUILD_TYPE_ENABLED=true -PRELEASE_FAKE_ENABLED=true -PACCEPT_SNAPSHOT_DEPENDENCIES=false --stacktrace"
 
   api:
     type: boolean
@@ -16,109 +14,75 @@ parameters:
     type: boolean
     default: false
 
-references:
+  upgradeDependencies:
+    type: boolean
+    default: false
 
-  ## Workspace
+references:
 
   working_dir: &working_dir
                  ~/project
-
-orbs:
-  ruby: circleci/ruby@1.1.2
 
 executors:
   jdk_executor:
     working_directory: *working_dir
     docker:
-      - image: circleci/openjdk:11-jdk
+      - image: cimg/openjdk:11.0
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
     environment:
       JVM_OPTS: -Xmx3200m
-      GRADLE_OPTS: -Dorg.gradle.caching=false -Dorg.gradle.daemon=false -Dorg.gradle.parallel=false -Dorg.gradle.jvmargs="-Xmx4g -Xms1g"
-      JAVA_MAX_HEAP_SIZE: 4096m
+      GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.caching=true
 
+orbs:
+  # https://circleci.com/developer/orbs/orb/eddiewebb/queue
+  queue: eddiewebb/queue@1.5.0
+  # https://circleci.com/developer/orbs/orb/circleci/ruby
+  ruby: circleci/ruby@1.1.4
 
 commands:
-  restore_gradle_cache:
-    steps:
-      - restore_cache:
-          keys:
-            - v2-gradle_cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ .Branch }}-{{ checksum "buildSrc/src/main/kotlin/Libs.kt" }}-{{ checksum "buildSrc/src/main/kotlin/BuildLibs.kt" }}
-            - v2-gradle_cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ .Branch }}
-            - v2-gradle_cache-
 
-  save_gradle_cache:
+  attach_to_workspace:
     steps:
-      - save_cache:
-          key: v2-gradle_cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ .Branch }}-{{ checksum "buildSrc/src/main/kotlin/Libs.kt" }}-{{ checksum "buildSrc/src/main/kotlin/BuildLibs.kt" }}
+      - attach_workspace:
+          at: ~/
+
+  persist_gradle_build_cache:
+    steps:
+      - persist_to_workspace:
+          root: ~/
           paths:
-            - ~/.gradle
+            - gradle-build-cache
+
+  custom_checkout:
+    parameters:
+      switchToGradleBinaryDistributionEnabled:
+        type: boolean
+        default: true
+    steps:
+      - checkout
+      - when:
+          condition: << parameters.switchToGradleBinaryDistributionEnabled >>
+          steps:
+            - run:
+                name: Switch to Gradle Binary Distribution
+                command: sed -i -e 's/-all.zip/-bin.zip/' gradle/wrapper/gradle-wrapper.properties
 
 jobs:
 
   ktlint:
     executor: jdk_executor
     steps:
-      - checkout
+      - custom_checkout
       - run:
           name: Ktlint
           command: ./gradlew ktlint --stacktrace
 
-  build:
-    executor: jdk_executor
-    steps:
-      - checkout
-      - restore_gradle_cache
-      - run:
-          name: Download dependencies
-          command: ./gradlew dependencies --refresh-dependencies --stacktrace
-      - save_gradle_cache
-      - run:
-          name: Assembling
-          command: ./gradlew assemble --stacktrace
-      - run:
-          name: Saving jars
-          command: |
-            mkdir -p ~/jars/
-            find . -type f -regex ".*/build/libs/.*jar" -exec cp {} ~/jars/ \;
-          when: always
-      - store_artifacts:
-          path: ~/jars
-          destination: jars
-
-  test:
-    executor: jdk_executor
-    steps:
-      - checkout
-      - restore_gradle_cache
-      - run:
-          name: Test
-          command: ./gradlew test --stacktrace
-      - run:
-          name: Saving test results
-          command: |
-            mkdir -p ~/junit/
-            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
-          when: always
-      - store_test_results:
-          path: ~/junit
-
-      - store_artifacts:
-          path: ./jdroid-java-core/build/reports/tests/test
-          destination: jdroid-java-core/tests
-
-      - store_artifacts:
-          path: ./jdroid-java-firebase-database/build/reports/tests/test
-          destination: jdroid-java-firebase-database/tests
-
-      - store_artifacts:
-          path: ./jdroid-java-remote-config/build/reports/tests/test
-          destination: jdroid-java-remote-config/tests
-
   security:
     executor: jdk_executor
     steps:
-      - checkout
-      - restore_gradle_cache
+      - custom_checkout
       - run:
           name: Verify the integrity of the Gradle Wrapper JAR
           command: |
@@ -129,55 +93,113 @@ jobs:
             echo "  gradle-wrapper.jar" >> gradle-wrapper.jar.sha256
             sha256sum --check gradle-wrapper.jar.sha256
 
+  build:
+    executor: jdk_executor
+    steps:
+      - custom_checkout
+      - attach_to_workspace
+      - run:
+          name: Assemble
+          command: ./gradlew assemble --stacktrace
+      - persist_gradle_build_cache
+      - store_artifacts:
+          path: ./build/libs
+          destination: jars
+
+  test:
+    executor: jdk_executor
+    steps:
+      - custom_checkout
+      - attach_to_workspace
+      - run:
+          name: Run tests
+          command: ./gradlew test --stacktrace
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/junit
+      - store_artifacts:
+          path: ./build/reports/tests/test
+          destination: tests
+
+  validatePlugins:
+    executor: jdk_executor
+    steps:
+      - custom_checkout
+      - attach_to_workspace
+      - run:
+          name: Validate plugins
+          command: ./gradlew validatePlugins --stacktrace
+
   publish:
     executor: jdk_executor
     steps:
-      - checkout
-      - restore_gradle_cache
+      - custom_checkout
+      - attach_to_workspace
+      - queue/until_front_of_line:
+          block-workflow: true
+          only-on-branch: master
       - run:
           name: Uploading to Nexus Sonatype
-          command: ./gradlew publish -PLOCAL_UPLOAD=false --stacktrace
-
-  upgradeDependencies:
-    executor: jdk_executor
-    steps:
-      - checkout
-      - run:
-          name: Upgrade Dependencies
-          command: ./gradlew upgradeDependencies -PpullRequestEnabled=true --stacktrace
+          command: ./gradlew publish -PLOCAL_UPLOAD=false --refresh-dependencies --stacktrace
 
   release:
     executor: jdk_executor
     steps:
-      - checkout
+      - custom_checkout
       - run:
           name: Close GitHub Milestone
-          command: ./gradlew closeGitHubMilestone << pipeline.parameters.releaseGradleFlags >>
-      - run:
-          name: Create GitHub Release
-          command: ./gradlew createGitHubRelease << pipeline.parameters.releaseGradleFlags >>
+          command: ./gradlew :closeGitHubMilestone << pipeline.parameters.releaseGradleFlags >>
       - ruby/install:
           version: '2.7'
       - run:
-          name: Generate Changelog
-          command: |
-            gem install github_changelog_generator -v 1.13.2
-            ./gradlew generateChangelog << pipeline.parameters.releaseGradleFlags >>
+          name: Install github_changelog_generator
+          command: gem install github_changelog_generator -v 1.13.2
       - run:
-          name: Publish
+          name: Create GitHub Release
+          command: ./gradlew :createGitHubRelease << pipeline.parameters.releaseGradleFlags >>
+      #      - run:
+      #          name: Generate Changelog
+      #          command: ./gradlew :generateChangelog << pipeline.parameters.releaseGradleFlags >>
+      - run:
+          name: Copy Signing secret key ring file
+          command: sudo bash -c "echo '$SIGNING_SECRET_KEY_RING' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
+      - run:
+          name: Publish on Sonatype
           command: ./gradlew publish << pipeline.parameters.releaseGradleFlags >>
-#      - run:
-#          name: Close and Release Repository
-#          command: ./gradlew closeAndReleaseRepository << pipeline.parameters.releaseGradleFlags >>
+      - run:
+          name: Publish on Gradle Plugins Portal
+          command: ./gradlew publishPlugins -PGRADLE_PLUGIN_PORTAL_ENABLED=true << pipeline.parameters.releaseGradleFlags >>
+      - run:
+          name: Close and Release Sonatype Repository
+          command: ./gradlew closeAndReleaseRepository << pipeline.parameters.releaseGradleFlags >>
+      - run:
+          name: Send merge pull request
+          command: ./gradlew sendMergePullRequest --stacktrace
+
+  upgradeDependencies:
+    executor: jdk_executor
+    steps:
+      - custom_checkout
+      - run:
+          name: Upgrade Dependencies
+          command: ./gradlew upgradeDependencies --stacktrace
 
 workflows:
   commit:
     unless: << pipeline.parameters.api >>
     jobs:
-      - build
-      - ktlint
       - security
+      - ktlint
+      - build
       - test:
+          requires:
+            - build
+      - validatePlugins:
           requires:
             - build
       - publish:
@@ -189,11 +211,8 @@ workflows:
           requires:
             - ktlint
             - test
+            - validatePlugins
             - security
-  release:
-    when: << pipeline.parameters.release >>
-    jobs:
-      - release
   weekly:
     triggers:
       - schedule:
@@ -204,3 +223,13 @@ workflows:
                 - master
     jobs:
       - upgradeDependencies
+
+  upgradeDependencies:
+    when: << pipeline.parameters.upgradeDependencies >>
+    jobs:
+      - upgradeDependencies
+
+  release:
+    when: << pipeline.parameters.release >>
+    jobs:
+      - release
