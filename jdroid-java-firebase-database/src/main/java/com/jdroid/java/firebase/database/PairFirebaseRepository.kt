@@ -1,7 +1,6 @@
 package com.jdroid.java.firebase.database
 
 import com.firebase.client.Firebase
-import com.jdroid.java.exception.UnexpectedException
 import com.jdroid.java.firebase.database.auth.FirebaseAuthenticationStrategy
 import com.jdroid.java.repository.Pair
 import com.jdroid.java.repository.PairRepository
@@ -70,7 +69,7 @@ abstract class PairFirebaseRepository : PairRepository {
 
     override fun update(item: Pair) {
         if (item.getId() == null) {
-            throw UnexpectedException("Item with null id can not be updated")
+            throw RuntimeException("Item with null id can not be updated")
         }
 
         var firebase = createFirebase()

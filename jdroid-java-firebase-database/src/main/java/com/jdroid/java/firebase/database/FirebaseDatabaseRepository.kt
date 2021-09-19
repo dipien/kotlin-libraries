@@ -3,7 +3,6 @@ package com.jdroid.java.firebase.database
 import com.firebase.client.DataSnapshot
 import com.firebase.client.Firebase
 import com.jdroid.java.repository.Entity
-import com.jdroid.java.exception.UnexpectedException
 import com.jdroid.java.firebase.database.auth.FirebaseAuthenticationStrategy
 import com.jdroid.java.repository.Repository
 import com.jdroid.java.logging.LoggerUtils
@@ -91,7 +90,7 @@ abstract class FirebaseDatabaseRepository<T : Entity> : Repository<T> {
 
     override fun update(item: T) {
         if (item.getId() == null) {
-            throw UnexpectedException("Item with null id can not be updated")
+            throw RuntimeException("Item with null id can not be updated")
         }
         val firebase = createFirebase().child(item.getId()!!)
 
@@ -107,7 +106,7 @@ abstract class FirebaseDatabaseRepository<T : Entity> : Repository<T> {
         var query = firebase.orderByChild(fieldName)
 
         if (values.size > 1) {
-            throw UnexpectedException("Just one value is supported")
+            throw RuntimeException("Just one value is supported")
         }
         val value = values[0]
         query = when (value) {
@@ -116,7 +115,7 @@ abstract class FirebaseDatabaseRepository<T : Entity> : Repository<T> {
             is Double -> query.equalTo(value)
             is Int -> query.equalTo(value.toDouble())
             is Boolean -> query.equalTo(value)
-            else -> throw UnexpectedException("Value type not supported")
+            else -> throw RuntimeException("Value type not supported")
         }
 
         val listener = FirebaseValueEventListener()

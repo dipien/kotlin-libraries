@@ -2,7 +2,6 @@ package com.jdroid.java.firebase.database
 
 import com.firebase.client.Firebase
 import com.firebase.client.FirebaseError
-import com.jdroid.java.exception.UnexpectedException
 
 class FirebaseCompletionListener : Firebase.CompletionListener {
 
@@ -22,7 +21,7 @@ class FirebaseCompletionListener : Firebase.CompletionListener {
                 throw it
             }
         } catch (e: InterruptedException) {
-            throw UnexpectedException(e)
+            throw RuntimeException(e)
         }
     }
 }

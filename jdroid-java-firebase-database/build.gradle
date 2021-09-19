@@ -12,7 +12,6 @@ buildscript {
 
 dependencies {
 
-	implementation project(":jdroid-java-core")
 	implementation project(":jdroid-java-logging")
 	implementation project(":jdroid-java-repository")
 	api(Libs.FIREBASE_CLIENT)

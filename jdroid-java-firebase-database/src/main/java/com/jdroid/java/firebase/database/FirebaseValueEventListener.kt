@@ -3,7 +3,6 @@ package com.jdroid.java.firebase.database
 import com.firebase.client.DataSnapshot
 import com.firebase.client.FirebaseError
 import com.firebase.client.ValueEventListener
-import com.jdroid.java.exception.UnexpectedException
 
 class FirebaseValueEventListener : ValueEventListener {
 
@@ -26,7 +25,7 @@ class FirebaseValueEventListener : ValueEventListener {
                 throw it
             }
         } catch (e: InterruptedException) {
-            throw UnexpectedException(e)
+            throw RuntimeException(e)
         }
     }
 
