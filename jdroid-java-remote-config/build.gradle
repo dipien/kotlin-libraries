@@ -12,8 +12,6 @@ buildscript {
 
 dependencies {
 
-	implementation project(":jdroid-java-core")
-
 	// Testing
 	testImplementation(Libs.JUNIT)
 }
