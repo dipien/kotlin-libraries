@@ -1,6 +1,6 @@
 version = "1.0.0"
 
-ext.GITHUB_REPOSITORY_NAME = "jdroid-java"
+ext.GITHUB_REPOSITORY_NAME = "kotlin-libraries"
 
 apply plugin: "com.dipien.component.builder"
 apply plugin: "com.jdroidtools.root"

@@ -1,40 +1,17 @@
-# Jdroid Java
+# Kotlin Libraries
 
-## Continuous Integration
-|Branch|Status|Workflows|Insights|
-| ------------- | ------------- | ------------- | ------------- |
-|master|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-java/tree/master.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-java/tree/master)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-java/tree/master)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-java/master)|
-|production|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-java/tree/production.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-java/tree/production)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-java/tree/production)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-java/production)|
+## Sponsor this project
 
-## Features
-### jdroid-java-core
-* JSON marshallers
-* Exception handling
-* Repository Pattern
- * In Memory Implementation 
-* Utilities for Collections, Strings, Dates, Files, Encryption, Threads, [Logging](http://www.slf4j.org/), Validations, Reflection and more
-### jdroid-java-firebase-database
-* Repository Pattern
- * [Firebase Implementation](https://www.firebase.com)
+Sponsor this open source project to help us get the funding we need to continue working on it.
 
-## Setup
+* [Donate cryptocurrency](http://coinbase.dipien.com/)
+* [Donate with PayPal](http://paypal.dipien.com/)
+* [Donate on Patreon](http://patreon.dipien.com/)
+* [Become a member of Medium](https://maxirosson.medium.com/membership) [We will receive a portion of your membership fee]
 
-Add the following lines to your `build.gradle`:
-
-    repositories {
-      jcenter()
-    }
-
-    dependencies {
-      implementation 'com.jdroidtools:jdroid-java-core:X.Y.Z'
-      implementation 'com.jdroidtools:jdroid-java-firebase-database:X.Y.Z'
-      implementation 'com.jdroidtools:jdroid-java-remote-config:X.Y.Z'
-    }
-
-Replace the X.Y.Z by the [latest version](https://github.com/maxirosson/jdroid-java/releases/latest)
-
-
-## Donations
-Help us to continue with this project:
-
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2UEBTRTSCYA9L)
+## Follow us
+* [Twitter](http://twitter.dipien.com)
+* [Medium](http://medium.dipien.com)
+* [Instagram](http://instagram.dipien.com)
+* [Pinterest](http://pinterest.dipien.com)
+* [GitHub](http://github.dipien.com)
