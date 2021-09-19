@@ -1,6 +1,5 @@
 package com.dipien.core
 
-import com.dipien.core.collections.Sets
 import org.junit.Test
 
 /**
@@ -19,20 +18,20 @@ class AssertTest {
         assertEqualsNoOrderTest(listOf(1, 2, 3), listOf(1, 2, 3))
 
         // Case 2: 2 HashSets with the same contents in the different order.
-        assertEqualsNoOrderTest(Sets.newHashSet(1, 1, 2, 3), Sets.newHashSet(3, 2, 1, 1))
+        assertEqualsNoOrderTest(hashSetOf(1, 1, 2, 3), hashSetOf(3, 2, 1, 1))
 
         // Case 3: 2 Empty ArrayLists.
         assertEqualsNoOrderTest(listOf<Any>(), listOf<Any>())
 
         // Case 4: 2 HashSets with same amount of only 1 content.
-        assertEqualsNoOrderTest(Sets.newHashSet(1, 1, 1, 1), Sets.newHashSet(1, 1, 1, 1))
+        assertEqualsNoOrderTest(hashSetOf(1, 1, 1, 1), hashSetOf(1, 1, 1, 1))
 
         // Case 5: The same ArrayList as both parameters.
         val aux = listOf(1, 2, 3)
         assertEqualsNoOrderTest(aux, aux)
 
         // Case 6: 1 ArrayList with the same contents of 1 HashSet.
-        assertEqualsNoOrderTest(listOf(1, 2, 3), Sets.newHashSet(1, 2, 3))
+        assertEqualsNoOrderTest(listOf(1, 2, 3), hashSetOf(1, 2, 3))
     }
 
     private fun assertEqualsNoOrderTest(actual: Iterable<Any>, expected: Iterable<Any>) {
@@ -44,7 +43,7 @@ class AssertTest {
     fun assertEqualsNoOrderExceptionTest() {
 
         // Case 1: 2 HashSets with the different contents.
-        assertEqualsNoOrderExceptionTest(Sets.newHashSet(1, 2, 3), Sets.newHashSet(4, 5, 6))
+        assertEqualsNoOrderExceptionTest(hashSetOf(1, 2, 3), hashSetOf(4, 5, 6))
 
         // Case 2: 2 ArrayLists with the repeated contents in the different
         // amounts.
@@ -55,7 +54,7 @@ class AssertTest {
         assertEqualsNoOrderExceptionTest(listOf(1, 1, 1), listOf(1, 1, 1, 1))
 
         // Case 4: 1 ArrayList and 1 HashSet containing some contents in common.
-        assertEqualsNoOrderExceptionTest(listOf(1, 2, 3), Sets.newHashSet(2, 3, 4))
+        assertEqualsNoOrderExceptionTest(listOf(1, 2, 3), hashSetOf(2, 3, 4))
     }
 
     private fun assertEqualsNoOrderExceptionTest(actual: Iterable<Any>, expected: Iterable<Any>) {

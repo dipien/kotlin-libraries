@@ -1,7 +1,6 @@
 package com.dipien.core.utils
 
 import com.dipien.core.Assert
-import com.dipien.core.collections.Sets
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -93,9 +92,9 @@ class StringUtilsTest {
     fun extractPlaceholders() {
         extractPlaceholders("", hashSetOf())
         extractPlaceholders("a", hashSetOf())
-        extractPlaceholders("\${a}", Sets.newHashSet("a"))
-        extractPlaceholders("\${a}\${a}", Sets.newHashSet("a"))
-        extractPlaceholders("\${a}\${b}", Sets.newHashSet("a", "b"))
+        extractPlaceholders("\${a}", hashSetOf("a"))
+        extractPlaceholders("\${a}\${a}", hashSetOf("a"))
+        extractPlaceholders("\${a}\${b}", hashSetOf("a", "b"))
     }
 
     /**

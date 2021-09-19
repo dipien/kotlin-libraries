@@ -1,6 +1,5 @@
 package com.dipien.core.collections
 
-import java.util.Collections
 import java.util.HashSet
 import java.util.LinkedHashSet
 import java.util.TreeSet
@@ -14,6 +13,7 @@ object Sets {
      *
      * @return a new, empty `HashSet`
      */
+    @Deprecated("")
     fun <E> newHashSet(): HashSet<E> {
         return HashSet()
     }
@@ -24,19 +24,7 @@ object Sets {
      * @param elements the elements that the set should contain
      * @return a new `HashSet` containing those elements (minus duplicates)
      */
-    @SafeVarargs
-    fun <E> newHashSet(vararg elements: E): HashSet<E> {
-        val set = HashSet<E>()
-        Collections.addAll<E>(set, *elements)
-        return set
-    }
-
-    /**
-     * Creates a *mutable* `HashSet` instance containing the given elements in unspecified order.
-     *
-     * @param elements the elements that the set should contain
-     * @return a new `HashSet` containing those elements (minus duplicates)
-     */
+    @Deprecated("")
     fun <E> newHashSet(elements: Iterable<E>): HashSet<E> {
         return if (elements is Collection<*>)
             HashSet(elements as Collection<E>)
