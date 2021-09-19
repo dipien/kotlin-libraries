@@ -163,9 +163,6 @@ jobs:
           name: Publish on Sonatype
           command: ./gradlew publish << pipeline.parameters.releaseGradleFlags >>
       - run:
-          name: Publish on Gradle Plugins Portal
-          command: ./gradlew publishPlugins -PGRADLE_PLUGIN_PORTAL_ENABLED=true << pipeline.parameters.releaseGradleFlags >>
-      - run:
           name: Close and Release Sonatype Repository
           command: ./gradlew closeAndReleaseRepository << pipeline.parameters.releaseGradleFlags >>
       - run:
