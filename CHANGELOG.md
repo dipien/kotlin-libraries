@@ -1,5 +1,9 @@
 # Change Log
 
+## [v1.0.0](https://github.com/dipien/kotlin-libraries/tree/v1.0.0) (2021-09-19)
+**Implemented enhancements:**
+
+- New libraries:  core-legacy, firebase-admin, firebase-database, firebase-firestore, logging, remote-config and repository [\#32](https://github.com/dipien/kotlin-libraries/issues/32)
 
 
 
