@@ -1,0 +1,17 @@
+ext.PROJECT_NAME = "Repository"
+description = "Repository library for both Android & Java apps"
+ext.ARTIFACT_ID = "repository"
+
+apply plugin: "com.jdroidtools.java.library"
+
+buildscript {
+	dependencies {
+		classpath(BuildLibs.JDROID_GRADLE_JAVA_PLUGIN)
+	}
+}
+
+dependencies {
+
+	implementation project(":logging")
+
+}

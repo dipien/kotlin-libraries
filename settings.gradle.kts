@@ -1,11 +1,19 @@
 plugins {
-    id("com.gradle.enterprise").version("3.5")
+    id("com.gradle.enterprise").version("3.7")
 }
 
-include(":jdroid-java-core")
-include(":jdroid-java-firebase-admin")
-include(":jdroid-java-firebase-database")
-include(":jdroid-java-firebase-firestore")
-include(":jdroid-java-remote-config")
+if (System.getenv("CI") == "true") {
+    buildCache {
+        local {
+            directory = File(System.getProperty("user.home"), "/gradle-build-cache")
+        }
+    }
+}
 
-apply(from = java.io.File(settingsDir, "buildCacheSettings.gradle"))
+include(":core-legacy")
+include(":firebase-admin")
+include(":firebase-database")
+include(":firebase-firestore")
+include(":logging")
+include(":remote-config")
+include(":repository")

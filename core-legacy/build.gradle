@@ -1,0 +1,20 @@
+ext.PROJECT_NAME = "Core Legacy"
+description = "Core legacy library for both Android & Java apps"
+ext.ARTIFACT_ID = "core-legacy"
+
+apply plugin: "com.jdroidtools.java.library"
+
+buildscript {
+	dependencies {
+		classpath(BuildLibs.JDROID_GRADLE_JAVA_PLUGIN)
+	}
+}
+
+dependencies {
+
+	implementation project(":logging")
+
+	// Testing
+	testImplementation(Libs.JUNIT)
+	testImplementation(Libs.MOCKITO)
+}

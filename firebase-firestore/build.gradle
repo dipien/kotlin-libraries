@@ -1,0 +1,21 @@
+ext.PROJECT_NAME = "Firebase Firestore"
+description = "Firebase Firestore library for both Android & Java apps"
+ext.ARTIFACT_ID = "firebase-firestore"
+
+apply plugin: 'com.jdroidtools.java.library'
+
+buildscript {
+	dependencies {
+		classpath(BuildLibs.JDROID_GRADLE_JAVA_PLUGIN)
+	}
+}
+
+dependencies {
+	api project(":firebase-admin")
+	implementation project(":core-legacy")
+	implementation project(":repository")
+	implementation project(":logging")
+
+	testImplementation(Libs.JUNIT)
+	testImplementation(Libs.MOCKITO)
+}

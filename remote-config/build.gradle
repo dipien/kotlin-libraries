@@ -1,0 +1,17 @@
+ext.PROJECT_NAME = "Remote Config"
+description = "Remote Config library for both Android & Java apps"
+ext.ARTIFACT_ID = "remote-config"
+
+apply plugin: "com.jdroidtools.java.library"
+
+buildscript {
+	dependencies {
+		classpath(BuildLibs.JDROID_GRADLE_JAVA_PLUGIN)
+	}
+}
+
+dependencies {
+
+	// Testing
+	testImplementation(Libs.JUNIT)
+}
