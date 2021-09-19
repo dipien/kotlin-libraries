@@ -20,6 +20,7 @@ dependencies {
 	api project(":jdroid-java-firebase-admin")
 	implementation project(":jdroid-java-core")
 	implementation project(":jdroid-java-repository")
+	implementation project(":jdroid-java-logging")
 
 	testImplementation(Libs.JUNIT)
 	testImplementation(Libs.MOCKITO)

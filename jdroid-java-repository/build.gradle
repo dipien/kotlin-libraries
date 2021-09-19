@@ -11,6 +11,6 @@ buildscript {
 
 dependencies {
 
-	implementation project(":jdroid-java-core")
+	implementation project(":jdroid-java-logging")
 
 }

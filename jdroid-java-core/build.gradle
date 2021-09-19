@@ -11,8 +11,7 @@ buildscript {
 
 dependencies {
 
-	api(Libs.GSON)
-	api(Libs.SLF4J_API)
+	implementation project(":jdroid-java-logging")
 
 	// Testing
 	testImplementation(Libs.JUNIT)

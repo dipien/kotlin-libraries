@@ -6,6 +6,7 @@ include(":jdroid-java-core")
 include(":jdroid-java-firebase-admin")
 include(":jdroid-java-firebase-database")
 include(":jdroid-java-firebase-firestore")
+include(":jdroid-java-logging")
 include(":jdroid-java-remote-config")
 include(":jdroid-java-repository")
 

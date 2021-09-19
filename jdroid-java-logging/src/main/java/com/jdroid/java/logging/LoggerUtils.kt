@@ -5,6 +5,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.lang.Exception
 import kotlin.collections.MutableList
+import kotlin.math.min
 
 object LoggerUtils {
 
@@ -17,29 +18,29 @@ object LoggerUtils {
 
     @JvmStatic
     fun getLogger(clazz: Class<*>): Logger {
-        return getLogger(clazz.getSimpleName())
+        return getLogger(clazz.simpleName)
     }
 
     fun getLogger(name: String): Logger {
-        if (isEnabled) {
+        return if (isEnabled) {
             val loggerName: String = getLoggerName(name)
             if (!disabledLoggers.contains(loggerName)) {
                 if (defaultLoggerFactory != null) {
-                    return defaultLoggerFactory!!.getLogger(loggerName)
+                    defaultLoggerFactory!!.getLogger(loggerName)
                 } else {
-                    return LoggerFactory.getLogger(loggerName)
+                    LoggerFactory.getLogger(loggerName)
                 }
             } else {
-                return muteLogger
+                muteLogger
             }
         } else {
-            return muteLogger
+            muteLogger
         }
     }
 
     private fun getLoggerName(name: String): String {
         // Logcat support 23 characters as maximum
-        return name.substring(0, Math.min(name.length, 23))
+        return name.substring(0, min(name.length, 23))
     }
 
     fun addDisabledLogger(name: String) {
@@ -47,7 +48,7 @@ object LoggerUtils {
     }
 
     fun addDisabledLogger(clazz: Class<*>) {
-        addDisabledLogger(clazz.getSimpleName())
+        addDisabledLogger(clazz.simpleName)
     }
 
     /**
