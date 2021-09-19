@@ -1,6 +1,6 @@
+ext.PROJECT_NAME = "Firebase Database"
+description = "Firebase Database library for both Android & Java apps"
 ext.ARTIFACT_ID = "firebase-database"
-ext.PROJECT_NAME = "Jdroid Java Firebase Database"
-description = "Firebase Database Repository for Jdroid"
 
 apply plugin: "com.jdroidtools.java.library"
 

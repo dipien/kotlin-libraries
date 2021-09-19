@@ -1,5 +1,6 @@
-ext.PROJECT_NAME = 'Jdroid Java - Firebase Admin'
-description = 'Firebase Admin'
+ext.PROJECT_NAME = 'Firebase Admin'
+description = "Firebase Admin library for both Android & Java apps"
+ext.ARTIFACT_ID = "firebase-admin"
 
 apply plugin: 'com.jdroidtools.java.library'
 

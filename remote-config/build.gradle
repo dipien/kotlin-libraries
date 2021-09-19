@@ -1,6 +1,6 @@
+ext.PROJECT_NAME = "Remote Config"
+description = "Remote Config library for both Android & Java apps"
 ext.ARTIFACT_ID = "remote-config"
-ext.PROJECT_NAME = "Jdroid Java Remote Config"
-description = "Remote Config"
 
 apply plugin: "com.jdroidtools.java.library"
 

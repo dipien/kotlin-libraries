@@ -1,6 +1,7 @@
+ext.PROJECT_NAME = "Core Legacy"
+description = "Core legacy library for both Android & Java apps"
 ext.ARTIFACT_ID = "core-legacy"
-ext.PROJECT_NAME = "Jdroid Java"
-description = "Java library for both Android & Java apps"
+
 apply plugin: "com.jdroidtools.java.library"
 
 buildscript {

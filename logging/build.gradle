@@ -1,6 +1,7 @@
+ext.PROJECT_NAME = "Logging"
+description = "Logging library for both Android & Java apps"
 ext.ARTIFACT_ID = "logging"
-ext.PROJECT_NAME = "Jdroid Java Logging"
-description = "Java Logging library for both Android & Java apps"
+
 apply plugin: "com.jdroidtools.java.library"
 
 buildscript {
