@@ -2,12 +2,12 @@ plugins {
     id("com.gradle.enterprise").version("3.5")
 }
 
-include(":jdroid-java-core")
-include(":jdroid-java-firebase-admin")
-include(":jdroid-java-firebase-database")
-include(":jdroid-java-firebase-firestore")
-include(":jdroid-java-logging")
-include(":jdroid-java-remote-config")
-include(":jdroid-java-repository")
+include(":core-legacy")
+include(":firebase-admin")
+include(":firebase-database")
+include(":firebase-firestore")
+include(":logging")
+include(":remote-config")
+include(":repository")
 
 apply(from = java.io.File(settingsDir, "buildCacheSettings.gradle"))

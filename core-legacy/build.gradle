@@ -1,4 +1,4 @@
-ext.ARTIFACT_ID = "jdroid-java-core"
+ext.ARTIFACT_ID = "core-legacy"
 ext.PROJECT_NAME = "Jdroid Java"
 description = "Java library for both Android & Java apps"
 apply plugin: "com.jdroidtools.java.library"
@@ -11,7 +11,7 @@ buildscript {
 
 dependencies {
 
-	implementation project(":jdroid-java-logging")
+	implementation project(":logging")
 
 	// Testing
 	testImplementation(Libs.JUNIT)

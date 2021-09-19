@@ -1,4 +1,4 @@
-ext.ARTIFACT_ID = "jdroid-java-repository"
+ext.ARTIFACT_ID = "repository"
 ext.PROJECT_NAME = "Jdroid Java Repository"
 description = "Java Repository library for both Android & Java apps"
 apply plugin: "com.jdroidtools.java.library"
@@ -11,6 +11,6 @@ buildscript {
 
 dependencies {
 
-	implementation project(":jdroid-java-logging")
+	implementation project(":logging")
 
 }

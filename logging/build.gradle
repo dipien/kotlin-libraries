@@ -1,4 +1,4 @@
-ext.ARTIFACT_ID = "jdroid-java-logging"
+ext.ARTIFACT_ID = "logging"
 ext.PROJECT_NAME = "Jdroid Java Logging"
 description = "Java Logging library for both Android & Java apps"
 apply plugin: "com.jdroidtools.java.library"

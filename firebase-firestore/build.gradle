@@ -17,10 +17,10 @@ buildscript {
 dependencies {
 
 	// Jdroid dependencies
-	api project(":jdroid-java-firebase-admin")
-	implementation project(":jdroid-java-core")
-	implementation project(":jdroid-java-repository")
-	implementation project(":jdroid-java-logging")
+	api project(":firebase-admin")
+	implementation project(":core-legacy")
+	implementation project(":repository")
+	implementation project(":logging")
 
 	testImplementation(Libs.JUNIT)
 	testImplementation(Libs.MOCKITO)
